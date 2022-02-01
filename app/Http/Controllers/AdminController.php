@@ -23,6 +23,11 @@ class AdminController extends Controller
         return view('dashboard.admin.profile');
     }
 
+    public function showAdmin()
+    {
+        $data = User::select('*')->where('role_id', 'admin')->get()->toArray();
+        return view('dashboard.admin.admin', compact('data'));
+    }
     public function showKlub()
     {
         $data = Klub::select('*')->get()->toArray();

@@ -25,7 +25,9 @@
                             <h1 class="text-center">WELCOME {{Auth::user()->username}}</h1>
                             <p class="text-center">ASOSIASI FUTSAL KABUPATEN SUMENEP</p>
                             <hr>
-                            <button type="submit"  onclick="window.location.href='{{route('registerAdmin')}}'" class="btn btn-primary col-sm-12">TAMBAH ADMIN</button>
+                            <button type="submit"  onclick="window.location.href='{{route('showAdmin')}}'" class="btn btn-primary col-sm-12">
+                                {{ __('ADMIN') }}
+                            </button>
                             <hr>    
                             <button type="submit" onclick="window.location.href='{{route('showKlub')}}'" class="btn btn-primary col-sm-12">
                                 {{ __('KLUB') }}

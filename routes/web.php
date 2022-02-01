@@ -50,6 +50,7 @@ Route::group(['prefix'=>'admin', 'middleware'=>['isAdmin','auth']], function(){
     Route::get('profile',[AdminController::class, 'profile'])->name('admin.profile');
    
     //register admin
+    Route::get('admin', [AdminController::class, 'showAdmin'])->name('showAdmin');
     Route::get('registerAdmin', [RegisterController::class, 'createAdmin'])->name('registerAdmin');
     Route::post('registerAdmin', [RegisterController::class, 'registerAdmin'])->name('registerAdmin');
 
