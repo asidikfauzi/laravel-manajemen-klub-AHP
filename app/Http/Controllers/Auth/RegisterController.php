@@ -131,6 +131,7 @@ class RegisterController extends Controller
         $role_id = $request->input('role_id');
         
         //klub
+        $uuid = Uuid::getId();
         $nama = $request->input('nama');
         $tglBeridiri = $request->input('tglBerdiri'); 
         $alamat = $request->input('alamat');
@@ -164,7 +165,7 @@ class RegisterController extends Controller
         }
 
         $result = DB::transaction(function() use ($username, $password, $role_id, $nama, $tglBeridiri, $alamat,
-                                                    $notelp, $jadwalLatihan, $sejarahKlub, $image){
+                                                    $notelp, $jadwalLatihan, $sejarahKlub, $image, $uuid){
             $uploadImage = Storage::uploadImageKlub($image);
             
             $hashPassword = Hash::make($password);
@@ -176,6 +177,7 @@ class RegisterController extends Controller
             $users->save();
 
             $klub = new Klub();
+            $klub->id = $uuid;
             $klub->nama_klub = $nama;
             $klub->tgl_berdiri = $tglBeridiri;
             $klub->alamat = $alamat;
@@ -215,7 +217,7 @@ class RegisterController extends Controller
         $gaji = $request->input('gaji');
         $awalKontrak = $request->input('awal_kontrak');
         $akhirKontrak = $request->input('akhir_kontrak');
-        $uploadKontrak = $request->input('img_kontrak');
+        $uploadKontrak = $request->file('img_kontrak');
 
         if(empty($username) || empty($password) || empty($nama) || empty($tinggi) || empty($berat) || empty($alamat) ||
             empty($notelp) || empty($tempat) || empty($tglLahir) || empty($posisi) || empty($namaKlub) || empty($gaji) || 
@@ -255,7 +257,7 @@ class RegisterController extends Controller
             $users->save();
 
             $uploadImage = Storage::uploadImagePemain($image);
-            //$uploadImageKontrak = Storage::uploadImageKontrak($uploadKontrak);
+            $uploadImageKontrak = Storage::uploadImageKontrak($uploadKontrak);
 
             $pemain = new Pemain();
             $pemain->id = $uuid;
@@ -277,7 +279,7 @@ class RegisterController extends Controller
             $kontrak->gaji = $gaji;
             $kontrak->awal_kontrak = $awalKontrak;
             $kontrak->akhir_kontrak = $akhirKontrak;
-            $kontrak->foto_kontrak = $uploadKontrak;
+            $kontrak->foto_kontrak = $uploadImageKontrak;
             $kontrak->klub_id = $dataKlub[0]['id'];
             $kontrak->pemain_id = $uuid;
             $kontrak->save();
