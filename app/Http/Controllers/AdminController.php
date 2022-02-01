@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Helper\Storage;
 use App\Models\Klub;
+use App\Models\Kontrak;
 use App\Models\Pemain;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -120,14 +121,17 @@ class AdminController extends Controller
     }
     public function deletePemain($id)
     {
+        
         DB::transaction(function() use ($id){
+            $pemain = Pemain::where('id', $id)->first();
+            $users = User::where('username', $pemain->users_username)->first();
+            $kontrak = Kontrak::where('pemain_id', $id)->first();
             
-            $pemain = Pemain::find($id);
-            $user = User::where('username', $pemain->users_username)->get();
+            $kontrak->delete();
             $pemain->delete();
-            $user->delete();
-            
+            $users->delete();
         });
+
         return back()->with('failed', 'Pemain berhasil di delete');
     }
 }
