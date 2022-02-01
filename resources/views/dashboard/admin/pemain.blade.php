@@ -42,7 +42,11 @@ tr:nth-child(even) {
         <td>{{$pemain['nama_pemain']}}</td>
         <td>{{$pemain['nama_klub']}}</td>
         <td><button type="submit" onclick="window.location.href='{{route('editPemain', $pemain['id'])}}'" class="btn btn-primary">EDIT</button>
-            <button type="submit" onclick="window.location.href='{{route('editPemain', $pemain['id'])}}'" class="btn btn-danger">DELETE</button>
+            <form action="{{ route('deletePemain', $pemain['id']) }}" method="POST">
+                {{ method_field('DELETE') }}
+                {{ csrf_field() }}
+                <button type="submit" class="btn btn-danger">DELETE</button>
+            </form>
         </td>  
     </tr>
   @endforeach

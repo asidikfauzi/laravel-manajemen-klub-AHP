@@ -32,6 +32,7 @@ class Storage
 
       return $name;
     }
+
     public static function uploadImageBerita($fileImage)
     {
       $ext = $fileImage->getClientOriginalExtension();

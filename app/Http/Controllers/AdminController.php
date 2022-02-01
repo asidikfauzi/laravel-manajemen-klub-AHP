@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Helper\Storage;
 use App\Models\Klub;
 use App\Models\Pemain;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
@@ -115,5 +117,17 @@ class AdminController extends Controller
         $data->save();
 
         return back()->with('success', 'Data succesfully update!');
+    }
+    public function deletePemain($id)
+    {
+        DB::transaction(function() use ($id){
+            
+            $pemain = Pemain::find($id);
+            $user = User::where('username', $pemain->users_username)->get();
+            $pemain->delete();
+            $user->delete();
+            
+        });
+        return back()->with('failed', 'Pemain berhasil di delete');
     }
 }

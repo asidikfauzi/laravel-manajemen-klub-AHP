@@ -11,5 +11,7 @@ class StrukturKlub extends Model
 
     protected $table = "struktur_klub";
     protected $guarded =[];
+
+    public $incrementing = false;
     
 }

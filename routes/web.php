@@ -66,6 +66,7 @@ Route::group(['prefix'=>'admin', 'middleware'=>['isAdmin','auth']], function(){
     Route::post('registerPemain', [RegisterController::class, 'registerPemain'])->name('registerPemain');
     Route::get('pemain/edit/{id}', [AdminController::class, 'showEditPemain'])->name('editPemain');
     Route::post('pemain/edit/{id}', [AdminController::class, 'editPemain'])->name('editPemain');
+    Route::delete('pemain/{id}', [AdminController::class, 'deletePemain'])->name('deletePemain');
     
     Route::get('tambahpoin', function () {
         return view('dashboard.admin.tambahpoin');

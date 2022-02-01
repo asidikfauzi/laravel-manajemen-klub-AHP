@@ -205,12 +205,12 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="foto_kontrak" class="col-md-4 col-form-label text-md-right">{{ __('Upload Kontrak') }}</label>
+                            <label for="img_kontrak" class="col-md-4 col-form-label text-md-right">{{ __('Upload Kontrak') }}</label>
 
                             <div class="col-md-6">
-                                <input id="foto_kontrak" type="file" class="form-control @error('foto_kontrak') is-invalid @enderror" name="foto_kontrak" value="{{ old('foto_kontrak')}}" required autocomplete="foto_kontrak">
+                                <input id="img_kontrak" type="file" class="form-control @error('img_kontrak') is-invalid @enderror" name="img_kontrak" value="{{ old('img_kontrak')}}" required autocomplete="img_kontrak">
 
-                                @error('foto_kontrak')
+                                @error('img_kontrak')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

@@ -10,6 +10,8 @@ class Pemain extends Model
     protected $table = "pemain";
     protected $guarded =[];
 
+    public $incrementing = false;
+
     use HasFactory;
 
     public function kontrak_klub()

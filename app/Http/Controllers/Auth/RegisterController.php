@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Helper\Storage;
+use App\Helper\Uuid;
 use App\Http\Controllers\Controller;
 use App\Models\Klub;
+use App\Models\Kontrak;
 use App\Models\Pemain;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
@@ -127,6 +129,7 @@ class RegisterController extends Controller
         $username = $request->input('username');
         $password = $request->input('password');
         $role_id = $request->input('role_id');
+        
         //klub
         $nama = $request->input('nama');
         $tglBeridiri = $request->input('tglBerdiri'); 
@@ -135,6 +138,8 @@ class RegisterController extends Controller
         $jadwalLatihan = $request->input('jadwalLatihan');
         $sejarahKlub = $request->input('sejarahKlub');
         $image = $request->file('image');
+
+        
 
         if(empty($username) || empty($password) || empty($nama) || empty($tglBeridiri) || empty($alamat) ||
         empty($notelp) || empty($jadwalLatihan) || empty($sejarahKlub))
@@ -161,6 +166,7 @@ class RegisterController extends Controller
         $result = DB::transaction(function() use ($username, $password, $role_id, $nama, $tglBeridiri, $alamat,
                                                     $notelp, $jadwalLatihan, $sejarahKlub, $image){
             $uploadImage = Storage::uploadImageKlub($image);
+            
             $hashPassword = Hash::make($password);
 
             $users = new User();
@@ -180,80 +186,106 @@ class RegisterController extends Controller
             $klub->users_username = $username;
             $klub->save();
 
+            
             return $klub;   
         });
         return back()->with('success', 'Data succesfully saved');
     }
+
     public function registerPemain(Request $request)
     {
-         //users
-         $username = $request->input('username');
-         $password = $request->input('password');
-         $role_id = $request->input('role_id');
-         //pemain
-         $nama = $request->input('nama');
-         $tempat = $request->input('tempat');
-         $tglLahir = $request->input('tglLahir'); 
-         $alamat = $request->input('alamat');
-         $notelp = $request->input('notelp');
-         $tinggi = $request->input('tinggi');
-         $berat = $request->input('berat');
-         $namaKlub = $request->input('nama_klub');
-         $posisi = $request->input('posisi');
-         $image = $request->file('image');
- 
-         if(empty($username) || empty($password) || empty($nama) || empty($tinggi) || empty($berat) || empty($alamat) ||
-         empty($notelp) || empty($tempat) || empty($tglLahir) || empty($posisi) || empty($namaKlub))
-         {
-             return back()->with('failed', 'please fill your data')->withInput();
-         }
-         else if(strlen($password) < 8)
-         {
-             return back()->with('failed', 'username minimum 8 char')->withInput();
-         }
- 
-         $pemainUser = User::where('username', $username)->get()->toArray();
- 
-         if(count($pemainUser) > 0)
-         {
-             return back()->with('failed', 'Username already exists')->withInput();
-         }
-         if(empty($role_id))
-         {
-             $role_id = 'pemain';
-         }
- 
-         $result = DB::transaction(function() use ($username, $password, $role_id, $nama, $tglLahir, $alamat,
-                                                     $notelp, $tempat, $tinggi, $berat, $namaKlub, $posisi, $image){
-             $uploadImage = Storage::uploadImagePemain($image);
-             
-             $hashPassword = Hash::make($password);
- 
-             $users = new User();
-             $users->username = $username;
-             $users->password = $hashPassword;
-             $users->role_id = $role_id;
-             $users->save();
- 
-             $pemain = new Pemain();
-             $pemain->nama_pemain = $nama;
-             $pemain->tempat = $tempat;
-             $pemain->tgl_lahir = $tglLahir;
-             $pemain->alamat = $alamat;
-             $pemain->notelp = $notelp;
-             $pemain->tinggi = $tinggi;
-             $pemain->berat = $berat;
-             $pemain->status = 'aktif';
-             $pemain->nama_klub = $namaKlub;
-             $pemain->posisi = $posisi;
-             $pemain->img = $uploadImage;
-             $pemain->users_username = $username;
-             $pemain->save();
- 
-             return $pemain;   
-         });
+        //users
+        $username = $request->input('username');
+        $password = $request->input('password');
+        $role_id = $request->input('role_id');
+        //pemain & kontrak
+        $uuid = Uuid::getId();
+        //pemain
+        $nama = $request->input('nama');
+        $tempat = $request->input('tempat');
+        $tglLahir = $request->input('tglLahir'); 
+        $alamat = $request->input('alamat');
+        $notelp = $request->input('notelp');
+        $tinggi = $request->input('tinggi');
+        $berat = $request->input('berat');
+        $namaKlub = $request->input('nama_klub');
+        $posisi = $request->input('posisi');
+        $image = $request->file('image');
+        //kontrak
+        $gaji = $request->input('gaji');
+        $awalKontrak = $request->input('awal_kontrak');
+        $akhirKontrak = $request->input('akhir_kontrak');
+        $uploadKontrak = $request->input('img_kontrak');
 
-         return back()->with('success', 'Data succesfully saved');
+        if(empty($username) || empty($password) || empty($nama) || empty($tinggi) || empty($berat) || empty($alamat) ||
+            empty($notelp) || empty($tempat) || empty($tglLahir) || empty($posisi) || empty($namaKlub) || empty($gaji) || 
+            empty($awalKontrak) || empty($akhirKontrak))
+        {
+            return back()->with('failed', 'please fill your data')->withInput();
+        }
+        else if(strlen($password) < 8)
+        {
+            return back()->with('failed', 'username minimum 8 char')->withInput();
+        }
+
+        $pemainUser = User::where('username', $username)->get()->toArray();
+
+        if(count($pemainUser) > 0)
+        {
+            return back()->with('failed', 'Username already exists')->withInput();
+        }
+        if(empty($role_id))
+        {
+            $role_id = 'pemain';
+        }
+
+        $result = DB::transaction(function() use ($username, $password, $role_id, $nama, $tglLahir, $alamat,
+                                                    $notelp, $tempat, $tinggi, $berat, $namaKlub, $posisi, $image, 
+                                                    $gaji, $awalKontrak, $akhirKontrak, $uploadKontrak, $uuid)
+        {
+            $hashPassword = Hash::make($password);
+
+            $dataKlub = Klub::where('nama_klub', $namaKlub)->get()->toArray();
+            
+
+            $users = new User();
+            $users->username = $username;
+            $users->password = $hashPassword;
+            $users->role_id = $role_id;
+            $users->save();
+
+            $uploadImage = Storage::uploadImagePemain($image);
+            //$uploadImageKontrak = Storage::uploadImageKontrak($uploadKontrak);
+
+            $pemain = new Pemain();
+            $pemain->id = $uuid;
+            $pemain->nama_pemain = $nama;
+            $pemain->tempat = $tempat;
+            $pemain->tgl_lahir = $tglLahir;
+            $pemain->alamat = $alamat;
+            $pemain->notelp = $notelp;
+            $pemain->tinggi = $tinggi;
+            $pemain->berat = $berat;
+            $pemain->status = 'aktif';
+            $pemain->nama_klub = $namaKlub;
+            $pemain->posisi = $posisi;
+            $pemain->img = $uploadImage;
+            $pemain->users_username = $username;
+            $pemain->save();
+
+            $kontrak = new Kontrak();
+            $kontrak->gaji = $gaji;
+            $kontrak->awal_kontrak = $awalKontrak;
+            $kontrak->akhir_kontrak = $akhirKontrak;
+            $kontrak->foto_kontrak = $uploadKontrak;
+            $kontrak->klub_id = $dataKlub[0]['id'];
+            $kontrak->pemain_id = $uuid;
+            $kontrak->save();
+
+            return $pemain;   
+        });
+
+        return back()->with('success', 'Data succesfully saved');
     }
 
 }

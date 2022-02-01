@@ -11,6 +11,8 @@ class Klub extends Model
     
     protected $table = "klub";
     protected $guarded =[];
+
+    public $incrementing = false;
     
     public function struktur_klub()
     {
