@@ -12,4 +12,8 @@ class SubKriteria extends Model
     protected $table = "sub_kriteria";
     protected $guarded =[];
     
+    public function hasil_sub_pemain()
+    {
+        return $this->belongsToMany(HasilSubKriteria::class, 'id', 'sub_kriteria_id', 'pemain_id')->withPivot('musim', 'jumlah', 'created_at');
+    }
 }

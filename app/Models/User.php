@@ -31,6 +31,11 @@ class User extends Authenticatable
         return $this->hasMany(BeritaDanAktivitas::class, "users_username", "username");
     }
 
+    public function pesan()
+    {
+        return $this->belongsToMany(Pemain::class, 'id', 'dari_username', 'kepada_username')->withPivot('isi_pesan', 'created_at');
+    }
+
     /**
      * The attributes that are mass assignable.
      *
