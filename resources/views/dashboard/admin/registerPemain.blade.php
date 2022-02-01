@@ -50,7 +50,7 @@
                                 @enderror
                             </div>
                         </div> 
-                        <br>
+                        <hr>
                         <div class="form-group row">
                             <label for="nama" class="col-md-4 col-form-label text-md-right">{{ __('Nama Pemain') }}</label>
 
@@ -107,24 +107,25 @@
                         </div>
                         <div class="form-group row">
                             <label for="tinggiberat" class="col-md-4 col-form-label text-md-right">{{ __('Tinggi / Berat Badan') }}</label>
-
-                            <div class="col-md-3">
-                                <input id="tinggi" type="text" class="form-control @error('tinggi') is-invalid @enderror" name="tinggi" value="{{ old('tinggi')}}" required autocomplete="tinggi">
-                                @error('tinggi')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                            /
-                            <div class="col-md-3">
-                                <input id="berat" type="text" class="form-control @error('berat') is-invalid @enderror" name="berat" value="{{ old('berat')}}" required autocomplete="berat">
-                                @error('berat')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
+                            
+                                <div class="col-md-3">
+                                    <input id="tinggi" type="text" class="form-control @error('tinggi') is-invalid @enderror" name="tinggi" value="{{ old('tinggi')}}" required autocomplete="tinggi">
+                                    @error('tinggi')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                
+                                <div class="col-md-3">
+                                    <input id="berat" type="text" class="form-control @error('berat') is-invalid @enderror" name="berat" value="{{ old('berat')}}" required autocomplete="berat">
+                                    @error('berat')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            
                         </div>
                         <div class="form-group row">
                             <label for="nama_klub" class="col-md-4 col-form-label text-md-right">{{ __('Klub') }}</label>
@@ -144,9 +145,7 @@
                         </div>
                         <div class="form-group row">
                             <label for="posisi" class="col-md-4 col-form-label text-md-right">{{ __('Posisi') }}</label>
-
-                            <div class="col-md-6">
-                               
+                            <div class="col-md-6"> 
                                 <select name="posisi" id="posisi" class="form-control @error('posisi') is-invalid @enderror">
                                     <option value="pemain">Pemain</option>
                                     <option value="kiper">Kiper</option>
@@ -157,8 +156,7 @@
                                     </span>
                                 @enderror
                             </div>
-                        </div>
-                        
+                        </div>          
                         <div class="form-group row">
                             <label for="image" class="col-md-4 col-form-label text-md-right">{{ __('Upload Image') }}</label>
 
@@ -172,10 +170,58 @@
                                 @enderror
                             </div>
                         </div>
-                        <br>
+                        <hr>
+                        <div class="form-group row">
+                            <label for="gaji" class="col-md-4 col-form-label text-md-right">{{ __('Gaji') }}</label>
+                            <div class="col-md-6">
+                                <input id="gaji" type="number" class="form-control @error('gaji') is-invalid @enderror" name="gaji" value="{{ old('gaji')}}" required autocomplete="gaji">
+                                @error('gaji')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="awal_kontrak" class="col-md-4 col-form-label text-md-right">{{ __('Awal Kontrak') }}</label>
+                            <div class="col-md-6">
+                                <input id="awal_kontrak" type="date" class="form-control @error('awal_kontrak') is-invalid @enderror" name="awal_kontrak" value="{{ old('awal_kontrak')}}" required autocomplete="awal_kontrak">
+                                @error('awal_kontrak')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="akhir_kontrak" class="col-md-4 col-form-label text-md-right">{{ __('Akhir Kontrak') }}</label>
+                            <div class="col-md-6">
+                                <input id="akhir_kontrak" type="date" class="form-control @error('akhir_kontrak') is-invalid @enderror" name="akhir_kontrak" value="{{ old('akhir_kontrak')}}" required autocomplete="akhir_kontrak">
+                                @error('akhir_kontrak')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="foto_kontrak" class="col-md-4 col-form-label text-md-right">{{ __('Upload Kontrak') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="foto_kontrak" type="file" class="form-control @error('foto_kontrak') is-invalid @enderror" name="foto_kontrak" value="{{ old('foto_kontrak')}}" required autocomplete="foto_kontrak">
+
+                                @error('foto_kontrak')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <hr>
                         <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                            <div class="col-sm-12">
+                                <button type="submit" class="btn btn-primary w-100">
                                     {{ __('Register') }}
                                 </button>
                             </div>
