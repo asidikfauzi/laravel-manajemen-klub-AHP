@@ -15,9 +15,21 @@ class User extends Authenticatable
     protected $table = "users";
     protected $guarded =[];
 
-    
     protected $primaryKey = "username";
     protected $keyType = "string";
+
+    public function klub()
+    {
+        return $this->hasMany(Klub::class, "users_username", "username");
+    }
+    public function pemain()
+    {
+        return $this->hasMany(Pemain::class, "users_username", "username");
+    }
+    public function berita_dan_aktivitas()
+    {
+        return $this->hasMany(BeritaDanAktivitas::class, "users_username", "username");
+    }
 
     /**
      * The attributes that are mass assignable.
