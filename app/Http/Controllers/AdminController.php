@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Helper\Storage;
+use App\Helper\Uuid;
+use App\Models\BeritaDanAktivitas;
 use App\Models\Klub;
 use App\Models\Kontrak;
 use App\Models\Pemain;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
@@ -28,16 +31,43 @@ class AdminController extends Controller
         $data = User::select('*')->where('role_id', 'admin')->get()->toArray();
         return view('dashboard.admin.admin', compact('data'));
     }
+
     public function showKlub()
     {
         $data = Klub::select('*')->get()->toArray();
         return view('dashboard.admin.klub', compact('data'));
     }
+
     public function showEditKlub($id)
     {
         $data = Klub::where('id', $id)->get()->toArray();
         return view('dashboard.admin.editKlub', compact('data'));
     }
+
+    public function showPemain()
+    {
+        $data = Pemain::select('*')->get()->toArray();
+        return view('dashboard.admin.pemain', compact('data'));
+    }
+
+    public function showEditPemain($id)
+    {
+        $data = Pemain::where('id', $id)->get()->toArray();
+        $dataKlub = Klub::get()->toArray();
+        return view('dashboard.admin.editPemain', compact('data', 'dataKlub'));
+    }
+
+    public function showTambahPoin()
+    {
+        $data = Pemain::select('*')->get()->toArray();
+        return view('dashboard.admin.tambahpoin', compact('data'));
+    }
+
+    public function showTambahBerita()
+    {
+        return view('dashboard.admin.tambahBerita');
+    }
+
     public function editKlub(Request $request, $id)
     {
         $nama = $request->input('namaKlub');
@@ -72,17 +102,7 @@ class AdminController extends Controller
 
         return back()->with('success', 'Data succesfully update!');
     }
-    public function showPemain()
-    {
-        $data = Pemain::select('*')->get()->toArray();
-        return view('dashboard.admin.pemain', compact('data'));
-    }
-    public function showEditPemain($id)
-    {
-        $data = Pemain::where('id', $id)->get()->toArray();
-        $dataKlub = Klub::get()->toArray();
-        return view('dashboard.admin.editPemain', compact('data', 'dataKlub'));
-    }
+    
     public function editPemain(Request $request, $id)
     {
         $nama = $request->input('namaPemain');
@@ -124,14 +144,33 @@ class AdminController extends Controller
 
         return back()->with('success', 'Data succesfully update!');
     }
+
+    public function tambahBerita(Request $request)
+    {
+        $uuid = Uuid::getId();
+        $judul = $request->input('judul_berita');
+        $isiBerita = $request->input('isi_berita');
+        $image = $request->file('image');
+
+        $uploadImage = Storage::uploadImageBerita($image);
+
+        $berita = new BeritaDanAktivitas();
+        $berita->id = $uuid;
+        $berita->judul_berita = $judul;
+        $berita->isi_berita = $isiBerita;
+        $berita->img = $uploadImage;
+        $berita->users_username = Auth::user()->username;
+        $berita->save();
+
+        return back()->with('success', 'Data succesfully saved');
+    }
+
     public function deletePemain($id)
     {
-        
         DB::transaction(function() use ($id){
             $pemain = Pemain::where('id', $id)->first();
             $users = User::where('username', $pemain->users_username)->first();
-            $kontrak = Kontrak::where('pemain_id', $id)->first();
-            
+            $kontrak = Kontrak::where('pemain_id', $id)->first();           
             $kontrak->delete();
             $pemain->delete();
             $users->delete();

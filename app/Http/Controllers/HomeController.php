@@ -26,8 +26,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $dataBerita = BeritaDanAktivitas::select('*')->get()->toArray();
-        $klub = Klub::select('*')->orderBy('id', 'desc')->take(5)->get()->toArray();
+        $dataBerita = BeritaDanAktivitas::select('*')->orderBy('created_at', 'desc')->get()->toArray();
+        $klub = Klub::select('*')->orderBy('created_at', 'desc')->take(5)->get()->toArray();
         
         $dataKlub = [];
         foreach($klub as $data)

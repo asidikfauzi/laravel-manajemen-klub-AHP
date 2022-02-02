@@ -69,9 +69,10 @@ Route::group(['prefix'=>'admin', 'middleware'=>['isAdmin','auth']], function(){
     Route::post('pemain/edit/{id}', [AdminController::class, 'editPemain'])->name('editPemain');
     Route::delete('pemain/{id}', [AdminController::class, 'deletePemain'])->name('deletePemain');
     
-    Route::get('tambahpoin', function () {
-        return view('dashboard.admin.tambahpoin');
-    })->name('tambahpoin'); 
+    Route::get('tambahpoin', [AdminController::class, 'showTambahPoin'])->name('tambahpoin');
+    
+    Route::get('tambahBerita', [AdminController::class, 'showTambahBerita'])->name('tambahBerita');
+    Route::post('tambahBerita', [AdminController::class, 'tambahBerita'])->name('tambahBerita');
 });
 
 Route::group(['prefix'=>'klub', 'middleware'=>['isKlub','auth']], function(){

@@ -41,6 +41,10 @@
                                 {{ __('TAMBAH POIN PEMAIN') }}
                             </button>
                             <hr>
+                            <button type="submit" onclick="window.location.href='{{route('tambahBerita')}}'" class="btn btn-primary col-sm-12">
+                                {{ __('TAMBAH BERITA DAN AKTIVITAS') }}
+                            </button>
+                            <hr>
                             
                         </div>
                     </div>
