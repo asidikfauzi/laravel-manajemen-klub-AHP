@@ -8,6 +8,7 @@ use App\Models\BeritaDanAktivitas;
 use App\Models\Klub;
 use App\Models\Kontrak;
 use App\Models\Pemain;
+use App\Models\StrukturKlub;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -66,6 +67,11 @@ class AdminController extends Controller
     public function showTambahBerita()
     {
         return view('dashboard.admin.tambahBerita');
+    }
+    public function showTambahStrukturKlub($id)
+    {
+        $data = Klub::where('id', $id)->get()->toArray();
+        return view('dashboard.admin.tambahStrukturKlub', compact('data', 'id'));
     }
 
     public function editKlub(Request $request, $id)
@@ -163,6 +169,28 @@ class AdminController extends Controller
         $berita->save();
 
         return back()->with('success', 'Data succesfully saved');
+    }
+
+    public function tambahStrukturKlub(Request $request, $id)
+    {
+        $uuid = Uuid::getId();
+        $nama = $request->input('nama');
+        $notelp = $request->input('notelp');
+        $jabatan = $request->input('jabatan');
+        $image = $request->file('image');
+        
+        $uploadImage = Storage::uploadImageStruktur($image);
+
+        $struktur = new StrukturKlub();
+        $struktur->id = $uuid;
+        $struktur->nama_sk = $nama;
+        $struktur->notelp = $notelp;
+        $struktur->jabatan = $jabatan;
+        $struktur->img = $uploadImage;
+        $struktur->klub_id = $id;
+        $struktur->save();
+
+        return back()->with('succes', 'Data succesfully saved');
     }
 
     public function deletePemain($id)

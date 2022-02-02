@@ -124,7 +124,6 @@
             <a class="active" href="{{ url('pemain', $data[0]['nama_klub']) }}">PEMAIN</a> 
             <a class="active" href="#home">OFFICIAL</a>
             <a class="active" href="#home">STRUKTUR KLUB</a>
-       
         </div>
 
     </div>

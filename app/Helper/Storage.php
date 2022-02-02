@@ -42,6 +42,15 @@ class Storage
       return $name;
     }
 
+    public static function uploadImageStruktur($fileImage)
+    {
+      $ext = $fileImage->getClientOriginalExtension();
+      $name = UUid::createNameForImage($ext);
+      $fileImage->move(base_path("public/assets/img/struktur"), $name);
+
+      return $name;
+    }
+
     public static function getLinkImageKlub($name)
     {
         return url('/assets/img/klub/'.$name);
