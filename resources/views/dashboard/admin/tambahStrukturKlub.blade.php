@@ -3,6 +3,16 @@
 @section('content')
 
 <section class="page-section" id="contact">
+@if (session('success'))
+<div class="alert alert-success">
+    {{ session('success') }}
+</div>
+@endif
+@if (session('failed'))
+    <div class="alert alert-danger">
+        {{ session('failed') }}
+    </div>
+@endif
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
@@ -28,7 +38,7 @@
                         <div class="form-group row">
                             <label for="jabatan" class="col-md-4 col-form-label text-md-right">{{ __('Jabatan') }}</label>
                             <div class="col-md-6">
-                                <select name="posisi" id="posisi" class="form-control @error('posisi') is-invalid @enderror">
+                                <select name="jabatan" id="jabatan" class="form-control @error('jabatan') is-invalid @enderror">
                                     <option value="ketua">Ketua Umum</option>
                                     <option value="wakil ketua">Wakil Ketua Umum</option>
                                     <option value="sekretaris1">Sekretaris I</option>

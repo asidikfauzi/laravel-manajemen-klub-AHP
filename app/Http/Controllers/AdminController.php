@@ -179,6 +179,15 @@ class AdminController extends Controller
         $jabatan = $request->input('jabatan');
         $image = $request->file('image');
         
+        
+
+        $dataStruktur = StrukturKlub::where('klub_id', $id)->where('jabatan', $jabatan)->get()->toArray();
+
+        if($dataStruktur)
+        {
+            return back()->with('failed', 'Jabatan Untuk Klub ini sudah ada');
+        }
+
         $uploadImage = Storage::uploadImageStruktur($image);
 
         $struktur = new StrukturKlub();
@@ -190,7 +199,7 @@ class AdminController extends Controller
         $struktur->klub_id = $id;
         $struktur->save();
 
-        return back()->with('succes', 'Data succesfully saved');
+        return back()->with('success', 'Data succesfully saved');
     }
 
     public function deletePemain($id)
