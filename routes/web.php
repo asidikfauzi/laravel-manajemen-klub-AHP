@@ -49,8 +49,9 @@ Route::get('layanan', function () {
 
 Route::group(['prefix'=>'admin', 'middleware'=>['isAdmin','auth']], function(){
     Route::get('dashboard',[AdminController::class, 'index'])->name('admin.dashboard');
-    Route::get('profile',[AdminController::class, 'profile'])->name('admin.profile');
-   
+    Route::get('changePassword',[AdminController::class, 'showChangePassword'])->name('changePassword');
+    Route::post('changePassword',[AdminController::class, 'changePassword'])->name('changePassword');
+
     //register admin
     Route::get('admin', [AdminController::class, 'showAdmin'])->name('showAdmin');
     Route::get('registerAdmin', [RegisterController::class, 'createAdmin'])->name('registerAdmin');
@@ -82,13 +83,19 @@ Route::group(['prefix'=>'admin', 'middleware'=>['isAdmin','auth']], function(){
 
 Route::group(['prefix'=>'klub', 'middleware'=>['isKlub','auth']], function(){
     Route::get('dashboard', [KlubController::class, 'index'])->name('klub.dashboard');
-    Route::post('dashboard', [KlubController::class, 'editKlub'])->name('klub.dashboard');    
-    Route::get('profile',[KlubController::class, 'profile'])->name('klub.profile');
+    Route::post('dashboard', [KlubController::class, 'editKlub'])->name('klub.dashboard');
+    
+    Route::get('changePassword',[KlubController::class, 'showChangePassword'])->name('changePassword');
+    Route::post('changePassword',[KlubController::class, 'changePassword'])->name('changePassword');
+    
 });
 
 Route::group(['prefix'=>'pemain', 'middleware'=>['isPemain','auth']], function(){
     Route::get('dashboard',[PemainController::class, 'index'])->name('pemain.dashboard');
-    Route::get('profile',[PemainController::class, 'profile'])->name('pemain.profile');
+
+    Route::get('changePassword',[PemainController::class, 'showChangePassword'])->name('changePassword');
+    Route::post('changePassword',[PemainController::class, 'changePassword'])->name('changePassword');
+
 });
 
 
