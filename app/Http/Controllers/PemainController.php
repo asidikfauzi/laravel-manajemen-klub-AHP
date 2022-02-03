@@ -25,7 +25,7 @@ class PemainController extends Controller
     }
     public function show($id)
     {
-        $data = Pemain::where('id', $id)->get()->toArray();
+        $data = Pemain::join('kontrak', 'pemain.id', '=', 'kontrak.pemain_id')->where('pemain.id', $id)->get()->toArray();
         return view('dashboard.public.detailpemain', compact('data','id'));
     }
 }

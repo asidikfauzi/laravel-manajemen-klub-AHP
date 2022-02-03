@@ -135,9 +135,7 @@
                       @foreach($data as $klub)
                         <div class="col-sm-4" style="height: 100%;">
                             <img src="{{asset('assets/img/klub/'.$klub['img'])}}" alt="" style="width:100%;  float:left; height: 100%;  float:left; border: 5px solid black;object-fit: cover;"><br>
-                            
                         </div>
-
                         <div class="col-sm-8" >
                             <h2>{{$klub['nama_klub']}}</h2>
                             <b>Tanggal Berdiri : </b>
