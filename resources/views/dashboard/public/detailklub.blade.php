@@ -138,20 +138,43 @@
                         </div>
                         <div class="col-sm-8" >
                             <h2>{{$klub['nama_klub']}}</h2>
-                            <b>Tanggal Berdiri : </b>
-                            <p>{{$klub['tgl_berdiri']}}</p>
-                            <b>Alamat : </b>
-                            <p>{{$klub['alamat']}}</p>
-                            <b>No. Telephone : </b>
-                            <p>{{$klub['notelp']}}</p>
-                            <b>Jadwal Latihan </b>
-                            @foreach(explode("%0D%0A", $klub['jadwal_latihan']) as $j)
-                            <p style="padding:0; margin: 0;">{{urldecode($j)}}</p>   
-                            @endforeach
-                            <br><b>Sejarah Klub : </b>
-                            @foreach(explode("%0D%0A", $klub['sejarah_klub']) as $j)
-                            <p style="padding:0; margin: 0;">{{urldecode($j)}}<br></p>   
-                            @endforeach
+                            <div class="form-group row">
+                              <label class="col-md-3 col-form-label text-md-right">Tanggal Berdiri </></label>
+                              <div class="col-md-9"> 
+                                <label class="col-md-8 col-form-label text-md-right" data-date-format="DD-MM-YYYY"><b>:</b> &nbsp;{{$klub['tgl_berdiri']}}</label>
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                              <label  class="col-md-3 col-form-label text-md-right"><b>Alamat</b></label>
+                              <div class="col-md-9"> 
+                                <label class="col-md-8 col-form-label text-md-right"><b>:</b> &nbsp;{{$klub['alamat']}}</label>
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                              <label class="col-md-3 col-form-label text-md-right"><b>No. Telephone</b></label>
+                              <div class="col-md-9"> 
+                                <label class="col-md-8 col-form-label text-md-right"><b>:</b> &nbsp;{{$klub['notelp']}}</label>
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                              <label class="col-md-3 col-form-label text-md-right"><b>Jadwal Latihan</b></label>
+                              <div class="col-md-9"> 
+                                @foreach(explode("%0D%0A", $klub['jadwal_latihan']) as $j)
+                                  <label class="col-md-8 col-form-label text-md-right"><b>:</b> &nbsp;{{urldecode($j)}}</label> 
+                                @endforeach
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                              <label class="col-md-3 col-form-label text-md-right"><b>Sejarah Klub</b></label>
+                              <div class="col-md-9"> 
+                                <label class="col-md-8 col-form-label text-md-right"><b>:</b></label> 
+                               
+                              </div>
+                              @foreach(explode("%0D%0A", $klub['sejarah_klub']) as $j)
+                                <label class="col-md-11 col-form-label text-md-right">{{urldecode($j)}}</label> 
+                              @endforeach
+                            </div>
+                            
                         </div>
                         @endforeach
                         

@@ -74,7 +74,11 @@
                             <li class="nav-item mx-0 mx-lg-1"><a class="dropbtn nav-link py-3 px-0 px-lg-3 rounded" href="">{{Auth::user()->username}}</a></li>
                             <div class="dropdown-content">
                                 @if(\Auth::user()->role_id !== "admin")
-                                    <a class="nav-link py-3 px-0 px-lg-3 rounded" href="#">My Profile</a>
+                                    @if(\Auth::user()->role_id === "klub")
+                                        <a class="nav-link py-3 px-0 px-lg-3 rounded" href="{{route('klub.dashboard')}}">My Profile</a>
+                                    @else 
+                                        <a class="nav-link py-3 px-0 px-lg-3 rounded" href="{{route('pemain.dashboard')}}">My Profile</a>
+                                    @endif
                                     <a class="nav-link py-3 px-0 px-lg-3 rounded" href="#">Message</a>
                                     <a class="nav-link py-3 px-0 px-lg-3 rounded" href="#" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout </a>
                                 @else

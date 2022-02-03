@@ -29,14 +29,14 @@
         list-style-type: circle;
     }
     .b1 {
-      width: 17%;
+        width: 17%;
     }
     .b2 {
-      width: 3% ;
+        width: 3% ;
     }
     .topnav {
-  overflow: hidden;
-  background-color: #e9e9e9;
+        overflow: hidden;
+        background-color: #e9e9e9;
 }
 
 .topnav a {
@@ -107,46 +107,90 @@
 </style>  
 <section class="page-section">
 
-  @if (session('success'))
-  <div class="alert alert-success">
-      {{ session('success') }}
-  </div>
+@if (session('success'))
+<div class="alert alert-success">
+    {{ session('success') }}
+</div>
 @endif
 @if (session('failed'))
   <div class="alert alert-danger">
       {{ session('failed') }}
   </div>
 @endif
+    <div class="topnav">
+        <a class="active" href="#home">Welcome {{Auth::user()->username}}</a> 
+        
+        <div class="search-container">
+            <a class="active" href="{{ url('pemain', $data[0]['nama_klub']) }}">PEMAIN</a> 
+            <a class="active" href="{{route('showStrukturKlub', $data[0]['id'])}}">STRUKTUR KLUB</a>
+        </div>
 
+    </div>
+    
+    
       <div id="about_faq" class="about_lav" >
             <div class="about_1">
-              
+                <form method="POST" action="{{route('klub.dashboard')}}" enctype="multipart/form-data"> 
+                    @csrf
                     <div class="row" >
                       @foreach($data as $klub)
                         <div class="col-sm-4" style="height: 100%;">
-                            <img src="{{asset('assets/img/klub/'.$klub['img'])}}" alt="" style="width:100%;  float:left; height: 100%;  float:left; border: 5px solid black;object-fit: cover;"><br>
+                            <a href="{{asset('assets/img/klub/'.$klub['img'])}}" target="_blank">
+                                <img src="{{asset('assets/img/klub/'.$klub['img'])}}" alt="" style="width:100%;  float:left; height: 100%;  float:left; border: 5px solid black;object-fit: cover;"><br>
+                            </a>
+                            <center>
+                                <h4>EDIT IMAGE</h4>
+                            </center>
+                            <input id="image" type="file" class="form-control" name="image" value="{{old('image')}}" >
+                            
                         </div>
+                        
                         <div class="col-sm-8" >
-                            <h1>WELCOME {{}}</h1>
                             <h2>{{$klub['nama_klub']}}</h2>
-                            <b>Tanggal Berdiri : </b>
-                            <p>{{$klub['tgl_berdiri']}}</p>
-                            <b>Alamat : </b>
-                            <p>{{$klub['alamat']}}</p>
-                            <b>No. Telephone : </b>
-                            <p>{{$klub['notelp']}}</p>
-                            <b>Jadwal Latihan </b>
-                            @foreach(explode("%0D%0A", $klub['jadwal_latihan']) as $j)
-                            <p style="padding:0; margin: 0;">{{urldecode($j)}}</p>   
-                            @endforeach
-                            <br><b>Sejarah Klub : </b>
-                            @foreach(explode("%0D%0A", $klub['sejarah_klub']) as $j)
-                            <p style="padding:0; margin: 0;">{{urldecode($j)}}<br></p>   
-                            @endforeach
+                            <div class="form-group row">
+                                <label class="col-md-3 col-form-label text-md-right"><b>Tanggal Berdiri </b></label>
+                                <div class="col-md-8 mb-1"> 
+                                    <input id="tglBerdiri" type="date" class="form-control @error('tglBerdiri') is-invalid @enderror" name="tglBerdiri" value="{{$klub['tgl_berdiri']}}" required autocomplete="tglBerdiri">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label  class="col-md-3 col-form-label text-md-right"><b>Alamat</b></label>
+                                <div class="col-md-8 mb-1"> 
+                                    <input id="alamat" type="text" class="form-control @error('alamat') is-invalid @enderror" name="alamat" value="{{$klub['alamat']}}" required autocomplete="alamat">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                              <label class="col-md-3 col-form-label text-md-right"><b>No. Telephone</b></label>
+                                <div class="col-md-8 mb-1"> 
+                                    <input id="notelp" type="text" class="form-control @error('notelp') is-invalid @enderror" name="notelp" value="{{$klub['notelp']}}" required autocomplete="notelp">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                              <label class="col-md-3 col-form-label text-md-right"><b>Jadwal Latihan</b></label>
+                              <div class="col-md-8 mb-1"> 
+                                <textarea  rows="5" cols="50" id="jadwalLatihan" class="form-control @error('jadwalLatihan') is-invalid @enderror" name="jadwalLatihan" required autocomplete="jadwalLatihan">{{ urldecode($klub['jadwal_latihan'])}}</textarea>
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                              <label class="col-md-3 col-form-label text-md-right"><b>Sejarah Klub</b></label>
+                              <div class="col-md-8 mb-1"> 
+                                <textarea  rows="10" cols="50" id="sejarahKlub" class="form-control @error('sejarahKlub') is-invalid @enderror" name="sejarahKlub" required autocomplete="sejarahKlub">{{ urldecode($klub['sejarah_klub'])}}</textarea>
+                              </div>
+                              
+                            </div>
+                            
                         </div>
                         @endforeach
                         
+                        <div class="col-md-8 offset-md-6">
+                            
+                            <button type="submit" class="btn btn-primary mt-3">
+                                {{ __('SIMPAN') }}
+                            </button>
+                        </div>
+                        
                     </div>
+                </form>
           
         
       </div>

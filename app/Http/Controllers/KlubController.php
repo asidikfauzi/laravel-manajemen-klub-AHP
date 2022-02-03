@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helper\Storage;
 use App\Models\Klub;
 use App\Models\StrukturKlub;
 use Illuminate\Http\Request;
@@ -14,6 +15,37 @@ class KlubController extends Controller
     {
         $data = Klub::where('users_username', Auth()->user()->username)->get()->toArray();
         return view('dashboard.klub.index', compact('data'));
+    }
+
+    public function editKlub(Request $request)
+    {
+        $nama = $request->input('namaKlub');
+        $tglBeridiri = $request->input('tglBerdiri'); 
+        $alamat = $request->input('alamat');
+        $notelp = $request->input('notelp');
+        $jadwalLatihan = $request->input('jadwalLatihan');
+        $sejarahKlub = $request->input('sejarahKlub');
+        $image = $request->file('image');
+        
+
+        $data = Klub::where('users_username', Auth()->user()->username)->first();
+    
+        $data->nama_klub = $nama;
+        $data->tgl_berdiri = $tglBeridiri;
+        $data->alamat = $alamat;
+        $data->notelp = $notelp;
+        $data->jadwal_latihan = urlencode($jadwalLatihan);
+        $data->sejarah_klub = urlencode($sejarahKlub);
+
+        if($request->hasFile('image'))   
+        {
+            $uploadImage = Storage::uploadImageKlub($image);
+            $data->img = $uploadImage;
+        }
+        
+        $data->save();
+
+        return back()->with('success', 'Data succesfully update!');
     }
     
     public function profile()

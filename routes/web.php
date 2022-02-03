@@ -81,7 +81,8 @@ Route::group(['prefix'=>'admin', 'middleware'=>['isAdmin','auth']], function(){
 });
 
 Route::group(['prefix'=>'klub', 'middleware'=>['isKlub','auth']], function(){
-    Route::get('dashboard',[KlubController::class, 'index'])->name('klub.dashboard');
+    Route::get('dashboard', [KlubController::class, 'index'])->name('klub.dashboard');
+    Route::post('dashboard', [KlubController::class, 'editKlub'])->name('klub.dashboard');    
     Route::get('profile',[KlubController::class, 'profile'])->name('klub.profile');
 });
 
