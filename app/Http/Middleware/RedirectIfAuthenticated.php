@@ -29,11 +29,11 @@ class RedirectIfAuthenticated
             {
                 return redirect()->route('admin.dashboard');
             }
-            elseif(Auth::guard($guard)->check() && Auth::user()->role_id == "klub")
+            if(Auth::guard($guard)->check() && Auth::user()->role_id == "klub")
             {
                 return redirect()->route('klub.dashboard');
             }
-            elseif(Auth::guard($guard)->check() && Auth::user()->role_id == "pemain")
+            if(Auth::guard($guard)->check() && Auth::user()->role_id == "pemain")
             {
                 return redirect()->route('pemain.dashboard');
             }

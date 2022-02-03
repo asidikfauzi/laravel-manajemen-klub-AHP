@@ -84,7 +84,7 @@ class LoginController extends Controller
             {
                 return redirect()->route('klub.dashboard');
             }
-            elseif(auth()->user()->role_id == "pemain")
+            if(auth()->user()->role_id == "pemain")
             {
                 return redirect()->route('pemain.dashboard');
             }

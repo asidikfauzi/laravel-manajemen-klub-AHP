@@ -23,11 +23,11 @@ Auth::routes();
 
 Route::get('home', [HomeController::class, 'index'])->name('home');
 
-Route::get('klub', [KlubController::class, 'index'])->name('klub');
+Route::get('klub', [KlubController::class, 'indexPublic'])->name('klub');
 Route::get('klub/detailklub/{id}', [KlubController::class, 'show'])->name('detailklub');
 Route::get('struktur/klub/{id}', [KlubController::class, 'showStrukturKlub'])->name('showStrukturKlub');
 
-Route::get('pemain/{namaKlub}', [PemainController::class, 'index'])->name('pemain');
+Route::get('pemain/{namaKlub}', [PemainController::class, 'indexPublic'])->name('pemain');
 Route::get('pemain/detailpemain/{id}', [PemainController::class, 'show'])->name('detailpemain');
 
 

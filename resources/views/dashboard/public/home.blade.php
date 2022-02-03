@@ -65,6 +65,7 @@
                     <img src="{{asset('assets/img/berita/'.$data['img'])}}" alt="" style="width:100%;float:left;"><br>
                 </div>
             </div>
+            <hr>
             @endforeach 
 
         </div>

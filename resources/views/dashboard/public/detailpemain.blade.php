@@ -127,61 +127,60 @@
                         <div class="col-sm-8" >
                             <h2>{{$pemain['nama_pemain']}}</h2>
                             <div class="form-group row">
-                              <label for="posisi" class="col-md-4 col-form-label text-md-right"><b>Tempat, Tgl Lahir</b></label>
-                              <div class="col-md-8"> 
+                              <label for="posisi" class="col-md-3 col-form-label text-md-right"><b>Tempat, Tgl Lahir</b></label>
+                              <div class="col-md-9"> 
                                 <label for="posisi" class="col-md-8 col-form-label text-md-right" data-date-format="DD-MM-YYYY"><b>:</b> &nbsp;{{$pemain['tempat']}}, {{$pemain['tgl_lahir']}}</label>
                               </div>
                             </div>
                             <div class="form-group row">
-                              <label for="posisi" class="col-md-4 col-form-label text-md-right"><b>Alamat</b></label>
-                              <div class="col-md-8"> 
+                              <label for="posisi" class="col-md-3 col-form-label text-md-right"><b>Alamat</b></label>
+                              <div class="col-md-9"> 
                                 <label for="posisi" class="col-md-8 col-form-label text-md-right"><b>:</b> &nbsp;{{$pemain['alamat']}}</label>
                               </div>
                             </div>
                             <div class="form-group row">
-                              <label for="posisi" class="col-md-4 col-form-label text-md-right"><b>No. Telephone</b></label>
-                              <div class="col-md-8"> 
+                              <label for="posisi" class="col-md-3 col-form-label text-md-right"><b>No. Telephone</b></label>
+                              <div class="col-md-9"> 
                                 <label for="posisi" class="col-md-8 col-form-label text-md-right"><b>:</b> &nbsp;{{$pemain['notelp']}}</label>
                               </div>
                             </div>
                             <div class="form-group row">
-                              <label for="posisi" class="col-md-4 col-form-label text-md-right"><b>Tinggi</b></label>
-                              <div class="col-md-8"> 
+                              <label for="posisi" class="col-md-3 col-form-label text-md-right"><b>Tinggi</b></label>
+                              <div class="col-md-9"> 
                                 <label for="posisi" class="col-md-8 col-form-label text-md-right"><b>:</b> &nbsp;{{$pemain['tinggi']}}</label>
                               </div>
                             </div>
                             <div class="form-group row">
-                              <label for="posisi" class="col-md-4 col-form-label text-md-right"><b>Berat</b></label>
-                              <div class="col-md-8"> 
+                              <label for="posisi" class="col-md-3 col-form-label text-md-right"><b>Berat</b></label>
+                              <div class="col-md-9"> 
                                 <label for="posisi" class="col-md-8 col-form-label text-md-right"><b>:</b> &nbsp;{{$pemain['berat']}}</label>
                               </div>
                             </div>
                             <div class="form-group row">
-                              <label for="posisi" class="col-md-4 col-form-label text-md-right"><b>Status</b></label>
-                              <div class="col-md-8"> 
+                              <label for="posisi" class="col-md-3 col-form-label text-md-right"><b>Status</b></label>
+                              <div class="col-md-9"> 
                                 <label for="posisi" class="col-md-8 col-form-label text-md-right"><b>:</b> &nbsp;{{$pemain['status']}}</label>
                               </div>
                             </div>
                             <div class="form-group row">
-                              <label for="posisi" class="col-md-4 col-form-label text-md-right"><b>Klub</b></label>
-                              <div class="col-md-8"> 
+                              <label for="posisi" class="col-md-3 col-form-label text-md-right"><b>Klub</b></label>
+                              <div class="col-md-9"> 
                                 <label for="posisi" class="col-md-8 col-form-label text-md-right"><b>:</b> &nbsp;{{$pemain['nama_klub']}}</label>
                               </div>
                             </div>
                             <div class="form-group row">
-                              <label for="posisi" class="col-md-4 col-form-label text-md-right"><b>Posisi</b></label>
-                              <div class="col-md-8"> 
+                              <label for="posisi" class="col-md-3 col-form-label text-md-right"><b>Posisi</b></label>
+                              <div class="col-md-9"> 
                                 <label for="posisi" class="col-md-8 col-form-label text-md-right"><b>:</b> &nbsp;{{$pemain['posisi']}}</label>
                               </div>
                             </div>
                             <div class="form-group row">
-                              <label for="posisi" class="col-md-4 col-form-label text-md-right"><b>Kontrak</b></label>
-                              <div class="col-md-8"> 
+                              <label for="posisi" class="col-md-3 col-form-label text-md-right"><b>Kontrak</b></label>
+                              <div class="col-md-9"> 
                                 <label for="posisi" class="col-md-10 col-form-label text-md-right" data-date-format="DD-MM-YYYY"><b>:</b> &nbsp; {{$pemain['awal_kontrak']}} - {{$pemain['akhir_kontrak']}}</label>
                               </div>
                             </div>
-                               
-                                                     
+                                  
                         </div>
                         @endforeach
                         

@@ -12,7 +12,7 @@ class KlubController extends Controller
     public function index()
     {
         $data = Klub::select('*')->get()->toArray();
-        return view('dashboard.public.klub', compact('data'));
+        return view('dashboard.klub.index', compact('data'));
     }
     
     public function profile()
@@ -24,6 +24,12 @@ class KlubController extends Controller
     {
         $data = Klub::where('id', $id)->get()->toArray();
         return view('dashboard.public.detailklub', compact('data','id'));
+    }
+
+    public function indexPublic()
+    {
+        $data = Klub::select('*')->get()->toArray();
+        return view('dashboard.public.klub', compact('data'));
     }
 
 

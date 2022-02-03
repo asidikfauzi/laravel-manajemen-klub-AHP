@@ -79,7 +79,7 @@
 	
   <div class="content">
 		<div class="topnav">
-		  	<a class="active" href="#home">Home</a>
+		  	<a class="active" href="{{route('klub')}}">{{$data[0]['nama_klub']}}</a>
 		  	
 		  	<div class="search-container">
 		    	<form action="/action_page.php">
