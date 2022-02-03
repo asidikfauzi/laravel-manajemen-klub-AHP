@@ -120,7 +120,7 @@
     <div class="topnav">
         <a class="active" href="#home">EDIT KLUB</a> 
         <div class="search-container">
-          <a class="active" href="{{route('strukturKlub', $data[0]['id'])}}">Tambah Struktur Klub</a>
+          <a class="active" href="{{route('strukturKlub', $data[0]['id'])}}">Struktur Klub</a>
         </div>
     </div>
       <div id="about_faq" class="about_lav" >

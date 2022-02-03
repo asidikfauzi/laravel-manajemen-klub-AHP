@@ -62,8 +62,9 @@ Route::group(['prefix'=>'admin', 'middleware'=>['isAdmin','auth']], function(){
     Route::post('registerKlub', [RegisterController::class, 'registerKlub'])->name('registerKlub');
     Route::get('klub/edit/{id}', [AdminController::class, 'showEditKlub'])->name('editKlub');
     Route::post('klub/edit/{id}', [AdminController::class, 'editKlub'])->name('editKlub');
-    Route::get('struktur/klub/{id}', [AdminController::class, 'showTambahStrukturKlub'])->name('strukturKlub');
-    Route::post('struktur/klub/{id}', [AdminController::class, 'tambahStrukturKlub'])->name('strukturKlub');
+    Route::get('struktur/klub/{id}', [AdminController::class, 'showStruktur'])->name('strukturKlub');
+    Route::get('struktur/klub/add/{id}', [AdminController::class, 'showTambahStrukturKlub'])->name('addStrukturKlub');
+    Route::post('struktur/klub/add/{id}', [AdminController::class, 'tambahStrukturKlub'])->name('addStrukturKlub');
     
     //pemain
     Route::get('pemain', [AdminController::class, 'showPemain'])->name('showPemain');

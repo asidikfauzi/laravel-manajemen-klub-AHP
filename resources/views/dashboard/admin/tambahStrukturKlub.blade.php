@@ -20,7 +20,7 @@
                 <div class="card-header text-uppercase"><h3>Tambah Struktur Klub {{$data[0]['nama_klub']}}</h3></div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('strukturKlub', $data[0]['id']) }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ route('addStrukturKlub', $data[0]['id']) }}" enctype="multipart/form-data">
                         @csrf
 
                         <div class="form-group row">

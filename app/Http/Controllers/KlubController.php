@@ -25,6 +25,8 @@ class KlubController extends Controller
         $data = Klub::where('id', $id)->get()->toArray();
         return view('dashboard.public.detailklub', compact('data','id'));
     }
+
+
     public function showStrukturKlub($id)
     {
         
@@ -39,26 +41,31 @@ class KlubController extends Controller
         if(empty($ketua))
         {
             $ketua[0]['nama_sk'] = '-';
+            $ketua[0]['img'] = '-';
         }
 
         if(empty($sekretaris1))
         {
             $sekretaris1[0]['nama_sk'] = '-';
+            $sekretaris1[0]['img'] = '-';
         }
 
         if(empty($sekretaris2))
         {
             $sekretaris2[0]['nama_sk'] = '-';
+            $sekretaris2[0]['img'] = '-';
         }
 
         if(empty($bendahara1))
         {
             $bendahara1[0]['nama_sk'] = '-';
+            $bendahara1[0]['img'] = '-';
         }
         
         if(empty($bendahara2))
         {
             $bendahara2[0]['nama_sk'] = '-';
+            $bendahara2[0]['img'] = '-';
         }
         
         return view('dashboard.public.strukturKlub', compact('ketua', 'sekretaris1', 'sekretaris2', 'bendahara1', 'bendahara2', 'id'));

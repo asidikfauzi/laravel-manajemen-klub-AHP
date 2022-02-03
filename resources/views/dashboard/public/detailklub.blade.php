@@ -122,7 +122,6 @@
         
         <div class="search-container">
             <a class="active" href="{{ url('pemain', $data[0]['nama_klub']) }}">PEMAIN</a> 
-            <a class="active" href="#home">OFFICIAL</a>
             <a class="active" href="{{route('showStrukturKlub', $data[0]['id'])}}">STRUKTUR KLUB</a>
         </div>
 

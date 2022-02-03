@@ -28,11 +28,6 @@ body {
   font-family: "Inter", sans-serif;
 }
 
-.container {
-  max-width: 1000px;
-  padding: 0 10px;
-  margin: 0 auto;
-}
 
 .rectangle {
   position: relative;
@@ -110,22 +105,7 @@ body {
   height: 20px;
   background: var(--black);
 }
-/* 
-.level-2::after {
-  display: none;
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 0%;
-  transform: translate(-100%, -50%);
-  width: 20px;
-  height: 2px;
-  background: var(--black);
-} */
 
-
-/* FOOTER
-–––––––––––––––––––––––––––––––––––––––––––––––––– */
 .page-footer {
   position: fixed;
   right: 0;
@@ -142,23 +122,52 @@ body {
 
 <section class="page-section">
     <form action="{{route('showStrukturKlub', $id)}}">
-    <div class="content">
-        <h1 class="level-1 rectangle">{{ $ketua[0]['nama_sk'] }} <span style = "display: block; color: #032A63">KETUA UMUM</span></h1> 
+        <h1 class="level-1 rectangle">
+            <div class="center">
+                <img src="{{asset('assets/img/struktur/'.$ketua[0]['img'])}}" style="height: 100px;" alt="image struktur">
+            </div>
+                {{ $ketua[0]['nama_sk'] }} 
+            <span style = "display: block; color: #032A63">KETUA UMUM</span>
+        </h1> 
         <ol class="level-2-wrapper">
             <li>
-                <h2 class="level-2 rectangle">{{ $sekretaris1[0]['nama_sk'] }}<span style = "display: block; color: #032A63">SEKRETARIS I</span></h2>
+                <h2 class="level-2 rectangle">
+                    <div class="center">
+                        <img src="{{asset('assets/img/struktur/'.$sekretaris1[0]['img'])}}" style="height: 100px;" alt="image struktur">
+                    </div>
+                        {{ $sekretaris1[0]['nama_sk'] }}
+                    <span style = "display: block; color: #032A63">SEKRETARIS I</span>
+                </h2>
             </li>
             <li>
-                <h2 class="level-2 rectangle">{{ $bendahara1[0]['nama_sk'] }} <span style = "display: block; color: #032A63">BENDAHARA I</span></h2>
+                <h2 class="level-2 rectangle">
+                    <div class="center">
+                        <img src="{{asset('assets/img/struktur/'.$bendahara1[0]['img'])}}" style="height: 100px;" alt="image struktur">
+                    </div>
+                        {{ $bendahara1[0]['nama_sk'] }} 
+                    <span style = "display: block; color: #032A63">BENDAHARA I</span>
+                </h2>
             </li>
             <li>
-                <h2 class="level-2 rectangle">{{ $sekretaris2[0]['nama_sk'] }}<span style = "display: block; color: #032A63">SEKRETARIS II</span></h2>
+                <h2 class="level-2 rectangle">
+                    <div class="center">
+                        <img src="{{asset('assets/img/struktur/'.$sekretaris2[0]['img'])}}" style="height: 100px;" alt="image struktur">
+                    </div>
+                        {{ $sekretaris2[0]['nama_sk'] }}
+                    <span style = "display: block; color: #032A63">SEKRETARIS II</span>
+                </h2>
             </li>
             <li>
-                <h2 class="level-2 rectangle">{{ $bendahara2[0]['nama_sk'] }} <span style = "display: block; color: #032A63">BENDAHARA II</span></h2>
+                <h2 class="level-2 rectangle">
+                    <div class="center">
+                        <img src="{{asset('assets/img/struktur/'.$bendahara2[0]['img'])}}" style="height: 100px;" alt="image struktur">
+                    </div>
+                        {{ $bendahara2[0]['nama_sk'] }}
+                    <span style = "display: block; color: #032A63">BENDAHARA II</span>
+                </h2>
             </li>
         </ol>
-    </div>
+    
     </form>
 </section>
 
