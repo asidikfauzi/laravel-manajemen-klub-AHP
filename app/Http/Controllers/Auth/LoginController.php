@@ -39,11 +39,11 @@ class LoginController extends Controller
         {
             return route('admin.dashboard');
         }
-        elseif(Auth()->user()->role_id == "klub")
+        if(Auth()->user()->role_id == "klub")
         {
             return route('klub.dashboard');
         }
-        elseif(Auth()->user()->role_id == "pemain")
+        if(Auth()->user()->role_id == "pemain")
         {
             return route('pemain.dashboard');
         }

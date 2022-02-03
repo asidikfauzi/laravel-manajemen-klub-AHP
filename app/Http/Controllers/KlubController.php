@@ -5,13 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Klub;
 use App\Models\StrukturKlub;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class KlubController extends Controller
 {
     //
     public function index()
     {
-        $data = Klub::select('*')->get()->toArray();
+        $data = Klub::where('users_username', Auth()->user()->username)->get()->toArray();
         return view('dashboard.klub.index', compact('data'));
     }
     
