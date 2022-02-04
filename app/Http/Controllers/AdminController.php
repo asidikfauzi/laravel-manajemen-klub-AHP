@@ -13,6 +13,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
@@ -78,6 +79,11 @@ class AdminController extends Controller
     {
         $data = Klub::where('id', $id)->get()->toArray();
         return view('dashboard.admin.tambahStrukturKlub', compact('data', 'id'));
+    }
+
+    public function showChangePassword()
+    {
+        return view('dashboard.admin.changePassword');
     }
 
     public function editKlub(Request $request, $id)
@@ -206,6 +212,38 @@ class AdminController extends Controller
         $struktur->save();
 
         return back()->with('success', 'Data succesfully saved');
+    }
+
+    public function changePassword(Request $request)
+    {
+        $oldPassword = $request->input('oldPassword');
+        $newPassword = $request->input('newPassword');
+        $reNewPassword = $request->input('reNewPassword');
+
+        if($newPassword !== $reNewPassword)
+        {
+            return back()->with('failed', 'Password tidak sama');
+        }
+        $data = User::where('username', Auth()->user()->username)->first();
+
+        if(!Hash::check($oldPassword, $data->password ))
+        {
+            return back()->with('failed', 'Password lama salah');
+        }
+        if(empty($newPassword) && empty($reNewPassword))
+        {
+            return back()->with('failed', 'Password baru tidak boleh kosong');
+        }
+        else if(strlen($newPassword) < 8) 
+        {
+            return back()->with('failed', 'Password minimal 8 Karakter');
+        }
+        $hashPassword = Hash::make($newPassword);
+
+        $data->password = $hashPassword;
+        $data->save();
+        return back()->with('success', 'Password changes succesfully ');
+
     }
 
     public function deletePemain($id)
