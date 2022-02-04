@@ -85,7 +85,7 @@ Route::group(['prefix'=>'klub', 'middleware'=>['isKlub','auth']], function(){
     Route::get('dashboard', [KlubController::class, 'index'])->name('klub.dashboard');
     Route::post('dashboard', [KlubController::class, 'editKlub'])->name('klub.dashboard');
     
-    Route::get('changePasswordKlub',[KlubController::class, 'showChangePassword'])->name('changePasswordKlub');
+    Route::get('changePassword',[KlubController::class, 'showChangePassword'])->name('changePasswordKlub');
     Route::post('changePassword',[KlubController::class, 'changePassword'])->name('changePasswordKlub');
     
 });

@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Helper\Storage;
 use App\Models\Klub;
 use App\Models\StrukturKlub;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class KlubController extends Controller
 {
@@ -108,5 +110,43 @@ class KlubController extends Controller
         }
         
         return view('dashboard.public.strukturKlub', compact('ketua', 'sekretaris1', 'sekretaris2', 'bendahara1', 'bendahara2', 'id'));
+    }
+
+    public function showChangePassword()
+    {
+        return view('dashboard.klub.changePassword');
+    }
+
+    public function changePassword(Request $request)
+    {
+        $oldPassword = $request->input('oldPassword');
+        $newPassword = $request->input('newPassword');
+        $reNewPassword = $request->input('reNewPassword');
+
+        if($newPassword !== $reNewPassword)
+        {
+            return back()->with('failed', 'Password tidak sama');
+        }
+        $data = User::where('username', Auth()->user()->username)->first();
+
+        if(!Hash::check($oldPassword, $data->password ))
+        {
+            return back()->with('failed', 'Password lama salah');
+        }
+        if(empty($newPassword) && empty($reNewPassword))
+        {
+            return back()->with('failed', 'Password baru tidak boleh kosong');
+        }
+        else if(strlen($newPassword) < 8) 
+        {
+            return back()->with('failed', 'Password minimal 8 Karakter');
+        }
+        
+        $hashPassword = Hash::make($newPassword);
+
+        $data->password = $hashPassword;
+        $data->save();
+
+        return back()->with('success', 'Password changes succesfully ');
     }
 }
