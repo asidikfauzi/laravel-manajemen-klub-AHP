@@ -272,6 +272,24 @@ class AdminController extends Controller
            
     }
 
+    public function deleteKlub($namaKlub)
+    {
+        DB::transaction(function() use ($namaKlub){
+            $kontrak = Kontrak::join('klub', 'klub_id', '=', 'klub.id')->where('klub.nama_klub', $namaKlub)->delete();
+            $pemain = Pemain::join('users', 'users_username', 'username')->where('nama_klub', $namaKlub)->delete();
+            $klub = Klub::join('users', 'users_username', 'username')->where('nama_klub', $namaKlub)->delete();
+            $usersKlub = User::where('users.role_id', 'klub')->leftJoin('klub', function($join){
+                $join->on('username', '=', 'klub.users_username');
+            })->whereNull('klub.users_username')->delete();
+            $usersKlub = User::where('users.role_id', 'pemain')->leftJoin('pemain', function($join){
+                $join->on('username', '=', 'pemain.users_username');
+            })->whereNull('pemain.users_username')->delete();
+            
+        });
+
+        return back()->with('success', 'Klub, Pemain, dan Kontrak yang terkait berhasil di delete');
+    }
+
     public function deletePemain($id)
     {
         DB::transaction(function() use ($id){

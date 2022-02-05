@@ -55,7 +55,13 @@ tr:nth-child(even) {
         <td>{{$klub['nama_klub']}}</td>
         <td><button type="submit" onclick="window.location.href='{{route('resetPasswordKlub', $klub['id'])}}'" class="btn btn-primary"><i class="fas fa-sync"></i></button></td>
         <td><button type="submit" onclick="window.location.href='{{route('editKlub', $klub['id'])}}'" class="btn btn-primary"><i class="fas fa-cog"></i></button></td>
-        <td><button type="submit" onclick="window.location.href='{{route('editKlub', $klub['id'])}}'" class="btn btn-danger" ><i class="fa fa-trash"></i></button></td>  
+        <td>
+          <form action="{{ route('deleteKlub', $klub['nama_klub']) }}" method="POST">
+            {{ method_field('DELETE') }}
+            {{ csrf_field() }}
+            <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+        </form>
+        </td>  
     </tr>
   @endforeach
 </table>

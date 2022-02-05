@@ -67,6 +67,7 @@ Route::group(['prefix'=>'admin', 'middleware'=>['isAdmin','auth']], function(){
     Route::get('struktur/klub/add/{id}', [AdminController::class, 'showTambahStrukturKlub'])->name('addStrukturKlub');
     Route::post('struktur/klub/add/{id}', [AdminController::class, 'tambahStrukturKlub'])->name('addStrukturKlub');
     Route::get('resetPasswordKlub/{id}', [AdminController::class, 'resetPasswordKlub'])->name('resetPasswordKlub');
+    Route::delete('klub/{namaKlub}', [AdminController::class, 'deleteKlub'])->name('deleteKlub');
     
     //pemain
     Route::get('pemain', [AdminController::class, 'showPemain'])->name('showPemain');
@@ -85,7 +86,6 @@ Route::group(['prefix'=>'admin', 'middleware'=>['isAdmin','auth']], function(){
 });
 
 Route::group(['prefix'=>'pemain', 'middleware'=>['isPemain','auth']], function(){
-
     Route::get('dashboard', [PemainController::class, 'index'])->name('pemain.dashboard');
     Route::get('changePassword', [PemainController::class, 'showChangePassword'])->name('changePasswordPemain');
     Route::post('changePassword', [PemainController::class, 'changePassword'])->name('changePasswordPemain');

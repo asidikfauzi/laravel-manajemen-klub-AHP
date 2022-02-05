@@ -26,10 +26,10 @@ tr:nth-child(even) {
 </head>
 <body>
 <section class="page-section" id="contact">
-  @if (session('success'))
-  <div class="alert alert-success">
-      {{ session('success') }}
-  </div>
+@if (session('success'))
+<div class="alert alert-success">
+    {{ session('success') }}
+</div>
 @endif
 @if (session('failed'))
   <div class="alert alert-danger">
