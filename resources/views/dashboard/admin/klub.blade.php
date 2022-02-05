@@ -59,7 +59,6 @@ tr:nth-child(even) {
     </tr>
   @endforeach
 </table>
-<!-- Button trigger modal -->
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModalSave" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
