@@ -44,20 +44,16 @@ tr:nth-child(even) {
         <th>Image</th>
         <th>Nama </th>
         <th>Jabatan</th>
-        <th>Controller</th>
+        <th>Edit</th>
+        <th>Delete</th>
     </tr>
     @foreach ($data as $struktur)
     <tr>
         <td><img src="{{asset('assets/img/struktur/'.$struktur['img'])}}" class="rounded mx-auto d-block" alt="image struktur" style="height: 50px;"></td>
         <td>{{$struktur['nama_sk']}}</td>
         <td>{{$struktur['jabatan']}}</td>
-        <td><button type="submit" onclick="window.location.href='{{route('editPemain', $struktur['id'])}}'" class="btn btn-primary">EDIT</button>
-            <form action="{{ route('deletePemain', $struktur['id']) }}" method="POST">
-                {{ method_field('DELETE') }}
-                {{ csrf_field() }}
-                <button type="submit" class="btn btn-danger">DELETE</button>
-            </form>
-        </td>  
+        <td><button type="submit" onclick="window.location.href='{{route('editPemain', $struktur['id'])}}'" class="btn btn-primary"><i class="fa fa-cog"></button></td>
+        <td><button type="submit" class="btn btn-danger"><i class="fa fa-trash"></button></td>  
     </tr>
   @endforeach
 </table>
