@@ -55,16 +55,35 @@ tr:nth-child(even) {
         <td>{{$klub['nama_klub']}}</td>
         <td><button type="submit" onclick="window.location.href='{{route('resetPasswordKlub', $klub['id'])}}'" class="btn btn-primary"><i class="fas fa-sync"></i></button></td>
         <td><button type="submit" onclick="window.location.href='{{route('editKlub', $klub['id'])}}'" class="btn btn-primary"><i class="fas fa-cog"></i></button></td>
-        <td>
-          <form action="{{ route('deleteKlub', $klub['nama_klub']) }}" method="POST">
-            {{ method_field('DELETE') }}
-            {{ csrf_field() }}
-            <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i></button>
-        </form>
-        </td>  
+        <td><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModalSave"><i class="fa fa-trash"></button></td>  
     </tr>
   @endforeach
 </table>
+<!-- Button trigger modal -->
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalSave" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+      <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Peringatan !</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          Apakah anda yakin ingin menghapus klub ini ?<br>
+          Ini akan menghapus kontrak, serta pemain yang terkait ada di dalam klub.
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <form action="{{ route('deleteKlub', $klub['nama_klub']) }}" method="POST">
+            {{ method_field('DELETE') }}
+            {{ csrf_field() }}
+            <button type="submit" class="btn btn-danger">DELETE</i></button>
+          </form>
+      </div>
+      </div>
+  </div>
+</div>
 </section>
 </body>
 </html>
