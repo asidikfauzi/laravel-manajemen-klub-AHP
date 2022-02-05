@@ -66,7 +66,7 @@ Route::group(['prefix'=>'admin', 'middleware'=>['isAdmin','auth']], function(){
     Route::get('struktur/klub/{id}', [AdminController::class, 'showStruktur'])->name('strukturKlub');
     Route::get('struktur/klub/add/{id}', [AdminController::class, 'showTambahStrukturKlub'])->name('addStrukturKlub');
     Route::post('struktur/klub/add/{id}', [AdminController::class, 'tambahStrukturKlub'])->name('addStrukturKlub');
-    Route::get('resetPassword/{id}', [AdminController::class, 'resetPassword'])->name('resetPasswordKlub');
+    Route::get('resetPasswordKlub/{id}', [AdminController::class, 'resetPasswordKlub'])->name('resetPasswordKlub');
     
     //pemain
     Route::get('pemain', [AdminController::class, 'showPemain'])->name('showPemain');
@@ -74,7 +74,9 @@ Route::group(['prefix'=>'admin', 'middleware'=>['isAdmin','auth']], function(){
     Route::post('registerPemain', [RegisterController::class, 'registerPemain'])->name('registerPemain');
     Route::get('pemain/edit/{id}', [AdminController::class, 'showEditPemain'])->name('editPemain');
     Route::post('pemain/edit/{id}', [AdminController::class, 'editPemain'])->name('editPemain');
+    Route::get('resetPasswordPemain/{id}', [AdminController::class, 'resetPasswordPemain'])->name('resetPasswordPemain');
     Route::delete('pemain/{id}', [AdminController::class, 'deletePemain'])->name('deletePemain');
+
     
     Route::get('tambahpoin', [AdminController::class, 'showTambahPoin'])->name('tambahpoin');
     

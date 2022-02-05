@@ -26,6 +26,16 @@ tr:nth-child(even) {
 </head>
 <body>
 <section class="page-section" id="contact">
+@if (session('success'))
+<div class="alert alert-success">
+    {{ session('success') }}
+</div>
+@endif
+@if (session('failed'))
+  <div class="alert alert-danger">
+      {{ session('failed') }}
+  </div>
+@endif
 <h2>DATA KLUB AFKAB SUMENEP 2021-2024</h2>
 <button type="submit" onclick="window.location.href='{{route('registerKlub')}}'" class="btn btn-primary">TAMBAH KLUB</button>
 <br><br>

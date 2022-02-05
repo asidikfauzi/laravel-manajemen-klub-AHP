@@ -43,19 +43,23 @@ tr:nth-child(even) {
     <tr>
         <th>Image</th>
         <th>Nama Pemain</th>
-        <th>Nama Klub</th>
-        <th>Controller</th>
+        <th>Nama Klub</th>\
+        <th>Reset Password</th>
+        <th>Edit</th>
+        <th>Delete</th>
     </tr>
     @foreach ($data as $pemain)
     <tr>
         <td><img src="{{asset('assets/img/pemain/'.$pemain['img'])}}" class="rounded mx-auto d-block" alt="image klub" style="height: 50px;"></td>
         <td>{{$pemain['nama_pemain']}}</td>
         <td>{{$pemain['nama_klub']}}</td>
-        <td><button type="submit" onclick="window.location.href='{{route('editPemain', $pemain['id'])}}'" class="btn btn-primary">EDIT</button>
+        <td><button type="submit" onclick="window.location.href='{{route('resetPasswordPemain', $pemain['id'])}}'" class="btn btn-primary"><i class="fa fa-sync"></i></button></td>
+        <td><button type="submit" onclick="window.location.href='{{route('editPemain', $pemain['id'])}}'" class="btn btn-primary"><i class="fa fa-cog"></i></button></td>
+        <td>
             <form action="{{ route('deletePemain', $pemain['id']) }}" method="POST">
                 {{ method_field('DELETE') }}
                 {{ csrf_field() }}
-                <button type="submit" class="btn btn-danger">DELETE</button>
+                <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i></button>
             </form>
         </td>  
     </tr>

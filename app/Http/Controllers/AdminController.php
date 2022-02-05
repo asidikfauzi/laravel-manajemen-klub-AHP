@@ -246,13 +246,25 @@ class AdminController extends Controller
 
     }
 
-    public function ResetPassword($id)
+    public function resetPasswordKlub($id)
     {
         $password = '12345678';
         $hashPassword = Hash::make($password);
 
         $data = User::join('klub', 'username', '=', 'users_username')->where('klub.id', $id)->first();
-      
+        $data->password = $hashPassword;
+        $data->save();
+
+        return back()->with('success', 'Reset Password succesfully');
+           
+    }
+
+    public function resetPasswordPemain($id)
+    {
+        $password = '12345678';
+        $hashPassword = Hash::make($password);
+
+        $data = User::join('pemain', 'username', '=', 'users_username')->where('pemain.id', $id)->first();
         $data->password = $hashPassword;
         $data->save();
 
