@@ -39,14 +39,15 @@ class LoginController extends Controller
         {
             return route('admin.dashboard');
         }
-        if(Auth()->user()->role_id == "klub")
-        {
-            return route('klub.dashboard');
-        }
-        if(Auth()->user()->role_id == "pemain")
+        elseif(Auth()->user()->role_id == "pemain")
         {
             return route('pemain.dashboard');
         }
+        elseif(Auth()->user()->role_id == "klub")
+        {
+            return route('klub.dashboard');
+        }
+        
     }
 
 
@@ -62,12 +63,6 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
-        // $input = $request->all();
-        // $this->validate($request, [
-        //     'username'=>'required',
-        //     'password'=>'required',
-        //     'role_id'=>'required',
-        // ]);
         $username = $request->input('username');
         $password = $request->input('password');
         $role_id = $request->input('role_id');
@@ -80,14 +75,15 @@ class LoginController extends Controller
             {
                 return redirect()->route('admin.dashboard');
             }
-            if(auth()->user()->role_id == "klub")
-            {
-                return redirect()->route('klub.dashboard');
-            }
-            if(auth()->user()->role_id == "pemain")
+            elseif(auth()->user()->role_id == "pemain")
             {
                 return redirect()->route('pemain.dashboard');
             }
+            elseif(auth()->user()->role_id == "klub")
+            {
+                return redirect()->route('klub.dashboard');
+            }
+            
         }
         else
         {

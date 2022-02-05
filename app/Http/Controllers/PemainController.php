@@ -4,14 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\Pemain;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PemainController extends Controller
 {
     //
     public function index()
     {
-        $data = Pemain::select('*')->get()->toArray();
-        return view('dashboard.pemain.index', compact('data'));
+        return view('dashboard.pemain.index');
     }
 
     public function profile()
@@ -19,7 +19,7 @@ class PemainController extends Controller
         return view('dashboard.pemain.profile');
     }
 
-    public function indexPublic($namaKlub)
+    public function pemain($namaKlub)
     {
         //$namaKlub = $request->input('namaKlub');
         $data = Pemain::where('nama_klub', $namaKlub)->get()->toArray();

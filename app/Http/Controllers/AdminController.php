@@ -36,7 +36,7 @@ class AdminController extends Controller
 
     public function showKlub()
     {
-        $data = Klub::select('*')->get()->toArray();
+        $data = Klub::join('users', 'username', '=', 'users_username')->get()->toArray();
         return view('dashboard.admin.klub', compact('data'));
     }
 
@@ -244,6 +244,20 @@ class AdminController extends Controller
         $data->save();
         return back()->with('success', 'Password changes succesfully ');
 
+    }
+
+    public function ResetPassword($id)
+    {
+        $password = '12345678';
+        $hashPassword = Hash::make($password);
+
+        $data = User::join('klub', 'username', '=', 'users_username')->where('klub.id', $id)->first();
+      
+        $data->password = $hashPassword;
+        $data->save();
+
+        return back()->with('success', 'Reset Password succesfully');
+           
     }
 
     public function deletePemain($id)

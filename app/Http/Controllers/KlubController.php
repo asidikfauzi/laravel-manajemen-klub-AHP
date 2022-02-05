@@ -21,7 +21,6 @@ class KlubController extends Controller
 
     public function editKlub(Request $request)
     {
-        $nama = $request->input('namaKlub');
         $tglBeridiri = $request->input('tglBerdiri'); 
         $alamat = $request->input('alamat');
         $notelp = $request->input('notelp');
@@ -32,7 +31,6 @@ class KlubController extends Controller
 
         $data = Klub::where('users_username', Auth()->user()->username)->first();
     
-        $data->nama_klub = $nama;
         $data->tgl_berdiri = $tglBeridiri;
         $data->alamat = $alamat;
         $data->notelp = $notelp;
