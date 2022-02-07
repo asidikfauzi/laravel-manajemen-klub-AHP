@@ -246,6 +246,12 @@ class AdminController extends Controller
 
     }
 
+    public function showEditStrukturKlub($id)
+    {
+        $data = StrukturKlub::where('id', $id)->get()->toArray();
+        return view('dashboard.admin.editStrukturKlub', compact('data'));
+    }
+
     public function resetPasswordKlub($id)
     {
         $password = '12345678';
@@ -257,6 +263,35 @@ class AdminController extends Controller
 
         return back()->with('success', 'Reset Password succesfully');
            
+    }
+
+    public function editStrukturKlub(Request $request, $id)
+    {
+        $namaSk = $request->input('nama_sk');
+        $notelp = $request->input('notelp');
+        $jabatan = $request->input('jabatan');
+        $image = $request->file('jabatan');
+
+        $data = StrukturKlub::where('id', $id)->first();
+        
+        // // $dataStruktur = StrukturKlub::where('klub_id', $data->klub_id)->where('jabatan', $data->jabatan)->get()->toArray();
+        
+        // if($dataStruktur)
+        // {
+        //     return back()->with('failed', 'Jabatan Untuk Klub ini sudah ada');
+        // }
+        
+        $data->nama_sk = $namaSk;
+        $data->notelp = $notelp;
+        $data->jabatan = $jabatan;
+        if($request->hasFile('image'))   
+        {
+            $uploadImage = Storage::uploadImageStruktur($image);
+            $data->img = $uploadImage;
+        }
+        $data->save();
+
+        return back()->with('success', 'Data Changed Successfully');
     }
 
     public function resetPasswordPemain($id)

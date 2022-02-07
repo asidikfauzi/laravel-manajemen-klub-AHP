@@ -63,11 +63,16 @@ Route::group(['prefix'=>'admin', 'middleware'=>['isAdmin','auth']], function(){
     Route::post('registerKlub', [RegisterController::class, 'registerKlub'])->name('registerKlub');
     Route::get('klub/edit/{id}', [AdminController::class, 'showEditKlub'])->name('editKlub');
     Route::post('klub/edit/{id}', [AdminController::class, 'editKlub'])->name('editKlub');
+    
     Route::get('struktur/klub/{id}', [AdminController::class, 'showStruktur'])->name('strukturKlub');
     Route::get('struktur/klub/add/{id}', [AdminController::class, 'showTambahStrukturKlub'])->name('addStrukturKlub');
+    Route::get('strukturklub/edit/{id}', [AdminController::class, 'showEditStrukturKlub'])->name('showEditStrukturKlub');
+    Route::post('strukturklub/edit/{id}', [AdminController::class, 'editStrukturKlub'])->name('showEditStrukturKlub');
     Route::post('struktur/klub/add/{id}', [AdminController::class, 'tambahStrukturKlub'])->name('addStrukturKlub');
+    
     Route::get('resetPasswordKlub/{id}', [AdminController::class, 'resetPasswordKlub'])->name('resetPasswordKlub');
     Route::delete('klub/{namaKlub}', [AdminController::class, 'deleteKlub'])->name('deleteKlub');
+    
     
     //pemain
     Route::get('pemain', [AdminController::class, 'showPemain'])->name('showPemain');
