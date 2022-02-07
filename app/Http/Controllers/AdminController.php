@@ -357,6 +357,13 @@ class AdminController extends Controller
         return back()->with('success', 'Klub, Pemain, dan Kontrak yang terkait berhasil di delete');
     }
 
+    public function deleteBerita($id)
+    {
+        $berita = BeritaDanAktivitas::where('id', $id)->delete();
+    
+        return back()->with('failed', 'Pemain berhasil di delete');
+    }
+
     public function deletePemain($id)
     {
         DB::transaction(function() use ($id){

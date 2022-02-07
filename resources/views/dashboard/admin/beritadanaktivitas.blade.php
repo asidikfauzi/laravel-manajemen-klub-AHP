@@ -37,7 +37,7 @@ tr:nth-child(even) {
   </div>
 @endif
 <h2>DATA BERITA DAN AKTIVITAS AFKAB SUMENEP 2021-2024</h2>
-<button type="submit" onclick="window.location.href='{{route('tambahBerita')}}'" class="btn btn-primary">TAMBAH PEMAIN</button>
+<button type="submit" onclick="window.location.href='{{route('tambahBerita')}}'" class="btn btn-primary">TAMBAH BERITA</button>
 <br><br>
 <table>
     <tr>
@@ -67,12 +67,11 @@ tr:nth-child(even) {
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-          Apakah anda yakin ingin menghapus pemain ini ?<br>
-          Ini akan menghapus kontrak data pemain.
+          Apakah anda yakin ingin menghapus berita ini ?<br>
       </div>
       <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <form action="{{ route('deleteBerita', $berita['id']) }}" method="POST">
+          <form action="{{ route('deleteBerita', $data[0]['id']) }}" method="POST">
             {{ method_field('DELETE') }}
             {{ csrf_field() }}
             <button type="submit" class="btn btn-danger">DELETE</i></button>
