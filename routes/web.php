@@ -86,8 +86,14 @@ Route::group(['prefix'=>'admin', 'middleware'=>['isAdmin','auth']], function(){
     
     Route::get('tambahpoin', [AdminController::class, 'showTambahPoin'])->name('tambahpoin');
     
+    //berita dan aktivitas
+    Route::get('beritadanaktivitas', [AdminController::class, 'showBerita'])->name('beritaDanAktivitas');
     Route::get('tambahBerita', [AdminController::class, 'showTambahBerita'])->name('tambahBerita');
     Route::post('tambahBerita', [AdminController::class, 'tambahBerita'])->name('tambahBerita');
+    Route::get('editBerita/{id}', [AdminController::class, 'showEditBerita'])->name('editBerita');
+    Route::post('editBerita/{id}', [AdminController::class, 'editBerita'])->name('editBerita'); 
+    Route::delete('berita/{id}', [AdminController::class, 'deleteBerita'])->name('deleteBerita');
+
 });
 
 Route::group(['prefix'=>'pemain', 'middleware'=>['isPemain','auth']], function(){

@@ -13,5 +13,5 @@ class StrukturKlub extends Model
     protected $guarded =[];
 
     public $incrementing = false;
-    
+    protected $keyType = "string";
 }

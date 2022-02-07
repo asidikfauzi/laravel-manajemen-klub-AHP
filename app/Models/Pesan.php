@@ -11,5 +11,6 @@ class Pesan extends Model
 
     protected $table = "pesan";
     protected $guarded =[];
-    
+ 
+    protected $keyType = "string";
 }

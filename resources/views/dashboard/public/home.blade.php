@@ -59,7 +59,9 @@
             <h5><i class="glyphicon glyphicon-comment"> {{$data['judul_berita']}}</i></h5>
             <div class="row" >
                 <div class="col-sm-8">
-                    <p>{{$data['isi_berita']}}</p>
+                    @foreach(explode("%0D%0A", $data['isi_berita']) as $j)
+                        <p>{{urldecode($j)}}</p> 
+                    @endforeach
                 </div>
                 <div class="col-sm-4">
                     <img src="{{asset('assets/img/berita/'.$data['img'])}}" alt="" style="width:100%;float:left;"><br>

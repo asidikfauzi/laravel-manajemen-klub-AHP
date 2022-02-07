@@ -37,12 +37,12 @@
                                 {{ __('PEMAIN') }}
                             </button>
                             <hr>
-                            <button type="submit" onclick="window.location.href='{{route('tambahpoin')}}'" class="btn btn-primary col-sm-12">
-                                {{ __('TAMBAH POIN PEMAIN') }}
+                            <button type="submit" onclick="window.location.href='{{route('beritaDanAktivitas')}}'" class="btn btn-primary col-sm-12">
+                                {{ __('BERITA DAN AKTIVITAS') }}
                             </button>
                             <hr>
-                            <button type="submit" onclick="window.location.href='{{route('tambahBerita')}}'" class="btn btn-primary col-sm-12">
-                                {{ __('TAMBAH BERITA DAN AKTIVITAS') }}
+                            <button type="submit" onclick="window.location.href='{{route('tambahpoin')}}'" class="btn btn-primary col-sm-12">
+                                {{ __('TAMBAH POIN PEMAIN') }}
                             </button>
                             <hr>
                             

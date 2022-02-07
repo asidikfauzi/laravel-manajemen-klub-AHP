@@ -34,6 +34,18 @@ class AdminController extends Controller
         return view('dashboard.admin.admin', compact('data'));
     }
 
+    public function showBerita()
+    {
+        $data = BeritaDanAktivitas::orderBy('created_at', 'desc')->get()->toArray();
+        return view('dashboard.admin.beritadanaktivitas', compact('data'));
+    }
+
+    public function showEditBerita($id)
+    {
+        $data = BeritaDanAktivitas::where('id', $id)->get()->toArray();
+        return view('dashboard.admin.editBerita', compact('data'));
+    }
+
     public function showKlub()
     {
         $data = Klub::join('users', 'username', '=', 'users_username')->get()->toArray();
@@ -163,6 +175,26 @@ class AdminController extends Controller
         return back()->with('success', 'Data succesfully update!');
     }
 
+    public function editBerita(Request $request, $id)
+    {
+        $judul = $request->input('judul');
+        $isiBerita = $request->input('isi_berita');
+        $image = $request->file('image');
+        
+        $data = BeritaDanAktivitas::where('id', $id)->first();
+        $data->judul_berita = $judul;
+        $data->isi_berita = urlencode($isiBerita);
+        $data->users_username = Auth::user()->username;
+        if($request->hasFile('image'))   
+        {
+            $uploadImage = Storage::uploadImageBerita($image);
+            $data->img = $uploadImage;
+        }
+        $data->save();
+
+        return back()->with('success', 'Data Changed Successfully');
+    }
+
     public function tambahBerita(Request $request)
     {
         $uuid = Uuid::getId();
@@ -175,7 +207,7 @@ class AdminController extends Controller
         $berita = new BeritaDanAktivitas();
         $berita->id = $uuid;
         $berita->judul_berita = $judul;
-        $berita->isi_berita = $isiBerita;
+        $berita->isi_berita = urlencode($isiBerita);
         $berita->img = $uploadImage;
         $berita->users_username = Auth::user()->username;
         $berita->save();
@@ -270,7 +302,7 @@ class AdminController extends Controller
         $namaSk = $request->input('nama_sk');
         $notelp = $request->input('notelp');
         $jabatan = $request->input('jabatan');
-        $image = $request->file('jabatan');
+        $image = $request->file('image');
 
         $data = StrukturKlub::where('id', $id)->first();
         

@@ -11,6 +11,7 @@ class Klub extends Model
     
     protected $table = "klub";
     protected $guarded =[];
+    protected $keyType = "string";
 
     public $incrementing = false;
     

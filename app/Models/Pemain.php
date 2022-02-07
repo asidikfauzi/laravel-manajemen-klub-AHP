@@ -10,6 +10,7 @@ class Pemain extends Model
     protected $table = "pemain";
     protected $guarded =[];
 
+    protected $keyType = "string";
     public $incrementing = false;
 
     use HasFactory;

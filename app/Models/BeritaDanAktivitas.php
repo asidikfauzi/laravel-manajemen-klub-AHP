@@ -11,5 +11,6 @@ class BeritaDanAktivitas extends Model
     
     protected $table = "berita_dan_aktivitas";
     protected $guarded =[];
+    protected $keyType = "string";
     
 }
