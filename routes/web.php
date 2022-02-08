@@ -55,6 +55,9 @@ Route::group(['prefix'=>'admin', 'middleware'=>['isAdmin','auth']], function(){
     Route::get('resetPasswordPemain/{id}', [AdminController::class, 'resetPasswordPemain'])->name('resetPasswordPemain');
     Route::delete('pemain/{id}', [AdminController::class, 'deletePemain'])->name('deletePemain');
 
+    //kontrak
+    Route::get('kontrak', [AdminController::class, 'showKontrak'])->name('showKontrak');
+    // Route::post('kontrak', [RegisterController::class, 'registerPemain'])->name('registerPemain');
     
     Route::get('tambahpoin', [AdminController::class, 'showTambahPoin'])->name('tambahpoin');
     

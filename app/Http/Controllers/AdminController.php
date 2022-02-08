@@ -64,6 +64,13 @@ class AdminController extends Controller
         return view('dashboard.admin.pemain', compact('data'));
     }
 
+    public function showKontrak()
+    {
+        $data = Pemain::with('kontrak_klub')->get()->toArray();
+        dd($data);
+        //return view('dashboard.admin.pemain', compact('data'));
+    }
+
     public function showStruktur($id)
     {
         $data = StrukturKlub::where('klub_id', $id)->get()->toArray();

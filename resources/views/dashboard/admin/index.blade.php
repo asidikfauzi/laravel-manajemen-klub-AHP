@@ -26,15 +26,19 @@
                             <p class="text-center">ASOSIASI FUTSAL KABUPATEN SUMENEP</p>
                             <hr>
                             <button type="submit"  onclick="window.location.href='{{route('showAdmin')}}'" class="btn btn-primary col-sm-12">
-                                {{ __('ADMIN') }}
+                                {{ __('DATA ADMIN') }}
                             </button>
                             <hr>    
                             <button type="submit" onclick="window.location.href='{{route('showKlub')}}'" class="btn btn-primary col-sm-12">
-                                {{ __('KLUB') }}
+                                {{ __('DATA KLUB') }}
                             </button>
                             <hr>
                             <button type="submit"  onclick="window.location.href='{{route('showPemain')}}'" class="btn btn-primary col-sm-12">
-                                {{ __('PEMAIN') }}
+                                {{ __('DATA PEMAIN') }}
+                            </button>
+                            <hr>
+                            <button type="submit"  onclick="window.location.href='{{route('showKontrak')}}'" class="btn btn-primary col-sm-12">
+                                {{ __('DATA KONTRAK') }}
                             </button>
                             <hr>
                             <button type="submit" onclick="window.location.href='{{route('beritaDanAktivitas')}}'" class="btn btn-primary col-sm-12">
