@@ -31,7 +31,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo;
 
     protected function redirectTo(){
 
@@ -41,7 +41,7 @@ class LoginController extends Controller
         }
         elseif(Auth()->user()->role_id == "pemain")
         {
-            return route('pemain.dashboard');
+            return route('isPemain.dashboard');
         }
         elseif(Auth()->user()->role_id == "klub")
         {
@@ -77,7 +77,7 @@ class LoginController extends Controller
             }
             elseif(auth()->user()->role_id == "pemain")
             {
-                return redirect()->route('pemain.dashboard');
+                return redirect()->route('isPemain.dashboard');
             }
             elseif(auth()->user()->role_id == "klub")
             {

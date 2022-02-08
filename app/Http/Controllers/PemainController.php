@@ -11,7 +11,8 @@ class PemainController extends Controller
     //
     public function index()
     {
-        return view('dashboard.pemain.index');
+        $data = Pemain::where('users_username', Auth::user()->username)->get()->toArray();
+        return view('dashboard.pemain.index', compact('data'));
     }
 
     public function profile()
@@ -19,10 +20,10 @@ class PemainController extends Controller
         return view('dashboard.pemain.profile');
     }
 
-    public function pemain($namaKlub)
+    public function dataPemain($namaKlub)
     {
-        //$namaKlub = $request->input('namaKlub');
         $data = Pemain::where('nama_klub', $namaKlub)->get()->toArray();
+       
         if(!$data)
         {
             return back()->with('failed', 'klub ini masih tidak memiliki pemain');

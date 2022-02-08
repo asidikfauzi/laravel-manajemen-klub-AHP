@@ -20,33 +20,6 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Auth::routes();
-
-Route::get('home', [HomeController::class, 'index'])->name('home');
-
-Route::get('klub', [KlubController::class, 'indexPublic'])->name('klub');
-Route::get('klub/detailklub/{id}', [KlubController::class, 'show'])->name('detailklub');
-Route::get('struktur/klub/{id}', [KlubController::class, 'showStrukturKlub'])->name('showStrukturKlub');
-
-Route::get('pemain/{namaKlub}', [PemainController::class, 'pemain'])->name('pemain');
-Route::get('pemain/detailpemain/{id}', [PemainController::class, 'show'])->name('detailpemain');
-
-
-Route::get('profile', function () {
-    return view('dashboard.public.profile');
-})->name('profile'); 
-
-Route::get('peraturan', function () {
-    return view('dashboard.public.peraturan');
-})->name('peraturan'); 
-
-Route::get('strukturafkab', function () {
-    return view('dashboard.public.strukturafkab');
-})->name('strukturafkab'); 
-
-Route::get('layanan', function () {
-    return view('dashboard.public.layanan');
-})->name('layanan');
-
 Route::group(['prefix'=>'admin', 'middleware'=>['isAdmin','auth']], function(){
     Route::get('dashboard',[AdminController::class, 'index'])->name('admin.dashboard');
     Route::get('changePassword',[AdminController::class, 'showChangePassword'])->name('changePassword');
@@ -97,7 +70,9 @@ Route::group(['prefix'=>'admin', 'middleware'=>['isAdmin','auth']], function(){
 });
 
 Route::group(['prefix'=>'pemain', 'middleware'=>['isPemain','auth']], function(){
-    Route::get('dashboard', [PemainController::class, 'index'])->name('pemain.dashboard');
+    Route::get('dashboard', [PemainController::class, 'index'])->name('isPemain.dashboard');
+    Route::post('dashboard', [PemainController::class, 'editPemain'])->name('pemain.dashboard');
+    
     Route::get('changePassword', [PemainController::class, 'showChangePassword'])->name('changePasswordPemain');
     Route::post('changePassword', [PemainController::class, 'changePassword'])->name('changePasswordPemain');
 
@@ -112,6 +87,36 @@ Route::group(['prefix'=>'klub', 'middleware'=>['isKlub','auth']], function(){
     Route::post('changePassword',[KlubController::class, 'changePassword'])->name('changePasswordKlub');
     
 });
+
+
+
+
+Route::get('home', [HomeController::class, 'index'])->name('home');
+
+Route::get('klub', [KlubController::class, 'indexPublic'])->name('klub');
+Route::get('klub/detailklub/{id}', [KlubController::class, 'show'])->name('detailklub');
+Route::get('struktur/klub/{id}', [KlubController::class, 'showStrukturKlub'])->name('showStrukturKlub');
+
+Route::get('pemain/{namaKlub}', [PemainController::class, 'dataPemain'])->name('pemain');
+Route::get('pemain/detailpemain/{id}', [PemainController::class, 'show'])->name('detailpemain');
+
+
+Route::get('profile', function () {
+    return view('dashboard.public.profile');
+})->name('profile'); 
+
+Route::get('peraturan', function () {
+    return view('dashboard.public.peraturan');
+})->name('peraturan'); 
+
+Route::get('strukturafkab', function () {
+    return view('dashboard.public.strukturafkab');
+})->name('strukturafkab'); 
+
+Route::get('layanan', function () {
+    return view('dashboard.public.layanan');
+})->name('layanan');
+
 
 
 

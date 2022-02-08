@@ -79,7 +79,7 @@
                                         <a class="nav-link py-3 px-0 px-lg-3 rounded" href="{{route('changePasswordKlub')}}">Change Password</a>
                                     @endif
                                     @if(\Auth::user()->role_id === "pemain")
-                                        <a class="nav-link py-3 px-0 px-lg-3 rounded" href="{{route('pemain.dashboard')}}">My Profile</a>
+                                        <a class="nav-link py-3 px-0 px-lg-3 rounded" href="{{route('isPemain.dashboard')}}">My Profile</a>
                                         <a class="nav-link py-3 px-0 px-lg-3 rounded" href="{{route('changePasswordPemain')}}">Change Password</a>
                                     @endif
                                     <a class="nav-link py-3 px-0 px-lg-3 rounded" href="#">Message</a>

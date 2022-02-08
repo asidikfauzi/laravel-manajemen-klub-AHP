@@ -29,7 +29,7 @@ class RedirectIfAuthenticated
             }
             elseif(Auth::guard($guard)->check() && Auth::user()->role_id == "pemain")
             {
-                return redirect()->route('pemain.dashboard');
+                return redirect()->route('isPemain.dashboard');
             }
             elseif(Auth::guard($guard)->check() && Auth::user()->role_id == "klub")
             {
