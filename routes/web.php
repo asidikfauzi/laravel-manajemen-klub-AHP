@@ -46,7 +46,6 @@ Route::group(['prefix'=>'admin', 'middleware'=>['isAdmin','auth']], function(){
     Route::get('resetPasswordKlub/{id}', [AdminController::class, 'resetPasswordKlub'])->name('resetPasswordKlub');
     Route::delete('klub/{namaKlub}', [AdminController::class, 'deleteKlub'])->name('deleteKlub');
     
-    
     //pemain
     Route::get('pemain', [AdminController::class, 'showPemain'])->name('showPemain');
     Route::get('registerPemain', [RegisterController::class, 'createPemain'])->name('registerPemain');

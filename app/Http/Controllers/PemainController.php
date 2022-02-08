@@ -11,7 +11,7 @@ class PemainController extends Controller
     //
     public function index()
     {
-        $data = Pemain::where('users_username', Auth::user()->username)->get()->toArray();
+        $data = Pemain::join('kontrak', 'pemain.id', '=', 'pemain_id')->where('users_username', Auth::user()->username)->get()->toArray();
         return view('dashboard.pemain.index', compact('data'));
     }
 
