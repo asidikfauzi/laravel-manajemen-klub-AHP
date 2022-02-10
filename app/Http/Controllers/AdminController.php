@@ -86,7 +86,7 @@ class AdminController extends Controller
 
     public function showEditPemain($id)
     {
-        $data = Pemain::where('id', $id)->get()->toArray();
+        $data = Pemain::join('kontrak', 'pemain.id', 'pemain_id')->where('pemain.id', $id)->get()->toArray();
         $dataKlub = Klub::get()->toArray();
         return view('dashboard.admin.editPemain', compact('data', 'dataKlub'));
     }
@@ -160,31 +160,49 @@ class AdminController extends Controller
         $klub = $request->input('klub');
         $posisi = $request->input('posisi');   
         $image = $request->file('image');
+
+        $gaji = $request->input('gaji');
+        $awalKontrak = $request->input('awal_kontrak');
+        $akhirKontrak = $request->input('akhir_kontrak');
+        $fotoKontrak = $request->file('foto_kontrak');
         
-        $data = Pemain::find($id);
+        $data = Pemain::where('id',$id)->first();
         if(!$data)
         {
-            return back()->with('failed', 'Image klub belum tidak ditemukan');
+            return back()->with('failed', 'pemain tidak ditemukan');
         }
-    
-        $data->nama_pemain = $nama;
-        $data->tempat = $tempat;
-        $data->tgl_lahir = $tglLahir;
-        $data->alamat = $alamat;
-        $data->notelp = $notelp;
-        $data->tinggi = $tinggi;
-        $data->berat = $berat;
-        $data->status = $status;
-        $data->nama_klub = $klub;
-        $data->posisi = $posisi;
+        
+        $kontrak = Kontrak::where('pemain_id', $id)->first();
 
-        if($request->hasFile('image'))   
-        {
-            $uploadImage = Storage::uploadImagePemain($image);
-            $data->img = $uploadImage;
-        }
+        DB::transaction(function() use ($request, $data, $kontrak, $nama, $tempat, $tglLahir, $alamat, $notelp, $tinggi, $berat, $status, $klub, $posisi, $image, $id, $awalKontrak, $akhirKontrak, $gaji, $fotoKontrak){
+            
+            $data->nama_pemain = $nama;
+            $data->tempat = $tempat;
+            $data->tgl_lahir = $tglLahir;
+            $data->alamat = $alamat;
+            $data->notelp = $notelp;
+            $data->tinggi = $tinggi;
+            $data->berat = $berat;
+            $data->status = $status;
+            $data->nama_klub = $klub;
+            $data->posisi = $posisi;
+            if($request->hasFile('image'))   
+            {
+                $uploadImage = Storage::uploadImagePemain($image);
+                $data->img = $uploadImage;
+            }
+            $data->save();
 
-        $data->save();
+            $kontrak->awal_kontrak = $awalKontrak;
+            $kontrak->akhir_kontrak = $akhirKontrak;
+            $kontrak->gaji = $gaji;
+            if($request->hasFile('foto_kontrak'))   
+            {
+                $uploadImageKontrak = Storage::uploadImageKontrak($fotoKontrak);
+                $kontrak->foto_kontrak = $uploadImageKontrak;
+            }
+            $kontrak->save();
+        });
 
         return back()->with('success', 'Data succesfully update!');
     }

@@ -135,6 +135,15 @@
                             <input id="image" type="file" class="form-control" name="image" value="{{old('image')}}">
                         </div>
                     </div>
+                    <img src="{{asset('assets/img/kontrak/'.$pemain['foto_kontrak'])}}" alt="" style="width:100%;  float:left; height: 100%;  float:left; border: 5px solid black;object-fit: cover;"><br>
+                    <div class="form-group-row">
+                        <div class="col-md-12">
+                            <center>
+                                <h4>EDIT IMAGE KONTRAK</h4>
+                            </center>
+                            <input id="foto_kontrak" type="file" class="form-control" name="foto_kontrak" value="{{old('foto_kontrak')}}">
+                        </div>
+                    </div>
                 </div>
 
                 <div class="col-sm-8" >
@@ -162,11 +171,11 @@
                     </p>
                     <b>Tinggi : </b>
                     <p>
-                        <input type="text" name="tinggi" class="form-control @error('tinggi') is-invalid @enderror" value="{{$pemain['tinggi']}}">
+                        <input type="number" name="tinggi" class="form-control @error('tinggi') is-invalid @enderror" value="{{$pemain['tinggi']}}">
                     </p>
                     <b>Berat : </b>
                     <p>
-                        <input type="text" name="berat" class="form-control @error('berat') is-invalid @enderror" value="{{$pemain['berat']}}">
+                        <input type="number" name="berat" class="form-control @error('berat') is-invalid @enderror" value="{{$pemain['berat']}}">
                     </p>
                     <b>Status : </b>
                     <p>
@@ -192,6 +201,16 @@
                             <option value="kiper">Kiper</option>
                         </select>
                     </p>
+                    <b>Gaji : </b>
+                    <p>
+                        <input type="number" name="gaji" class="form-control @error('gaji') is-invalid @enderror" value="{{$pemain['gaji']}}">
+                    </p>
+                    <b>Kontrak : </b>
+                    <p>
+                        Awal Kontrak <input id="awal_kontrak" type="date" class="col-sm-6 form-control @error('awal_kontrak') is-invalid @enderror" name="awal_kontrak" value="{{ $pemain['awal_kontrak']}}" required autocomplete="awal_kontrak">
+                        Akhir Kontrak <input id="akhir_kontrak" type="date" class="col-sm-6 form-control @error('akhir_kontrak') is-invalid @enderror" name="akhir_kontrak" value="{{ $pemain['akhir_kontrak']}}" required autocomplete="akhir_kontrak">
+                    </p>
+                    
                     
                         
                                                 
