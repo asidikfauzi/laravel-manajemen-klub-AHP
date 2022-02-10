@@ -66,9 +66,16 @@ class AdminController extends Controller
 
     public function showKontrak()
     {
-        $data = Pemain::with('kontrak_klub')->get()->toArray();
-        dd($data);
-        //return view('dashboard.admin.pemain', compact('data'));
+        $kontrak = Kontrak::join('pemain', 'pemain.id', '=', 'pemain_id')
+                        ->join('klub', 'klub.id', '=', 'klub_id')
+                        ->get()->toArray();
+        $data = [];
+        foreach($kontrak as $item)
+        {
+            array_push($data, ['id'=>$item['pemain_id'],'nama_pemain'=>$item['nama_pemain'], 'nama_klub'=>$item['nama_klub'], 'foto_kontrak'=>$item['foto_kontrak'], 'awal_kontrak'=>$item['awal_kontrak'], 'akhir_kontrak'=>$item['akhir_kontrak']]);
+        }
+        
+        return view('dashboard.admin.kontrak', compact('data'));
     }
 
     public function showStruktur($id)
