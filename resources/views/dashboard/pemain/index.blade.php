@@ -134,7 +134,7 @@
                   <h4>EDIT IMAGE</h4>
                 </center>
               <input id="image" type="file" class="form-control" name="image" value="{{old('image')}}"> <br><br>
-                <img src="{{asset('assets/img/kontrak/'.$pemain['foto_kontrak'])}}" alt="" style="width:100%;  float:left; height: 100%;  float:left; border: 5px solid black;object-fit: cover;"><br>
+                
             </div>
            
             <div class="col-sm-8" >
@@ -198,6 +198,10 @@
                   <div class="col-md-8"> 
                   <label for="posisi" class="col-md-10 col-form-label text-md-right"><b>:</b> &nbsp; Rp.{{$pemain['gaji']}}</label>
                   </div>
+                </div>
+                <div class="form-group row">
+                  <label for="posisi" class="col-md-3 col-form-label text-md-right">Lihat Kontrak anda <a href="{{asset('assets/img/kontrak/'. $pemain['foto_kontrak'])}}" target="_blank">disini </label>
+                  
                 </div>
                 <div class="col-md-8 offset-md-10">
                   <button type="submit" class="btn btn-primary mt-3">
