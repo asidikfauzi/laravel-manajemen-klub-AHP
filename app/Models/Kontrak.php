@@ -12,4 +12,5 @@ class Kontrak extends Model
     protected $table = "kontrak";
     protected $guarded =[];
     protected $primaryKey = 'pemain_id';
+    protected $keyType = "string";
 }

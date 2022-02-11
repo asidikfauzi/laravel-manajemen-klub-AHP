@@ -103,7 +103,7 @@ namespace App\Models{
  * @property string|null $akhir_kontrak
  * @property string|null $foto_kontrak
  * @property string $klub_id
- * @property int $pemain_id
+ * @property string $pemain_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @method static \Illuminate\Database\Eloquent\Builder|Kontrak newModelQuery()
