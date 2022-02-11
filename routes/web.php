@@ -73,7 +73,7 @@ Route::group(['prefix'=>'admin', 'middleware'=>['isAdmin','auth']], function(){
 
 Route::group(['prefix'=>'pemain', 'middleware'=>['isPemain','auth']], function(){
     Route::get('dashboard', [PemainController::class, 'index'])->name('isPemain.dashboard');
-    Route::post('dashboard', [PemainController::class, 'editPemain'])->name('pemain.dashboard');
+    Route::post('dashboard', [PemainController::class, 'editPemain'])->name('editPemain');
     
     Route::get('changePassword', [PemainController::class, 'showChangePassword'])->name('changePasswordPemain');
     Route::post('changePassword', [PemainController::class, 'changePassword'])->name('changePasswordPemain');

@@ -106,6 +106,16 @@
 
 </style>  
 <section class="page-section">
+@if (session('success'))
+<div class="alert alert-success">
+    {{ session('success') }}
+</div>
+@endif
+@if (session('failed'))
+    <div class="alert alert-danger">
+        {{ session('failed') }}
+    </div>
+@endif
 
     <div class="topnav">
         <a class="active" href="#">WELCOME {{$data[0]['nama_pemain']}}</a> 
@@ -114,13 +124,19 @@
     
     <div id="about_faq" class="about_lav" >
     <div class="about_1">
-        <div class="row" >
+      <form action="{{route('editPemain')}}" method="POST" enctype="multipart/form-data">
+        @csrf
+        <div class="row">
             @foreach($data as $pemain)
             <div class="col-sm-4" style="height: 100%;">
-                <img src="{{asset('assets/img/pemain/'.$pemain['img'])}}" alt="" style="width:100%;  float:left; height: 100%;  float:left; border: 5px solid black;object-fit: cover;"><br>
-                    
+                <img src="{{asset('assets/img/pemain/'.$pemain['img'])}}" alt="" style="width:100%;  float:left; height: 100%;  float:left; border: 5px solid black;object-fit: cover;"><br>  
+                <center>
+                  <h4>EDIT IMAGE</h4>
+                </center>
+              <input id="image" type="file" class="form-control" name="image" value="{{old('image')}}"> <br><br>
+                <img src="{{asset('assets/img/kontrak/'.$pemain['foto_kontrak'])}}" alt="" style="width:100%;  float:left; height: 100%;  float:left; border: 5px solid black;object-fit: cover;"><br>
             </div>
-
+           
             <div class="col-sm-8" >
                 <h2>{{$pemain['nama_pemain']}}</h2>
                 <div class="form-group row">
@@ -176,11 +192,24 @@
                     <div class="col-md-8"> 
                     <label for="posisi" class="col-md-10 col-form-label text-md-right" data-date-format="DD-MM-YYYY"><b>:</b> &nbsp; {{$pemain['awal_kontrak']}} - {{$pemain['akhir_kontrak']}}</label>
                     </div>
-                </div>            
-            </div>
-            @endforeach
+                </div>
+                <div class="form-group row">
+                  <label for="posisi" class="col-md-3 col-form-label text-md-right"><b>Gaji</b></label>
+                  <div class="col-md-8"> 
+                  <label for="posisi" class="col-md-10 col-form-label text-md-right"><b>:</b> &nbsp; Rp.{{$pemain['gaji']}}</label>
+                  </div>
+                </div>
+                <div class="col-md-8 offset-md-10">
+                  <button type="submit" class="btn btn-primary mt-3">
+                      {{ __('SIMPAN') }}
+                  </button>
+                </div> 
+              </div>
+            </div>                 
             
+            @endforeach
         </div>
+      </form>  
       </div>
     </div>
 
