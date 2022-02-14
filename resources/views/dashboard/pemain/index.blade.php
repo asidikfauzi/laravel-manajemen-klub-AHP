@@ -201,7 +201,6 @@
                 </div>
                 <div class="form-group row">
                   <label for="posisi" class="col-md-3 col-form-label text-md-right">Lihat Kontrak anda <a href="{{asset('assets/img/kontrak/'. $pemain['foto_kontrak'])}}" target="_blank">disini </label>
-                  
                 </div>
                 <div class="col-md-8 offset-md-10">
                   <button type="submit" class="btn btn-primary mt-3">
