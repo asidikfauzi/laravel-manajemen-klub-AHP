@@ -317,6 +317,18 @@ class AdminController extends Controller
         return view('dashboard.admin.editStrukturKlub', compact('data'));
     }
 
+    public function resetPasswordAdmin($id)
+    {
+        $password = '12345678';
+        $hashPassword = Hash::make($password);
+
+        $data = User::where('role_id', 'admin')->where('username', $id)->first();
+        $data->password = $hashPassword;
+        $data->save();
+
+        return back()->with('success', 'Reset Password succesfully');
+    }
+
     public function resetPasswordKlub($id)
     {
         $password = '12345678';
@@ -338,13 +350,6 @@ class AdminController extends Controller
         $image = $request->file('image');
 
         $data = StrukturKlub::where('id', $id)->first();
-        
-        // // $dataStruktur = StrukturKlub::where('klub_id', $data->klub_id)->where('jabatan', $data->jabatan)->get()->toArray();
-        
-        // if($dataStruktur)
-        // {
-        //     return back()->with('failed', 'Jabatan Untuk Klub ini sudah ada');
-        // }
         
         $data->nama_sk = $namaSk;
         $data->notelp = $notelp;

@@ -29,6 +29,7 @@ Route::group(['prefix'=>'admin', 'middleware'=>['isAdmin','auth']], function(){
     Route::get('admin', [AdminController::class, 'showAdmin'])->name('showAdmin');
     Route::get('registerAdmin', [RegisterController::class, 'createAdmin'])->name('registerAdmin');
     Route::post('registerAdmin', [RegisterController::class, 'registerAdmin'])->name('registerAdmin');
+    Route::get('resetPasswordAdmin/{id}', [AdminController::class, 'resetPasswordAdmin'])->name('resetPasswordAdmin');
 
     //klub
     Route::get('klub', [AdminController::class, 'showKlub'])->name('showKlub');
