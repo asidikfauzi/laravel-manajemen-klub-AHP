@@ -67,13 +67,24 @@ class AdminController extends Controller
 
     public function showMessage()
     {
-        $message = Pesan::where('kepada_username', Auth::user()->username)->get()->toArray();
+        $message = Pesan::where('kepada_username', Auth::user()->username)->orderBy('created_at', 'desc')->get()->toArray();
         $data = [];
         foreach($message as $item)
         {
             array_push($data, ['dari_username'=>$item['dari_username'], 'isi_pesan'=>substr($item['isi_pesan'],0,80), 'created_at'=>$item['created_at']]);
         }
         return view('dashboard.admin.message', compact('data'));
+    }
+
+    public function showSentMessage()
+    {
+        $message = Pesan::where('dari_username', Auth::user()->username)->orderBy('created_at', 'desc')->get()->toArray();
+        $data = [];
+        foreach($message as $item)
+        {
+            array_push($data, ['kepada_username'=>$item['kepada_username'], 'isi_pesan'=>substr($item['isi_pesan'],0,80), 'created_at'=>$item['created_at']]);
+        }
+        return view('dashboard.admin.sentMessage', compact('data'));
     }
 
     public function showKontrak()

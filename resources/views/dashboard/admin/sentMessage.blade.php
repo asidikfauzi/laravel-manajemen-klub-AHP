@@ -23,7 +23,7 @@ tr:nth-child(even) {
 <section class="page-section">
         <div class="row">
             <div class="col-sm-2" style="border: 2px solid black;">
-                <h2 class="text text-center">INBOX</h2>
+                <h2 class="text text-center">SENT</h2>
                 <center>
                     <button class="btn btn-primary mb-2">COMPOSE</button>
                 </center>
@@ -37,13 +37,13 @@ tr:nth-child(even) {
             <div class="col-sm-10" style="border: 2px solid black;">
                 <table>
                     <tr>
-                        <th>From</th>
+                        <th>To</th>
                         <th>Pesan</th>
                         <th>Tanggal</th>
                     </tr>
                     @foreach ($data as $message)
                     <tr>
-                        <td>{{$message['dari_username']}}</td>
+                        <td>{{$message['kepada_username']}}</td>
                         <td style="text-align: left;">{{$message['isi_pesan']}}. . .</td>
                         <td>{{$message['created_at']}}</td>
                     </tr>  

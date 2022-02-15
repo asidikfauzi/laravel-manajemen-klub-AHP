@@ -26,6 +26,7 @@ Route::group(['prefix'=>'admin', 'middleware'=>['isAdmin','auth']], function(){
     Route::post('changePassword',[AdminController::class, 'changePassword'])->name('changePassword');
     Route::get('message',[AdminController::class, 'showMessage'])->name('messageAdmin');
     Route::post('message',[AdminController::class, 'sendMessageAdmin'])->name('messageAdmin');
+    Route::get('message/sent',[AdminController::class, 'showSentMessage'])->name('sentMessageAdmin');
 
     //register admin
     Route::get('admin', [AdminController::class, 'showAdmin'])->name('showAdmin');
