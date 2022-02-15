@@ -43,19 +43,11 @@ tr:nth-child(even) {
     <tr>
         <th>Username</th>
         <th>Reset Password</th>
-        <th>Delete</th>
     </tr>
     @foreach ($data as $admin)
     <tr>
         <td>{{$admin['username']}}</td>
-        <td><button type="submit" onclick="window.location.href='{{route('resetPasswordAdmin', $admin['username'])}}'" class="btn btn-primary"><i class="fas fa-sync"></i></button></td>
-        <td>
-            <form action="{{ route('deletePemain', $admin['username']) }}" method="POST">
-                {{ method_field('DELETE') }}
-                {{ csrf_field() }}
-                <button type="submit" class="btn btn-danger">DELETE</button>
-            </form>
-        </td>  
+        <td><button type="submit" onclick="window.location.href='{{route('resetPasswordAdmin', $admin['username'])}}'" class="btn btn-primary"><i class="fas fa-sync"></i></button></td>  
     </tr>
   @endforeach
 </table>
