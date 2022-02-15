@@ -8,6 +8,7 @@ use App\Models\BeritaDanAktivitas;
 use App\Models\Klub;
 use App\Models\Kontrak;
 use App\Models\Pemain;
+use App\Models\Pesan;
 use App\Models\StrukturKlub;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -62,6 +63,17 @@ class AdminController extends Controller
     {
         $data = Pemain::select('*')->get()->toArray();
         return view('dashboard.admin.pemain', compact('data'));
+    }
+
+    public function showMessage()
+    {
+        $message = Pesan::where('kepada_username', Auth::user()->username)->get()->toArray();
+        $data = [];
+        foreach($message as $item)
+        {
+            array_push($data, ['dari_username'=>$item['dari_username'], 'isi_pesan'=>substr($item['isi_pesan'],0,80), 'created_at'=>$item['created_at']]);
+        }
+        return view('dashboard.admin.message', compact('data'));
     }
 
     public function showKontrak()

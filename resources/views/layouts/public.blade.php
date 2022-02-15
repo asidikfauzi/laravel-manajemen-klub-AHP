@@ -86,7 +86,7 @@
                                     <a class="nav-link py-3 px-0 px-lg-3 rounded" href="#" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout </a>
                                 @else
                                     <a class="nav-link py-3 px-0 px-lg-3 rounded" href="{{route('admin.dashboard')}}">Access Control</a>
-                                    <a class="nav-link py-3 px-0 px-lg-3 rounded" href="#">Message</a>
+                                    <a class="nav-link py-3 px-0 px-lg-3 rounded" href="{{route('messageAdmin')}}">Message</a>
                                     <a class="nav-link py-3 px-0 px-lg-3 rounded" href="{{route('changePassword')}}">Change Password</a>
                                     <a class="nav-link py-3 px-0 px-lg-3 rounded" href="#" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout </a>
                                 @endif
