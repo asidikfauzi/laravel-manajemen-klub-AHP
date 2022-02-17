@@ -32,7 +32,7 @@ class HomeController extends Controller
         $dataKlub = [];
         foreach($klub as $data)
         {
-            array_push($dataKlub, ['nama_klub'=> $data['nama_klub'], "img" => Storage::getLinkImageKlub($data['img'])]);
+            array_push($dataKlub, ['id'=>$data['id'],'nama_klub'=> $data['nama_klub'], "img" => Storage::getLinkImageKlub($data['img'])]);
         }
 
         return view('dashboard.public.home', compact('dataBerita', 'dataKlub'));

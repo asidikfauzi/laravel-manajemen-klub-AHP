@@ -101,7 +101,7 @@
                     <div class="item-img-wrap">
                         <img src="{{asset('assets/img/klub/'.$klub['img'])}}" class="rounded mx-auto d-block" alt="image klub" style="width: 300px; height: 300px;">
                         <div class="item-img-overlay">
-                            <a href="{{route('detailklub',$klub['id'])}}" class="show-image">
+                            <a  style="text-decoration: none" href="{{route('detailklub',$klub['id'])}}" class="show-image">
                                 <center><h5><span>{{$klub['nama_klub']}}</span></h5></center>
                             </a>
                         </div>

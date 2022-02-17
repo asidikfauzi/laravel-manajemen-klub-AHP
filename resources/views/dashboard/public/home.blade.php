@@ -35,20 +35,18 @@
         <div class="card">
             <div class="card-body">
                 <center>
-                    <h2>Club Futsal</h2>
+                    <h2>Klub Futsal</h2>
                 </center>
                 @foreach($dataKlub as $data)
-                    <img src="{{$data['img']}}" style="width: 100px; height:100px;" class="rounded mx-auto d-block">
-                    <ul class="vertical-menu">
-                        <center>
-                            <li style="list-style: none"><a href="">{{$data['nama_klub']}}</a></li>
-                        </center>
-                    </ul>
+                    <center>
+                        <img src="{{$data['img']}}" style="width: 100px; height:100px;" class="rounded mx-auto d-block">
+                        <li style="list-style: none"><a style="text-decoration: none" href="{{route('detailklub',$data['id'])}}">{{$data['nama_klub']}}</a></li>
+                    </center>
                 @endforeach
             </div>
             <br>
             <center>
-                <a href="klub">Lihat semua club</a>
+                <a href="klub" style="text-decoration: none"><b>Lihat semua club</b></a>
             </center>
             <br>
         </div>
