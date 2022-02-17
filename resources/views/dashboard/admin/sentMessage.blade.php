@@ -14,10 +14,6 @@ td, th {
   padding: 8px;
 }
 
-tr:nth-child(even) {
-  background-color: #dddddd;
-
-}
 </style>
 
 <section class="page-section">
@@ -40,12 +36,14 @@ tr:nth-child(even) {
                         <th>To</th>
                         <th>Pesan</th>
                         <th>Tanggal</th>
+                        <th></th>
                     </tr>
                     @foreach ($data as $message)
                     <tr>
                         <td>{{$message['kepada_username']}}</td>
                         <td style="text-align: left;">{{$message['isi_pesan']}}. . .</td>
-                        <td>{{$message['created_at']}}</td>
+                        <td>{{date('d-m-Y', strtotime($message['created_at']))}}</td>
+                        <td><button class="btn btn-primary">Open</button></td>
                     </tr>  
                     @endforeach
                     

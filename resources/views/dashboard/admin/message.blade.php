@@ -14,10 +14,7 @@ td, th {
   padding: 8px;
 }
 
-tr:nth-child(even) {
-  background-color: #dddddd;
 
-}
 </style>
 
 <section class="page-section">
@@ -28,7 +25,7 @@ tr:nth-child(even) {
                     <button class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#exampleModalSave">COMPOSE</button>
                 </center>
                 <center>
-                    <button  onclick="window.location.href='{{route('messageAdmin')}}'" class="btn btn-secondary col-sm-12">Inbox</button>
+                    <button  onclick="window.location.href='{{route('messageAdmin')}}'" class="btn btn-secondary col-sm-12 mb-1">Inbox</button>
                 </center>
                 <center>
                     <button onclick="window.location.href='{{route('sentMessageAdmin')}}'" class="btn btn-secondary col-sm-12">Sent</button>
@@ -40,12 +37,14 @@ tr:nth-child(even) {
                         <th>From</th>
                         <th>Pesan</th>
                         <th>Tanggal</th>
+                        <th></th>
                     </tr>
                     @foreach ($data as $message)
                     <tr>
                         <td>{{$message['dari_username']}}</td>
                         <td style="text-align: left;">{{$message['isi_pesan']}}. . .</td>
-                        <td>{{$message['created_at']}}</td>
+                        <td>{{date('d-m-Y', strtotime($message['created_at']))}}</td>
+                        <td><button class="btn btn-primary">Open</button></td>
                     </tr>  
                     @endforeach
                     
