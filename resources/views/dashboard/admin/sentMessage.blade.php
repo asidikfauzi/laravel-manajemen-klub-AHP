@@ -24,7 +24,7 @@ td, th {
                     <button class="btn btn-primary mb-2">COMPOSE</button>
                 </center>
                 <center>
-                    <button  onclick="window.location.href='{{route('messageAdmin')}}'" class="btn btn-secondary col-sm-12">Inbox</button>
+                    <button  onclick="window.location.href='{{route('messageAdmin')}}'" class="btn btn-secondary col-sm-12 mb-1">Inbox</button>
                 </center>
                 <center>
                     <button onclick="window.location.href='{{route('sentMessageAdmin')}}'" class="btn btn-secondary col-sm-12">Sent</button>

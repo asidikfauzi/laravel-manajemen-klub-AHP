@@ -54,7 +54,7 @@ tr:nth-child(even) {
         <td>{{$pemain['nama_pemain']}}</td>
         <td>{{$pemain['nama_klub']}}</td>
         <td><button type="submit" onclick="window.location.href='{{route('resetPasswordPemain', $pemain['id'])}}'" class="btn btn-primary"><i class="fa fa-sync"></i></button></td>
-        <td><button type="submit" onclick="window.location.href='{{route('editPemain', $pemain['id'])}}'" class="btn btn-primary"><i class="fa fa-cog"></i></button></td>
+        <td><button type="submit" onclick="window.location.href='{{route('adminEditPemain', $pemain['id'])}}'" class="btn btn-primary"><i class="fa fa-cog"></i></button></td>
         <td><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModalSave"><i class="fa fa-trash"></button></td>
         
     </tr>

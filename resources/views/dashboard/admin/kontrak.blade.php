@@ -53,7 +53,7 @@ tr:nth-child(even) {
         <td>{{$kontrak['nama_pemain']}}</td>
         <td>{{$kontrak['nama_klub']}}</td>
         <td>{{$kontrak['awal_kontrak']}} - {{$kontrak['akhir_kontrak']}}</td>
-        <td><button type="submit" onclick="window.location.href='{{route('editPemain', $kontrak['id'])}}'" class="btn btn-primary"><i class="fa fa-cog"></i></button></td>
+        <td><button type="submit" onclick="window.location.href='{{route('adminEditPemain', $kontrak['id'])}}'" class="btn btn-primary"><i class="fa fa-cog"></i></button></td>
         <td><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModalSave"><i class="fa fa-trash"></button></td>
         
     </tr>

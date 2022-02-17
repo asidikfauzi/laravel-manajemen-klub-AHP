@@ -54,8 +54,8 @@ Route::group(['prefix'=>'admin', 'middleware'=>['isAdmin','auth']], function(){
     Route::get('pemain', [AdminController::class, 'showPemain'])->name('showPemain');
     Route::get('registerPemain', [RegisterController::class, 'createPemain'])->name('registerPemain');
     Route::post('registerPemain', [RegisterController::class, 'registerPemain'])->name('registerPemain');
-    Route::get('pemain/edit/{id}', [AdminController::class, 'showEditPemain'])->name('editPemain');
-    Route::post('pemain/edit/{id}', [AdminController::class, 'editPemain'])->name('editPemain');
+    Route::get('pemain/edit/{id}', [AdminController::class, 'showEditPemain'])->name('adminEditPemain');
+    Route::post('pemain/edit/{id}', [AdminController::class, 'editPemain'])->name('adminEditPemain');
     Route::get('resetPasswordPemain/{id}', [AdminController::class, 'resetPasswordPemain'])->name('resetPasswordPemain');
     Route::delete('pemain/{id}', [AdminController::class, 'deletePemain'])->name('deletePemain');
 

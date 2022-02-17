@@ -41,8 +41,8 @@ tr:nth-child(even) {
 <br><br>
 <table>
     <tr>
-        <th>Username</th>
         <th>Image</th>
+        <th>Username</th>
         <th>Nama Klub</th>
         <th>Reset Password</th>
         <th>Edit</th>
@@ -50,8 +50,8 @@ tr:nth-child(even) {
     </tr>
     @foreach ($data as $klub)
     <tr>
-        <td>{{$klub['username']}}</td>
         <td><img src="{{asset('assets/img/klub/'.$klub['img'])}}" class="rounded mx-auto d-block" alt="image klub" style="height: 50px;"></td>
+        <td>{{$klub['username']}}</td>
         <td>{{$klub['nama_klub']}}</td>
         <td><button type="submit" onclick="window.location.href='{{route('resetPasswordKlub', $klub['id'])}}'" class="btn btn-primary"><i class="fas fa-sync"></i></button></td>
         <td><button type="submit" onclick="window.location.href='{{route('editKlub', $klub['id'])}}'" class="btn btn-primary"><i class="fas fa-cog"></i></button></td>

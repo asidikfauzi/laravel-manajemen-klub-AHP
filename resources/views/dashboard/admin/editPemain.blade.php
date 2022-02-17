@@ -121,7 +121,7 @@
     </div>
     <div id="about_faq" class="about_lav" >
         <div class="about_1">
-            <form method="POST" action="{{route('editPemain', $data[0]['id'])}}" enctype="multipart/form-data"> 
+            <form method="POST" action="{{route('adminEditPemain', $data[0]['id'])}}" enctype="multipart/form-data"> 
             @csrf
             <div class="row">
                 @foreach($data as $pemain)
@@ -132,7 +132,7 @@
                             <center>
                                 <h4>EDIT IMAGE</h4>
                             </center>
-                            <input id="image" type="file" class="form-control" name="image" value="{{old('image')}}">
+                            <input id="image" type="file" class="form-control mb-4" name="image" value="{{old('image')}}">
                         </div>
                     </div>
                     <img src="{{asset('assets/img/kontrak/'.$pemain['foto_kontrak'])}}" alt="" style="width:100%;  float:left; height: 100%;  float:left; border: 5px solid black;object-fit: cover;"><br>
