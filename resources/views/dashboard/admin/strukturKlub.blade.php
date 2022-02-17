@@ -36,7 +36,7 @@ tr:nth-child(even) {
       {{ session('failed') }}
   </div>
 @endif
-<h2>DATA PEMAIN AFKAB SUMENEP 2021-2024</h2>
+<h2>DATA STRUKTUR KLUB AFKAB SUMENEP 2021-2024</h2>
 <button type="submit" onclick="window.location.href='{{route('addStrukturKlub',$data[0]['klub_id'])}}'" class="btn btn-primary">TAMBAH STRUKTUR KLUB</button>
 <br><br>
 <table>

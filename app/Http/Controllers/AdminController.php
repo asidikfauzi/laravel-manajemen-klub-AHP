@@ -105,6 +105,10 @@ class AdminController extends Controller
     public function showStruktur($id)
     {
         $data = StrukturKlub::where('klub_id', $id)->get()->toArray();
+        if(empty($data))
+        {
+            return back()->with('failed', 'Struktur data dari klub ini masih belum ada, silahkan tambahkan terlebih dahulu');
+        }
         return view('dashboard.admin.strukturKlub', compact('data'));
     }
 
@@ -337,6 +341,10 @@ class AdminController extends Controller
     public function showEditStrukturKlub($id)
     {
         $data = StrukturKlub::where('id', $id)->get()->toArray();
+        if(empty($data))
+        {
+            return back()->with('failed', 'Struktur data dari klub ini masih belum ada, silahkan tambahkan terlebih dahulu');
+        }
         return view('dashboard.admin.editStrukturKlub', compact('data'));
     }
 
@@ -372,8 +380,13 @@ class AdminController extends Controller
         $jabatan = $request->input('jabatan');
         $image = $request->file('image');
 
+        $struktur = StrukturKlub::where('jabatan', $jabatan)->where('id', $id)->get()->toArray();
+
+        if(!empty($struktur))
+        {
+            return back()->with('failed', 'Jabatan sudah ada');
+        }
         $data = StrukturKlub::where('id', $id)->first();
-        
         $data->nama_sk = $namaSk;
         $data->notelp = $notelp;
         $data->jabatan = $jabatan;
