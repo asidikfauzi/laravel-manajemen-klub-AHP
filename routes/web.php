@@ -61,7 +61,7 @@ Route::group(['prefix'=>'admin', 'middleware'=>['isAdmin','auth']], function(){
 
     //kontrak
     Route::get('kontrak', [AdminController::class, 'showKontrak'])->name('showKontrak');
-    // Route::post('kontrak', [RegisterController::class, 'registerPemain'])->name('registerPemain');
+    Route::delete('kontrak/{id}', [AdminController::class, 'deleteKontrak'])->name('deleteKontrak');
     
     Route::get('tambahpoin', [AdminController::class, 'showTambahPoin'])->name('tambahpoin');
     

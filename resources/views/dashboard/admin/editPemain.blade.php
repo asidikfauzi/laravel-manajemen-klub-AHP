@@ -180,6 +180,8 @@
                     <b>Status : </b>
                     <p>
                         <select name="status" id="status" class="form-control @error('status') is-invalid @enderror">
+                            <option value="{{$pemain['status']}}">{{$pemain['status']}}</option>
+                            <option value="-">-</option>
                             <option value="aktif">Aktif</option>
                             <option value="nonaktif">Nonaktif</option>
                         </select>

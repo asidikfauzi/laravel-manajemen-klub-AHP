@@ -115,6 +115,14 @@ class AdminController extends Controller
     public function showEditPemain($id)
     {
         $data = Pemain::join('kontrak', 'pemain.id', 'pemain_id')->where('pemain.id', $id)->get()->toArray();
+        if(empty($data))
+        {
+            $data = Pemain::where('id', $id)->get()->toArray();
+            $data[0]['gaji'] = '-';
+            $data[0]['awal_kontrak'] = '-';
+            $data[0]['akhir_kontrak'] = '-';
+            $data[0]['foto_kontrak'] = '-';
+        }   
         $dataKlub = Klub::get()->toArray();
         return view('dashboard.admin.editPemain', compact('data', 'dataKlub'));
     }
@@ -202,7 +210,9 @@ class AdminController extends Controller
         
         $kontrak = Kontrak::where('pemain_id', $id)->first();
 
-        DB::transaction(function() use ($request, $data, $kontrak, $nama, $tempat, $tglLahir, $alamat, $notelp, $tinggi, $berat, $status, $klub, $posisi, $image, $id, $awalKontrak, $akhirKontrak, $gaji, $fotoKontrak){
+        $dataKlub = Klub::where('nama_klub', $klub)->get()->toArray();
+
+        DB::transaction(function() use ($dataKlub, $request, $data, $kontrak, $nama, $tempat, $tglLahir, $alamat, $notelp, $tinggi, $berat, $status, $klub, $posisi, $image, $id, $awalKontrak, $akhirKontrak, $gaji, $fotoKontrak){
             
             $data->nama_pemain = $nama;
             $data->tempat = $tempat;
@@ -221,8 +231,14 @@ class AdminController extends Controller
             }
             $data->save();
 
+            if(empty($kontrak))
+            {
+                $kontrak = new Kontrak();
+            }
             $kontrak->awal_kontrak = $awalKontrak;
             $kontrak->akhir_kontrak = $akhirKontrak;
+            $kontrak->klub_id = $dataKlub[0]['id'];
+            $kontrak->pemain_id = $id;
             $kontrak->gaji = $gaji;
             if($request->hasFile('foto_kontrak'))   
             {
@@ -450,5 +466,18 @@ class AdminController extends Controller
         });
 
         return back()->with('failed', 'Pemain berhasil di delete');
+    }
+
+    public function deleteKontrak($id)
+    {
+        DB::transaction(function() use ($id){
+            $pemain = Pemain::where('id', $id)->first();
+            $kontrak = Kontrak::where('pemain_id', $id)->first();  
+            $pemain->status = 'nonaktif';
+            $pemain->save();         
+            $kontrak->delete();
+        });
+
+        return back()->with('failed', 'Kontrak berhasil di delete');
     }
 }

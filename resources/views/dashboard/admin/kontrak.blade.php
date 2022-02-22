@@ -73,11 +73,11 @@ tr:nth-child(even) {
       </div>
       <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          {{-- <form action="{{ route('deletePemain', $pemain['id']) }}" method="POST">
+          <form action="{{ route('deleteKontrak', $kontrak['id']) }}" method="POST">
             {{ method_field('DELETE') }}
             {{ csrf_field() }}
             <button type="submit" class="btn btn-danger">DELETE</i></button>
-        </form> --}}
+        </form>
       </div>
       </div>
   </div>
