@@ -92,6 +92,8 @@ Route::group(['prefix'=>'klub', 'middleware'=>['isKlub','auth']], function(){
     Route::get('datastruktur/klub/{id}', [KlubController::class, 'showStruktur'])->name('klub.showStrukturAll');
     Route::get('struktur/klub/add/{id}', [KlubController::class, 'showTambahStrukturKlub'])->name('klub.addStrukturKlub');
     Route::post('struktur/klub/add/{id}', [KlubController::class, 'tambahStrukturKlub'])->name('klub.addStrukturKlub');
+    Route::get('strukturklub/edit/{id}', [KlubController::class, 'showEditStrukturKlub'])->name('klub.showEditStrukturKlub');
+    Route::post('strukturklub/edit/{id}', [KlubController::class, 'editStrukturKlub'])->name('klub.showEditStrukturKlub');
 
     Route::get('changePassword',[KlubController::class, 'showChangePassword'])->name('changePasswordKlub');
     Route::post('changePassword',[KlubController::class, 'changePassword'])->name('changePasswordKlub');

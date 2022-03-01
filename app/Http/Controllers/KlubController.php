@@ -158,6 +158,16 @@ class KlubController extends Controller
         return back()->with('success', 'Data succesfully saved');
     }
 
+    public function showEditStrukturKlub($id)
+    {
+        $data = StrukturKlub::where('id', $id)->get()->toArray();
+        if(empty($data))
+        {
+            return back()->with('failed', 'Struktur data dari klub ini masih belum ada, silahkan tambahkan terlebih dahulu');
+        }
+        return view('dashboard.klub.editStrukturKlub', compact('data'));
+    }
+
     public function showChangePassword()
     {
         return view('dashboard.klub.changePassword');
