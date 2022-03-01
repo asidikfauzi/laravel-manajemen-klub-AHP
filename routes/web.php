@@ -46,7 +46,8 @@ Route::group(['prefix'=>'admin', 'middleware'=>['isAdmin','auth']], function(){
     Route::get('strukturklub/edit/{id}', [AdminController::class, 'showEditStrukturKlub'])->name('showEditStrukturKlub');
     Route::post('strukturklub/edit/{id}', [AdminController::class, 'editStrukturKlub'])->name('showEditStrukturKlub');
     Route::post('struktur/klub/add/{id}', [AdminController::class, 'tambahStrukturKlub'])->name('addStrukturKlub');
-    
+    Route::delete('struktur/{id}', [AdminController::class, 'deleteStruktur'])->name('deleteStruktur');
+
     Route::get('resetPasswordKlub/{id}', [AdminController::class, 'resetPasswordKlub'])->name('resetPasswordKlub');
     Route::delete('klub/{namaKlub}', [AdminController::class, 'deleteKlub'])->name('deleteKlub');
     
@@ -97,6 +98,8 @@ Route::group(['prefix'=>'klub', 'middleware'=>['isKlub','auth']], function(){
 
     Route::get('changePassword',[KlubController::class, 'showChangePassword'])->name('changePasswordKlub');
     Route::post('changePassword',[KlubController::class, 'changePassword'])->name('changePasswordKlub');
+
+    Route::delete('struktur/{id}', [KlubController::class, 'deleteStruktur'])->name('klub.deleteStruktur');
     
 });
 

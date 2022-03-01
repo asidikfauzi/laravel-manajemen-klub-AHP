@@ -445,6 +445,11 @@ class AdminController extends Controller
 
         return back()->with('success', 'Klub, Pemain, dan Kontrak yang terkait berhasil di delete');
     }
+    public function deleteStruktur($id)
+    {
+        $struktur = StrukturKlub::where('id', $id)->delete();
+        return back()->with('success', 'Data struktur berhasil di delete');
+    }
 
     public function deleteBerita($id)
     {

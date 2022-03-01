@@ -231,4 +231,11 @@ class KlubController extends Controller
 
         return back()->with('success', 'Password changes succesfully ');
     }
+
+    public function deleteStruktur($id)
+    {
+        $struktur = StrukturKlub::where('id', $id)->delete();
+        return back()->with('success', 'Data struktur berhasil di delete');
+    }
+
 }

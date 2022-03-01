@@ -69,12 +69,12 @@ tr:nth-child(even) {
           Apakah anda yakin ingin menghapus struktur klub ini ?
       </div>
       <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          {{-- <form action="{{ route('deletePemain', $pemain['id']) }}" method="POST">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <form action="{{ route('klub.deleteStruktur', $struktur['id']) }}" method="POST">
             {{ method_field('DELETE') }}
-            {{ csrf_field() }} --}}
+            {{ csrf_field() }}
             <button type="submit" class="btn btn-danger">DELETE</i></button>
-        {{-- </form> --}}
+        </form>
       </div>
       </div>
   </div>
