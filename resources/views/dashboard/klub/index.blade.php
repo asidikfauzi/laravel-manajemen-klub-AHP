@@ -122,12 +122,9 @@
         
         <div class="search-container">
             <a class="active" href="{{ url('pemain', $data[0]['nama_klub']) }}">PEMAIN</a> 
-            <a class="active" href="{{route('showStrukturKlub', $data[0]['id'])}}">STRUKTUR KLUB</a>
+            <a class="active" href="{{route('klub.showStrukturKlub', $data[0]['id'])}}">STRUKTUR KLUB</a>
         </div>
-
     </div>
-    
-    
       <div id="about_faq" class="about_lav" >
             <div class="about_1">
                 <form method="POST" action="{{route('klub.dashboard')}}" enctype="multipart/form-data"> 

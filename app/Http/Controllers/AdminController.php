@@ -157,7 +157,6 @@ class AdminController extends Controller
         $jadwalLatihan = $request->input('jadwalLatihan');
         $sejarahKlub = $request->input('sejarahKlub');
         $image = $request->file('image');
-        
 
         $data = Klub::find($id);
         if(!$data)
@@ -450,7 +449,6 @@ class AdminController extends Controller
     public function deleteBerita($id)
     {
         $berita = BeritaDanAktivitas::where('id', $id)->delete();
-    
         return back()->with('failed', 'Pemain berhasil di delete');
     }
 

@@ -65,6 +65,16 @@ class KlubController extends Controller
         return view('dashboard.public.klub', compact('data'));
     }
 
+    public function showStruktur($id)
+    {
+        $data = StrukturKlub::where('klub_id', $id)->get()->toArray();
+        if(empty($data))
+        {
+            return back()->with('failed', 'Struktur data dari klub ini masih belum ada, silahkan tambahkan terlebih dahulu');
+        }
+        return view('dashboard.klub.dataStruktur', compact('data', 'id'));
+    }
+
 
     public function showStrukturKlub($id)
     {
@@ -107,7 +117,13 @@ class KlubController extends Controller
             $bendahara2[0]['img'] = '-';
         }
         
-        return view('dashboard.public.strukturKlub', compact('ketua', 'sekretaris1', 'sekretaris2', 'bendahara1', 'bendahara2', 'id'));
+        return view('dashboard.klub.strukturKlub', compact('ketua', 'sekretaris1', 'sekretaris2', 'bendahara1', 'bendahara2', 'id'));
+    }
+
+    public function showTambahStrukturKlub($id)
+    {
+        $data = Klub::where('id', $id)->get()->toArray();
+        return view('dashboard.klub.tambahStrukturKlub', compact('data', 'id'));
     }
 
     public function showChangePassword()

@@ -125,12 +125,10 @@ class RegisterController extends Controller
 
     public function registerKlub(Request $request)
     {
-        //users
         $username = $request->input('username');
         $password = $request->input('password');
         $role_id = $request->input('role_id');
         
-        //klub
         $uuid = Uuid::getId();
         $nama = $request->input('nama');
         $tglBeridiri = $request->input('tglBerdiri'); 
@@ -139,8 +137,6 @@ class RegisterController extends Controller
         $jadwalLatihan = $request->input('jadwalLatihan');
         $sejarahKlub = $request->input('sejarahKlub');
         $image = $request->file('image');
-
-        
 
         if(empty($username) || empty($password) || empty($nama) || empty($tglBeridiri) || empty($alamat) ||
         empty($notelp) || empty($jadwalLatihan) || empty($sejarahKlub))
@@ -166,8 +162,7 @@ class RegisterController extends Controller
 
         $result = DB::transaction(function() use ($username, $password, $role_id, $nama, $tglBeridiri, $alamat,
                                                     $notelp, $jadwalLatihan, $sejarahKlub, $image, $uuid){
-            $uploadImage = Storage::uploadImageKlub($image);
-            
+            $uploadImage = Storage::uploadImageKlub($image);            
             $hashPassword = Hash::make($password);
 
             $users = new User();
@@ -187,8 +182,6 @@ class RegisterController extends Controller
             $klub->img = $uploadImage;
             $klub->users_username = $username;
             $klub->save();
-
-            
             return $klub;   
         });
         return back()->with('success', 'Data succesfully saved');
@@ -196,13 +189,10 @@ class RegisterController extends Controller
 
     public function registerPemain(Request $request)
     {
-        //users
         $username = $request->input('username');
         $password = $request->input('password');
         $role_id = $request->input('role_id');
-        //pemain & kontrak
         $uuid = Uuid::getId();
-        //pemain
         $nama = $request->input('nama');
         $tempat = $request->input('tempat');
         $tglLahir = $request->input('tglLahir'); 
@@ -213,7 +203,6 @@ class RegisterController extends Controller
         $namaKlub = $request->input('nama_klub');
         $posisi = $request->input('posisi');
         $image = $request->file('image');
-        //kontrak
         $gaji = $request->input('gaji');
         $awalKontrak = $request->input('awal_kontrak');
         $akhirKontrak = $request->input('akhir_kontrak');
@@ -246,10 +235,8 @@ class RegisterController extends Controller
                                                     $gaji, $awalKontrak, $akhirKontrak, $uploadKontrak, $uuid)
         {
             $hashPassword = Hash::make($password);
-
             $dataKlub = Klub::where('nama_klub', $namaKlub)->get()->toArray();
-            
-
+        
             $users = new User();
             $users->username = $username;
             $users->password = $hashPassword;

@@ -28,35 +28,45 @@
             <div class="row">
                 <div class="col-lg-8">
                     <div class="row">
-                        <pre>    <b>A. BIDANG INTERNAL</b>
-        1.  Pembenahan Administrasi Organisasi;
-        2.  Menyusun Statuta Asosiasi Futsal Kabupaten Sumenep;
-        3.  Penyediaan Sekretariat Organisasi yang Tetap dan Representatif;
-        4.  Pembuatan Atribut Organisasi;
-        5.  Penyempurnaan Manajemen Organisasi;
-        6.  Penyelenggara Liga Futsal Sumenep;
-        7.  Penyelenggara Turnamen Futsal Pelajar, Mahasiswa, dan Wanita;
-        8.  Penyelenggara Kursus Pelatih Futsal dan Coaching Clinic;
-        9.  Membuat Rencana Bisnis Pengembangan Futsal di Kabupaten Sumenep;
-        10. Melaksanakan Pembinaan Klub Futsal di Kabupaten Sumenep;
+                        <pre>    <b>Luas lapangan</b>
+        1.  Ukuran: 25m x 15m                      
+        2.  Garis batas: garis selebar 8 cm, yakni garis sentuh di sisi, garis gawang di ujung-ujung, dan 
+            garis melintang tengah lapangan; 3 m lingkaran tengah; tak ada tembok penghalang atau papan. 
+            Memakai pengaman Jaring sebagai pembatas agar bola tidak terlempar jauh.
+        3.  Daerah penalti: busur berukuran 6 m dari masing-masing tiang gawang
+        4.  Titik penalti: 6 m dari titik tengah garis gawang
+        5.  Titik penalti kedua: 10 m dari titik tengah garis gawang
+        6.  Zona pergantian: daerah 5 m (5 m dari garis tengah lapangan) pada sisi tribun dari pelemparan
+        7.  Gawang: tinggi 2 m x lebar 3 m
+        8.  Permukaan daerah pelemparan: halus, rata, dan tak abrasif
                         </pre>
-                    </div>
-
-                    <div class="row">
-                        <pre>    <b>B. BIDANG EXTERNAL</b>
-        1.  Melaksanakan Koordinasi dengan Asprop PSSI Jawa Timur, AFD Jawa Timur KONI 
-            Kabupaten Sumenep dan AFKAB PSSI Kabupaten Sumenep terkait hasil - hasil 
-            penyelenggara kongres asosiasi futsal kabupaten;
-        2.  Menyampaikan Laporan Pelaksanaan Kongres Asosisasi Futsal Kabupaten Sumenep 
-            Kepada AFD Jawa Timur;
-        3.  Menyampaikan Susunan Pengurus Asosiasi Futsal Kabupaten Hasil Kongres Asosiasi
-            Futsal Kabupaten Sumenep Kepada AFD Jawa Timur untuk mendapatkan pengesahan
-            dan Surat Keputusan (SK);
-        4.  Melaksanakan Koordinasi Dengan Pihak Pemerintahan Daerah Kabupaten Sumenep 
-            Terkait hasil - hasil kongres Asosiasi Futsal Kabupaten Sumenep sekaligus
-            Sosialisasi Rencana Kerja Pengurus Asosiasi Futsal Kabupaten Sumenep Selama
-            Periode 2021-2025;
-        
+                        <pre>   <b>Bola</b>            
+        1.  Ukuran: 4
+        2.  Keliling: 62–64 cm
+        3.  Berat: 0,4 - 0,44 kg
+        4.  Lambungan: 55–65 cm pada pantulan pertama
+        5.  Bahan: kulit atau bahan yang cocok lainnya (yaitu bahan tak berbahaya)
+                        </pre>
+                        <pre>   <b>Jumlah pemain (per team)</b>      
+        1.  Jumlah pemain maksimal untuk memulai pertandingan: 5, salah satunya penjaga gawang
+        2.  Jumlah pemain minimal untuk mengakhiri pertandingan: 2 (tidak termasuk cedera)
+        3.  Jumlah pemain cadangan maksimal: 7
+        4.  Jumlah wasit: 2
+        5.  Jumlah hakim garis: 0
+        6.  Batas jumlah pergantian pemain: tak terbatas
+        7.  Metode pergantian: "pergantian melayang" (semua pemain kecuali penjaga gawang boleh memasuki 
+            dan meninggalkan lapangan kapan saja; pergantian penjaga gawang hanya dapat dilakukan jika bola 
+            tak sedang dimainkan dan dengan persetujuan wasit)
+        8.  Dan wasit pun tidak boleh menginjak arena lapangan, hanya boleh di luar garis lapangan saja, 
+            terkecuali jika ada pelanggaran-pelanggaran yang harus memasuki lapangan
+                        </pre>
+                        <pre>   <b>Lama permainan</b>
+        1.  Lama normal: 2x20 menit
+        2.  Lama istirahat: 10 menit
+        3.  Lama perpanjangan waktu: 2x5 menit (bila hasil masih imbang setelah 2x20 menit waktu normal)
+        4.  Ada adu penalti (maksimal 5 gol) jika jumlah gol kedua tim seri saat perpanjangan waktu selesai
+        5.  Time-out: 1 per tim per babak; tak ada dalam waktu tambahan
+        6.  Waktu pergantian babak: maksimal 10 menit
                         </pre>
                     </div>
 

@@ -88,7 +88,10 @@ Route::group(['prefix'=>'pemain', 'middleware'=>['isPemain','auth']], function()
 Route::group(['prefix'=>'klub', 'middleware'=>['isKlub','auth']], function(){
     Route::get('dashboard', [KlubController::class, 'index'])->name('klub.dashboard');
     Route::post('dashboard', [KlubController::class, 'editKlub'])->name('klub.dashboard');
-    
+    Route::get('struktur/klub/{id}', [KlubController::class, 'showStrukturKlub'])->name('klub.showStrukturKlub');
+    Route::get('datastruktur/klub/{id}', [KlubController::class, 'showStruktur'])->name('klub.showStrukturAll');
+    Route::get('struktur/klub/add/{id}', [KlubController::class, 'showTambahStrukturKlub'])->name('klub.addStrukturKlub');
+
     Route::get('changePassword',[KlubController::class, 'showChangePassword'])->name('changePasswordKlub');
     Route::post('changePassword',[KlubController::class, 'changePassword'])->name('changePasswordKlub');
     
@@ -101,7 +104,7 @@ Route::get('home', [HomeController::class, 'index'])->name('home');
 
 Route::get('klub', [KlubController::class, 'indexPublic'])->name('klub');
 Route::get('klub/detailklub/{id}', [KlubController::class, 'show'])->name('detailklub');
-Route::get('struktur/klub/{id}', [KlubController::class, 'showStrukturKlub'])->name('showStrukturKlub');
+Route::get('struktur/klub/{id}', [HomeController::class, 'showStrukturKlub'])->name('showStrukturKlub');
 
 Route::get('pemain/{namaKlub}', [PemainController::class, 'dataPemain'])->name('pemain');
 Route::get('pemain/detailpemain/{id}', [PemainController::class, 'show'])->name('detailpemain');
