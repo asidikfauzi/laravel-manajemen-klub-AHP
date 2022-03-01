@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helper\Storage;
+use App\Helper\Uuid;
 use App\Models\Klub;
 use App\Models\StrukturKlub;
 use App\Models\User;
@@ -124,6 +125,37 @@ class KlubController extends Controller
     {
         $data = Klub::where('id', $id)->get()->toArray();
         return view('dashboard.klub.tambahStrukturKlub', compact('data', 'id'));
+    }
+
+    public function tambahStrukturKlub(Request $request, $id)
+    {
+        $uuid = Uuid::getId();
+        $nama = $request->input('nama');
+        $notelp = $request->input('notelp');
+        $jabatan = $request->input('jabatan');
+        $image = $request->file('image');
+        
+        
+
+        $dataStruktur = StrukturKlub::where('klub_id', $id)->where('jabatan', $jabatan)->get()->toArray();
+
+        if($dataStruktur)
+        {
+            return back()->with('failed', 'Jabatan Untuk Klub anda sudah ada');
+        }
+
+        $uploadImage = Storage::uploadImageStruktur($image);
+
+        $struktur = new StrukturKlub();
+        $struktur->id = $uuid;
+        $struktur->nama_sk = $nama;
+        $struktur->notelp = $notelp;
+        $struktur->jabatan = $jabatan;
+        $struktur->img = $uploadImage;
+        $struktur->klub_id = $id;
+        $struktur->save();
+
+        return back()->with('success', 'Data succesfully saved');
     }
 
     public function showChangePassword()
