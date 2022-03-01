@@ -167,6 +167,32 @@ class KlubController extends Controller
         }
         return view('dashboard.klub.editStrukturKlub', compact('data'));
     }
+    public function editStrukturKlub(Request $request, $id)
+    {
+        $namaSk = $request->input('nama_sk');
+        $notelp = $request->input('notelp');
+        $jabatan = $request->input('jabatan');
+        $image = $request->file('image');
+
+        $struktur = StrukturKlub::where('jabatan', $jabatan)->where('id', $id)->get()->toArray();
+
+        if(!empty($struktur))
+        {
+            return back()->with('failed', 'Jabatan sudah ada');
+        }
+        $data = StrukturKlub::where('id', $id)->first();
+        $data->nama_sk = $namaSk;
+        $data->notelp = $notelp;
+        $data->jabatan = $jabatan;
+        if($request->hasFile('image'))   
+        {
+            $uploadImage = Storage::uploadImageStruktur($image);
+            $data->img = $uploadImage;
+        }
+        $data->save();
+
+        return back()->with('success', 'Data Changed Successfully');
+    }
 
     public function showChangePassword()
     {
