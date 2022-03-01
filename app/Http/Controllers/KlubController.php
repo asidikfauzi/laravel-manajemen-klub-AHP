@@ -174,7 +174,7 @@ class KlubController extends Controller
         $jabatan = $request->input('jabatan');
         $image = $request->file('image');
 
-        $struktur = StrukturKlub::where('jabatan', $jabatan)->where('id', $id)->get()->toArray();
+        $struktur = StrukturKlub::where('jabatan', $jabatan)->where('id', "!=", $id)->get()->toArray();
 
         if(!empty($struktur))
         {
