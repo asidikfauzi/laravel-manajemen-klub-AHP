@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PemainController;
 use App\Http\Controllers\KlubController;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -24,9 +25,15 @@ Route::group(['prefix'=>'admin', 'middleware'=>['isAdmin','auth']], function(){
     Route::get('dashboard',[AdminController::class, 'index'])->name('admin.dashboard');
     Route::get('changePassword',[AdminController::class, 'showChangePassword'])->name('changePassword');
     Route::post('changePassword',[AdminController::class, 'changePassword'])->name('changePassword');
+
+    
+    //message
     Route::get('message',[AdminController::class, 'showMessage'])->name('messageAdmin');
     Route::post('message',[AdminController::class, 'sendMessageAdmin'])->name('messageAdmin');
     Route::get('message/sent',[AdminController::class, 'showSentMessage'])->name('sentMessageAdmin');
+    Route::get('message/{id}', [AdminController::class, 'showOpenMessage'])->name('showOpenMessage');
+    Route::post('message', [AdminController::class, 'sentMessage'])->name('sentMessage');
+   
 
     //register admin
     Route::get('admin', [AdminController::class, 'showAdmin'])->name('showAdmin');

@@ -18,16 +18,6 @@ td, th {
 </style>
 
 <section class="page-section">
-@if (session('success'))
-<div class="alert alert-success">
-    {{ session('success') }}
-</div>
-@endif
-@if (session('failed'))
-  <div class="alert alert-danger">
-      {{ session('failed') }}
-  </div>
-@endif
         <div class="row">
             <div class="col-sm-2" style="border: 2px solid black;">
                 <h2 class="text text-center">INBOX</h2>
@@ -42,60 +32,44 @@ td, th {
                 </center>
             </div>
             <div class="col-sm-10" style="border: 2px solid black;">
-                <table>
-                    <tr>
-                        <th>From</th>
-                        <th>Pesan</th>
-                        <th>Tanggal</th>
-                        <th></th>
-                    </tr>
-                    @foreach ($data as $message)
-                    <tr>
-                        <td>{{$message['dari_username']}}</td>
-                        <td style="text-align: left;">{{$message['isi_pesan']}}. . .</td>
-                        <td>{{date('d-m-Y', strtotime($message['created_at']))}}</td>
-                        <td><button class="btn btn-primary" onclick="window.location.href='{{route('showOpenMessage', $message['id'])}}'" >Open</button></td>
-                    </tr>  
-                    @endforeach
-                    
-                    
-                </table>
+                <h4>From : {{$data[0]['dari_username']}}</h4>
+                <p>
+                    {{date('D, d-m-Y', strtotime($data[0]['created_at']))}}
+                </p>
+                <p>
+                    {{$data[0]['isi_pesan']}}
+                </p>
             </div>
         </div>
 
-        
-
-          <!-- Modal -->
-          <form action="{{route('sentMessage')}}" method="POST">
-            @csrf
-          <div class="modal right fade" id="exampleModalSave" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+         <!-- Modal -->
+         <div class="modal right fade" id="exampleModalSave" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">New message</h5>
                 </div>
                 <div class="modal-body">
-                   
+                    <form>
                         <div class="mb-3">
                           <label for="recipient-name" class="col-form-label">To:</label>
-                          <input type="text" name="to" id="to" class="form-control">
+                          <input type="text" class="form-control" id="recipient-name">
                         </div>
                         <div class="mb-3">
                           <label for="message-text" class="col-form-label">Message:</label>
-                          <textarea class="form-control" id="message-text" name="isi_pesan"></textarea>
+                          <textarea class="form-control" id="message-text"></textarea>
                         </div>
-                     
+                      </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">SEND</button>
+                    
                 </div>
                 </div>
             </div>
           </div>
-        </form>
-        
-
+          
 </section>
 
 @endsection
