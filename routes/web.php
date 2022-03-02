@@ -87,6 +87,14 @@ Route::group(['prefix'=>'admin', 'middleware'=>['isAdmin','auth']], function(){
 Route::group(['prefix'=>'pemain', 'middleware'=>['isPemain','auth']], function(){
     Route::get('dashboard', [PemainController::class, 'index'])->name('isPemain.dashboard');
     Route::post('dashboard', [PemainController::class, 'editPemain'])->name('editPemain');
+
+    //message
+    Route::get('message',[PemainController::class, 'showMessage'])->name('pemain.messageAdmin');
+    Route::post('message',[PemainController::class, 'sendMessageAdmin'])->name('pemain.messageAdmin');
+    Route::get('message/sent',[PemainController::class, 'showSentMessage'])->name('pemain.sentMessageAdmin');
+    Route::get('message/{id}', [PemainController::class, 'showOpenMessage'])->name('pemain.showOpenMessage');
+    Route::post('message', [PemainController::class, 'sentMessage'])->name('pemain.sentMessage');
+    Route::get('sentmessage/{id}', [PemainController::class, 'showOpenSentMessage'])->name('pemain.showOpenSentMessage');
     
     Route::get('changePassword', [PemainController::class, 'showChangePassword'])->name('changePasswordPemain');
     Route::post('changePassword', [PemainController::class, 'changePassword'])->name('changePasswordPemain');
@@ -103,6 +111,14 @@ Route::group(['prefix'=>'klub', 'middleware'=>['isKlub','auth']], function(){
     Route::post('struktur/klub/add/{id}', [KlubController::class, 'tambahStrukturKlub'])->name('klub.addStrukturKlub');
     Route::get('strukturklub/edit/{id}', [KlubController::class, 'showEditStrukturKlub'])->name('klub.showEditStrukturKlub');
     Route::post('strukturklub/edit/{id}', [KlubController::class, 'editStrukturKlub'])->name('klub.showEditStrukturKlub');
+
+    //message
+    Route::get('message',[KlubController::class, 'showMessage'])->name('klub.messageAdmin');
+    Route::post('message',[KlubController::class, 'sendMessageAdmin'])->name('klub.messageAdmin');
+    Route::get('message/sent',[KlubController::class, 'showSentMessage'])->name('klub.sentMessageAdmin');
+    Route::get('message/{id}', [KlubController::class, 'showOpenMessage'])->name('klub.showOpenMessage');
+    Route::post('message', [KlubController::class, 'sentMessage'])->name('sentMessage');
+    Route::get('sentmessage/{id}', [KlubController::class, 'showOpenSentMessage'])->name('klub.showOpenSentMessage');
 
     Route::get('changePassword',[KlubController::class, 'showChangePassword'])->name('changePasswordKlub');
     Route::post('changePassword',[KlubController::class, 'changePassword'])->name('changePasswordKlub');

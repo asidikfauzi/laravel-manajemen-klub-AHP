@@ -108,6 +108,12 @@ class AdminController extends Controller
         $uuid = Uuid::getId();;
         $to = $request->input('to');
         $isiPesan = $request->input('isi_pesan');
+
+        $data = User::where('username', $to)->get()->toArray();
+        if(empty($data))
+        {
+            return back()->with('failed', 'username yang anda kirimkan tidak tersedia');
+        }
         
         $pesan = new Pesan();
         $pesan->id = $uuid;
