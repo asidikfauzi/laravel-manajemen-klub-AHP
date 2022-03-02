@@ -117,7 +117,7 @@ Route::group(['prefix'=>'klub', 'middleware'=>['isKlub','auth']], function(){
     Route::post('message',[KlubController::class, 'sendMessageAdmin'])->name('klub.messageAdmin');
     Route::get('message/sent',[KlubController::class, 'showSentMessage'])->name('klub.sentMessageAdmin');
     Route::get('message/{id}', [KlubController::class, 'showOpenMessage'])->name('klub.showOpenMessage');
-    Route::post('message', [KlubController::class, 'sentMessage'])->name('sentMessage');
+    Route::post('message', [KlubController::class, 'sentMessage'])->name('klub.sentMessage');
     Route::get('sentmessage/{id}', [KlubController::class, 'showOpenSentMessage'])->name('klub.showOpenSentMessage');
 
     Route::get('changePassword',[KlubController::class, 'showChangePassword'])->name('changePasswordKlub');

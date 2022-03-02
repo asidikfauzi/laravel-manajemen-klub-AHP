@@ -77,12 +77,14 @@
                                     @if(\Auth::user()->role_id === "klub")
                                         <a class="nav-link py-3 px-0 px-lg-3 rounded" href="{{route('klub.dashboard')}}">My Profile</a>
                                         <a class="nav-link py-3 px-0 px-lg-3 rounded" href="{{route('changePasswordKlub')}}">Change Password</a>
+                                        <a class="nav-link py-3 px-0 px-lg-3 rounded" href="{{route('klub.messageAdmin')}}">Message</a>
                                     @endif
                                     @if(\Auth::user()->role_id === "pemain")
                                         <a class="nav-link py-3 px-0 px-lg-3 rounded" href="{{route('isPemain.dashboard')}}">My Profile</a>
                                         <a class="nav-link py-3 px-0 px-lg-3 rounded" href="{{route('changePasswordPemain')}}">Change Password</a>
+                                        <a class="nav-link py-3 px-0 px-lg-3 rounded" href="{{route('pemain.messageAdmin')}}">Message</a>
                                     @endif
-                                    <a class="nav-link py-3 px-0 px-lg-3 rounded" href="#">Message</a>
+                                    
                                     <a class="nav-link py-3 px-0 px-lg-3 rounded" href="#" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout </a>
                                 @else
                                     <a class="nav-link py-3 px-0 px-lg-3 rounded" href="{{route('admin.dashboard')}}">Access Control</a>
