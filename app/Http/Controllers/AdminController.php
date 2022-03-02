@@ -85,6 +85,12 @@ class AdminController extends Controller
         return view('dashboard.admin.openmessage', compact('data'));
     }
 
+    public function showOpenSentMessage($id)
+    {
+        $data = Pesan::where('id', $id)->get()->toArray();
+        return view('dashboard.admin.opensentmessage', compact('data'));
+    }
+
     public function showSentMessage()
     {
         $message = Pesan::where('dari_username', Auth::user()->username)->orderBy('created_at', 'desc')->get()->toArray();

@@ -33,6 +33,7 @@ Route::group(['prefix'=>'admin', 'middleware'=>['isAdmin','auth']], function(){
     Route::get('message/sent',[AdminController::class, 'showSentMessage'])->name('sentMessageAdmin');
     Route::get('message/{id}', [AdminController::class, 'showOpenMessage'])->name('showOpenMessage');
     Route::post('message', [AdminController::class, 'sentMessage'])->name('sentMessage');
+    Route::get('sentmessage/{id}', [AdminController::class, 'showOpenSentMessage'])->name('showOpenSentMessage');
    
 
     //register admin
