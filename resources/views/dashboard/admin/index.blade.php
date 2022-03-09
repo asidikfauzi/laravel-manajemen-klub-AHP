@@ -45,8 +45,8 @@
                                 {{ __('BERITA DAN AKTIVITAS') }}
                             </button>
                             <hr>
-                            <button type="submit" onclick="window.location.href='{{route('tambahpoin')}}'" class="btn btn-primary col-sm-12">
-                                {{ __('TAMBAH POIN PEMAIN') }}
+                            <button type="submit" onclick="window.location.href='{{route('poinpemain')}}'" class="btn btn-primary col-sm-12">
+                                {{ __('POINT PEMAIN / KIPER') }}
                             </button>
                             <hr>
                             

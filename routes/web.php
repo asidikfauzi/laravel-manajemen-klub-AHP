@@ -72,7 +72,9 @@ Route::group(['prefix'=>'admin', 'middleware'=>['isAdmin','auth']], function(){
     Route::get('kontrak', [AdminController::class, 'showKontrak'])->name('showKontrak');
     Route::delete('kontrak/{id}', [AdminController::class, 'deleteKontrak'])->name('deleteKontrak');
     
+    //pont pemain/kiper
     Route::get('tambahpoin', [AdminController::class, 'showTambahPoin'])->name('tambahpoin');
+    Route::get('poinpemain', [AdminController::class, 'showPoinPemain'])->name('poinpemain');
     
     //berita dan aktivitas
     Route::get('beritadanaktivitas', [AdminController::class, 'showBerita'])->name('beritaDanAktivitas');

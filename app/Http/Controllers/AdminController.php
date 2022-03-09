@@ -10,6 +10,7 @@ use App\Models\Kontrak;
 use App\Models\Pemain;
 use App\Models\Pesan;
 use App\Models\StrukturKlub;
+use App\Models\SubKriteria;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -166,10 +167,18 @@ class AdminController extends Controller
         return view('dashboard.admin.editPemain', compact('data', 'dataKlub'));
     }
 
+    public function showPoinPemain()
+    {
+        return view('dashboard.admin.poinpemain');
+    }
+
     public function showTambahPoin()
     {
-        $data = Pemain::select('*')->get()->toArray();
-        return view('dashboard.admin.tambahpoin', compact('data'));
+        $dataPemain = Pemain::select('*')->join('users', 'users.username', '=', 'pemain.users_username')->get()->toArray();
+        
+        $dataSubKriteria = SubKriteria::get()->toArray();
+        //dd($dataSubKriteria);
+        return view('dashboard.admin.tambahpoin', compact('dataPemain', 'dataSubKriteria'));
     }
 
     public function showTambahBerita()

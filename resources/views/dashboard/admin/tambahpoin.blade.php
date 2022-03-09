@@ -10,36 +10,37 @@
                 <div class="card-header"><h3>KONTRIBUSI PEMAIN DALAM 1 PERTANDINGAN</h3></div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
+                    <form method="POST" action="">
                         @csrf
 
                         <div class="form-group row">
-                            <label for="nama" class="col-md-4 col-form-label text-md-right">{{ __('Username / Nama Pemain') }}</label>
+                            <label for="username" class="col-md-4 col-form-label text-md-right">{{ __('Username / Nama Pemain') }}</label>
 
                             <div class="col-md-6">
-                                <input id="username" type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required autocomplete="username" autofocus>
+                                <select name="username" id="username" class="form-control mb-2 @error('username') is-invalid @enderror">
+                                    @foreach ($dataPemain as $data)
+                                    <option value="{{$data['username']}}">{{$data['username']}} - {{$data['nama_pemain']}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
-                        <br>
                         <div class="form-group row">
                             <label for="goal" class="col-md-4 col-form-label text-md-right">{{ __('Goal') }}</label>
 
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                            <div class="col-md-6 mb-2">
+                                <input id="goal" type="text" class="form-control @error('goal') is-invalid @enderror" name="goal">
                             </div>
                         </div>
-                        <br>
                         <div class="form-group row">
                             <label for="assist" class="col-md-4 col-form-label text-md-right">{{ __('Assist') }}</label>
 
-                            <div class="col-md-6">
-                                <input id="kartu" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                            <div class="col-md-6 mb-2">
+                                <input id="assist" type="text" class="form-control @error('assist') is-invalid @enderror" name="assist" >
                             </div>
                         </div>
-                        <br>
                         <div class="form-group row">
                             <label for="kartu" class="col-md-4 col-form-label text-md-right">{{ __('Kartu') }}</label>
-                            <div class="col-md-6">
+                            <div class="col-md-6 ">
                                 <input type="radio" id="kartu" name="kartu" value="kuning">
                                 <label for="admin">Kuning</label> &nbsp; &nbsp; &nbsp; &nbsp;
                                 <input type="radio" id="kartu" name="kartu" value="merah">
@@ -56,7 +57,6 @@
                                 </div>
                             </div>
                         </div>
-                        <br>
                         <div class="form-group row">
                             <label for="attitude" class="col-md-4 col-form-label text-md-right">{{ __('Attitude') }}</label>
 
@@ -70,8 +70,14 @@
                                 <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
                                 <label for="vehicle3">Mental</label>
                             </div>
+                            <div class="form-group row">
+                                <label for="musim" class="col-md-4 col-form-label text-md-right">{{ __('Musim') }}</label>
+    
+                                <div class="col-md-6 mb-2">
+                                    <input id="datepicker" type="text" class="form-control @error('musim') is-invalid @enderror" name="musim">
+                                </div>
+                            </div>
                         </div>
-
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
@@ -85,5 +91,7 @@
         </div>
     </div>
 </div>
+
+
 </section>
 @endsection
