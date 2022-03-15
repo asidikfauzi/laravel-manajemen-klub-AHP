@@ -3,21 +3,31 @@
 @section('content')
 
 <section class="page-section" id="contact">
+    @if (session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+    @endif
+    @if (session('failed'))
+      <div class="alert alert-danger">
+          {{ session('failed') }}
+      </div>
+    @endif  
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header"><h3>KONTRIBUSI PEMAIN DALAM 1 PERTANDINGAN</h3></div>
                 <div class="card-body">
-                    <form method="POST" action="">
+                    <form method="POST" action="{{route('tambahpoin')}}">
                         @csrf
                         <div class="form-group row mb-2">
-                            <label for="username" class="col-md-4 col-form-label text-md-right">{{ __('Username / Nama Pemain') }}</label>
+                            <label for="pemain" class="col-md-4 col-form-label text-md-right">{{ __('Username / Nama Pemain') }}</label>
                             <div class="col-md-6">
-                                <select name="username" id="username" class="form-control @error('username') is-invalid @enderror">
+                                <select name="pemain" id="pemain" class="form-control @error('pemain') is-invalid @enderror">
                                     <option disabled selected value> -- select an option -- </option>
                                     @foreach ($dataPemain as $data)
-                                    <option value="{{$data['username']}}">{{$data['username']}} - {{$data['nama_pemain']}}</option>
+                                    <option value="{{$data['id']}}">{{$data['username']}} - {{$data['nama_pemain']}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -73,7 +83,7 @@
                                 <input id="datepicker" type="text" class="form-control @error('musim') is-invalid @enderror" name="musim">
                             </div>
                         </div>
-                        <div class="form-group row mb-2">
+                        <div class="form-group row">
                             <div class="col-md-8 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Submit') }}

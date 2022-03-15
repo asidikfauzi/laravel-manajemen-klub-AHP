@@ -10,5 +10,8 @@ class HasilSubKriteria extends Model
     use HasFactory;
     protected $table = "hasil_sub_kriteria";
     protected $guarded =[];
+    protected $primaryKey = null;
+    public $incrementing = false;
+
     
 }

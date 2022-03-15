@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Helper\Storage;
 use App\Helper\Uuid;
 use App\Models\BeritaDanAktivitas;
+use App\Models\HasilSubKriteria;
 use App\Models\Klub;
 use App\Models\Kontrak;
 use App\Models\Pemain;
@@ -12,6 +13,7 @@ use App\Models\Pesan;
 use App\Models\StrukturKlub;
 use App\Models\SubKriteria;
 use App\Models\User;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -174,8 +176,10 @@ class AdminController extends Controller
 
     public function showTambahPoin()
     {
-        $dataPemain = Pemain::select('*')->join('users', 'users.username', '=', 'pemain.users_username')
-                        ->where('pemain.posisi', 'pemain')->get()->toArray();
+        $dataPemain = Pemain::select('pemain.id', 'pemain.nama_pemain', 'users.username')
+                            ->join('users', 'users.username', '=', 'pemain.users_username')
+                            ->where('pemain.posisi', 'pemain')
+                            ->get()->toArray();
         
         $dataSubKriteria = SubKriteria::select('sub_kriteria.id', 'sub_kriteria.nama_sub_kriteria', 'kriteria.nama_kriteria', 
                                                 'sub_kriteria.bobot', 'sub_kriteria.kriteria_id', 'sub_kriteria.min_max')
@@ -183,11 +187,94 @@ class AdminController extends Controller
                             ->where('kriteria.jenis', 'pemain') 
                             ->orderBy('sub_kriteria.id', 'asc')
                             ->get()->toArray();
-        $kartuKuning = SubKriteria::select('id','nama_sub_kriteria')->where('kriteria_id', 4)->get()->toArray();
-        $kartuMerah = SubKriteria::select('id','nama_sub_kriteria')->where('kriteria_id', 3)->get()->toArray();
-        $attitude = SubKriteria::select('id','nama_sub_kriteria')->where('kriteria_id', 5)->get()->toArray();
+        $kartuKuning = SubKriteria::select('id','nama_sub_kriteria')
+                            ->where('kriteria_id', 4)
+                            ->get()->toArray();
+        $kartuMerah = SubKriteria::select('id','nama_sub_kriteria')
+                            ->where('kriteria_id', 3)
+                            ->get()->toArray();
+        $attitude = SubKriteria::select('id','nama_sub_kriteria')
+                            ->where('kriteria_id', 5)
+                            ->get()->toArray();
 
         return view('dashboard.admin.tambahpoin', compact('dataPemain', 'dataSubKriteria', 'kartuKuning', 'kartuMerah', 'attitude'));
+    }
+
+    public function tambahPoinPemain(Request $request)
+    {
+        $pemain_id = $request->input('pemain');
+        $goal = $request->input('goal');
+        $assist = $request->input('assist');
+        $kuning = $request->input('kuning');
+        $merah = $request->input('merah');
+        $attitude = $request->input('attitude');
+        $musim = $request->input('musim');
+
+        // dd($pemain_id);
+
+        DB::transaction(function() use ($pemain_id, $goal, $assist, $kuning, $merah, 
+                                            $attitude, $musim)
+        {
+            try
+            {
+                if(!empty($goal))
+                {
+                    $data = new HasilSubKriteria();
+                    $data->pemain_id = $pemain_id;
+                    $data->sub_kriteria_id = 25;
+                    $data->musim = $musim;
+                    $data->jumlah = $goal;
+                    $data->save();
+                }
+                
+                if(!empty($assist))
+                {
+                    $data1 = new HasilSubKriteria();
+                    $data1->pemain_id = $pemain_id;
+                    $data1->sub_kriteria_id = 26;
+                    $data1->musim = $musim;
+                    $data1->jumlah = $assist;
+                    $data1->save();
+                }
+
+                if(!empty($kuning))
+                {
+                    $data2 = new HasilSubKriteria();
+                    $data2->pemain_id = $pemain_id;
+                    $data2->sub_kriteria_id = $kuning;
+                    $data2->musim = $musim;
+                    $data2->jumlah = 1;
+                    $data2->save();
+                }
+
+                if(!empty($merah))
+                {
+                    $data3 = new HasilSubKriteria();
+                    $data3->pemain_id = $pemain_id;
+                    $data3->sub_kriteria_id = $merah;
+                    $data3->musim = $musim;
+                    $data3->jumlah = 1;
+                    $data3->save();
+                }
+
+                if(!empty($attitude))
+                {
+                    $data4 = new HasilSubKriteria();
+                    $data4->pemain_id = $pemain_id;
+                    $data4->sub_kriteria_id = $attitude;
+                    $data4->musim = $musim;
+                    $data4->jumlah = 1;
+                    $data4->save();
+                }
+            }
+            catch (Exception $e)
+            {
+                return back()->with('failed', 'Data not succesfully added!');
+            }
+            
+        });
+        
+        return back()->with('success', 'Data succesfully added!');
     }
 
     public function showTambahBerita()

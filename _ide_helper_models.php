@@ -216,7 +216,7 @@ namespace App\Models{
  *
  * @property string $id
  * @property string|null $nama_sk
- * @property string|null $nomertelp
+ * @property string|null $notelp
  * @property string|null $jabatan
  * @property string|null $img
  * @property string $klub_id
@@ -231,7 +231,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|StrukturKlub whereJabatan($value)
  * @method static \Illuminate\Database\Eloquent\Builder|StrukturKlub whereKlubId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|StrukturKlub whereNamaSk($value)
- * @method static \Illuminate\Database\Eloquent\Builder|StrukturKlub whereNomertelp($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|StrukturKlub whereNotelp($value)
  * @method static \Illuminate\Database\Eloquent\Builder|StrukturKlub whereUpdatedAt($value)
  */
 	class StrukturKlub extends \Eloquent {}
