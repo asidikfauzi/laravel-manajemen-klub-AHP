@@ -183,7 +183,11 @@ class AdminController extends Controller
                             ->where('kriteria.jenis', 'pemain') 
                             ->orderBy('sub_kriteria.id', 'asc')
                             ->get()->toArray();
-        return view('dashboard.admin.tambahpoin', compact('dataPemain', 'dataSubKriteria'));
+        $kartuKuning = SubKriteria::select('id','nama_sub_kriteria')->where('kriteria_id', 4)->get()->toArray();
+        $kartuMerah = SubKriteria::select('id','nama_sub_kriteria')->where('kriteria_id', 3)->get()->toArray();
+        $attitude = SubKriteria::select('id','nama_sub_kriteria')->where('kriteria_id', 5)->get()->toArray();
+
+        return view('dashboard.admin.tambahpoin', compact('dataPemain', 'dataSubKriteria', 'kartuKuning', 'kartuMerah', 'attitude'));
     }
 
     public function showTambahBerita()
