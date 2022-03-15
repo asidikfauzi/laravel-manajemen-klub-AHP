@@ -174,10 +174,15 @@ class AdminController extends Controller
 
     public function showTambahPoin()
     {
-        $dataPemain = Pemain::select('*')->join('users', 'users.username', '=', 'pemain.users_username')->get()->toArray();
+        $dataPemain = Pemain::select('*')->join('users', 'users.username', '=', 'pemain.users_username')
+                        ->where('pemain.posisi', 'pemain')->get()->toArray();
         
-        $dataSubKriteria = SubKriteria::get()->toArray();
-        //dd($dataSubKriteria);
+        $dataSubKriteria = SubKriteria::select('sub_kriteria.id', 'sub_kriteria.nama_sub_kriteria', 'kriteria.nama_kriteria', 
+                                                'sub_kriteria.bobot', 'sub_kriteria.kriteria_id', 'sub_kriteria.min_max')
+                            ->join('kriteria', 'kriteria.id', '=', 'sub_kriteria.kriteria_id')
+                            ->where('kriteria.jenis', 'pemain') 
+                            ->orderBy('sub_kriteria.id', 'asc')
+                            ->get()->toArray();
         return view('dashboard.admin.tambahpoin', compact('dataPemain', 'dataSubKriteria'));
     }
 
