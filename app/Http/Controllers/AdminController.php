@@ -64,7 +64,7 @@ class AdminController extends Controller
 
     public function showPemain()
     {
-        $data = Pemain::select('*')->get()->toArray();
+        $data = Pemain::select('*')->orderBy('created_at', 'DESC')->get()->toArray();
         return view('dashboard.admin.pemain', compact('data'));
     }
 
@@ -171,7 +171,89 @@ class AdminController extends Controller
 
     public function showPoinPemain()
     {
-        return view('dashboard.admin.poinpemain');
+        $dataHasil = HasilSubKriteria::select('pemain_id', 'pemain.nama_pemain', 'pemain.nama_klub', 'musim')
+                    ->join('pemain', 'pemain.id', '=', 'hasil_sub_kriteria.pemain_id')
+                    ->groupBy('pemain_id','pemain.nama_pemain', 'pemain.nama_klub', 'musim')->get()->toArray();
+       
+        //DataGoal
+        $dataGoal = HasilSubKriteria::jumlahGoal()->toArray();
+
+        //Data Assist
+        $dataAssist = HasilSubKriteria::jumlahAssist()->toArray();
+
+        //Data Kartu Kuning
+        $dataPelanggaranKuning = HasilSubKriteria::jumlahPelanggaranKuning()->toArray();
+        $dataProvokasiKuning = HasilSubKriteria::jumlahProvokasiKuning()->toArray();
+        $dataMemukulKuning = HasilSubKriteria::jumlahMemukulKuning()->toArray();
+        $dataSelebrasiKuning = HasilSubKriteria::jumlahSelebrasiKuning()->toArray();
+            
+
+        //Data Kartu Merah
+        $dataPelanggaranMerah = HasilSubKriteria::jumlahPelanggaranMerah()->toArray();
+        $dataProvokasiMerah = HasilSubKriteria::jumlahProvokasiMerah()->toArray();
+        $dataMemukulMerah = HasilSubKriteria::jumlahMemukulMerah()->toArray();
+        $dataSelebrasiMerah = HasilSubKriteria::jumlahSelebrasiMerah()->toArray();
+
+        //Data Attitude
+        $dataWaktuPemain = HasilSubKriteria::jumlahWaktuPemain();
+        $dataRespectPemain = HasilSubKriteria::jumlahRespectPemain();
+        $dataMentalPemain = HasilSubKriteria::jumlahMentalPemain();
+
+
+        $hasilGoal = [];
+        for($i = 0; $i < count($dataHasil); $i++)
+        {
+            array_push($hasilGoal, ['nama_pemain'=>$dataHasil[$i]['nama_pemain'],'nama_klub'=>$dataHasil[$i]['nama_klub'],'musim'=>$dataHasil[$i]['musim'],'jumlah'=> number_format((float)$dataGoal[$i]['jumlah_goal'], 3, '.', '')]);
+        }
+
+        $hasilAssist = [];
+        for($i = 0; $i < count($dataHasil); $i++)
+        {
+            array_push($hasilAssist, ['nama_pemain'=>$dataHasil[$i]['nama_pemain'],'nama_klub'=>$dataHasil[$i]['nama_klub'],'musim'=>$dataHasil[$i]['musim'],'jumlah'=> number_format((float)$dataAssist[$i]['jumlah_assist'], 3, '.', '')]);
+        }
+
+        $hasilKuning = [];
+        $jumlahKuning = [];
+        for($i = 0; $i < count($dataHasil); $i++)
+        {
+            $jumlahKuning = $dataPelanggaranKuning[$i]['jumlah_pelanggaran_kuning'] + $dataProvokasiKuning[$i]['jumlah_provokasi_kuning'] + $dataMemukulKuning[$i]['jumlah_memukul_kuning'] + $dataSelebrasiKuning[$i]['jumlah_selebrasi_kuning'];
+            $pv = 0.049;
+            $hasilKalipv = $jumlahKuning * $pv;
+            array_push($hasilKuning, ['nama_pemain'=>$dataHasil[$i]['nama_pemain'],'nama_klub'=>$dataHasil[$i]['nama_klub'],'musim'=>$dataHasil[$i]['musim'],'jumlah'=> number_format((float)$hasilKalipv, 3, '.', '')]);
+        }
+
+        $hasilMerah = [];
+        $jumlahMerah = [];
+        for($i = 0; $i < count($dataHasil); $i++)
+        {
+            $jumlahMerah = $dataPelanggaranMerah[$i]['jumlah_pelanggaran_merah'] + $dataProvokasiMerah[$i]['jumlah_provokasi_merah'] + $dataMemukulMerah[$i]['jumlah_memukul_merah'] + $dataSelebrasiMerah[$i]['jumlah_selebrasi_merah'];
+            $pv = 0.076;
+            $hasilKalipv = $jumlahMerah * $pv;
+            array_push($hasilMerah, ['nama_pemain'=>$dataHasil[$i]['nama_pemain'],'nama_klub'=>$dataHasil[$i]['nama_klub'],'musim'=>$dataHasil[$i]['musim'],'jumlah'=> number_format((float)$hasilKalipv, 3, '.', '')]);
+        }
+        
+        $hasilAttitude = [];
+        $jumlahAttitude = [];
+        for($i = 0; $i < count($dataHasil); $i++)
+        {
+            $jumlahAttitude = $dataWaktuPemain[$i]['jumlah_waktu_pemain'] + $dataRespectPemain[$i]['jumlah_respect_pemain'] + $dataMentalPemain[$i]['jumlah_mental_pemain'];
+            $pv = 0.119;
+            $hasilKalipv = $jumlahAttitude * $pv;
+            array_push($hasilAttitude, ['nama_pemain'=>$dataHasil[$i]['nama_pemain'],'nama_klub'=>$dataHasil[$i]['nama_klub'],'musim'=>$dataHasil[$i]['musim'],'jumlah'=> number_format((float)$hasilKalipv, 3, '.', '')]);
+        }
+        
+
+        $hasilFinal = [];
+        $jumlahFinal = [];
+        $hasilFinish = [];
+        for($i = 0; $i < count($dataHasil); $i++)
+        {
+            $jumlahFinal = $hasilGoal[$i]['jumlah'] + $hasilAssist[$i]['jumlah'] - $hasilKuning[$i]['jumlah'] - $hasilMerah[$i]['jumlah'] + $hasilAttitude[$i]['jumlah'];
+            array_push($hasilFinal, ['nama_pemain'=>$dataHasil[$i]['nama_pemain'],'nama_klub'=>$dataHasil[$i]['nama_klub'],'musim'=>$dataHasil[$i]['musim'],'jumlah'=> number_format((float)$jumlahFinal, 3, '.', '')]);
+            $hasilFinish = collect($hasilFinal)->sortByDesc('jumlah');
+        }
+
+        return view('dashboard.admin.poinpemain', compact('hasilFinish'));
     }
 
     public function showTambahPoin()

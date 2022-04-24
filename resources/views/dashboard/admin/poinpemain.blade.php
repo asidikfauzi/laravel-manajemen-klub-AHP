@@ -47,15 +47,20 @@ tr:nth-child(even) {
             <tr>
                 <th>No.</th>
                 <th>Nama Pemain</th>
+                <th>Musim</th>
                 <th>Nama Klub</th>
                 <th>Jumlah Poin</th>
             </tr>
+            @foreach ($hasilFinish as $data)
             <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
+                <td>{{$loop->index +1}}</td>
+                <td>{{$data['nama_pemain']}}</td>
+                <td>{{$data['musim']}}</td>
+                <td>{{$data['nama_klub']}}</td>
+                <td>{{$data['jumlah']}}</td>
+            </tr>    
+            @endforeach
+            
         </table>
     </div>
     <div class="col-xl-6 stretch-card-center grid-margin">
