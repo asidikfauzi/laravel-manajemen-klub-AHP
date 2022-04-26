@@ -133,4 +133,124 @@ class HasilSubKriteria extends Model
         return $data;
     }
     
+
+
+
+    //KIPER ------------------------------------------------------------------------------------------------------------
+    static function jumlahKebobolan()   
+    {
+        $data = HasilSubKriteria::select('pemain_id', 'musim', DB::raw('SUM(jumlah*0.502) as jumlah_kebobolan'))
+                                    ->where('sub_kriteria_id', 25)
+                                    ->groupBy('pemain_id', 'musim')->get();
+        return $data;
+    }
+
+    static function jumlahPenyelamatan()
+    {
+        $data = HasilSubKriteria::select('pemain_id', 'musim', DB::raw('SUM(jumlah*0.254) as jumlah_penyelamatan'))
+                                    ->where('sub_kriteria_id', 26)
+                                    ->groupBy('pemain_id', 'musim')->get();
+        return $data;
+    }
+
+
+    //KARTU KUNING -------------------------------------------------------------------------
+    //Jumlah Pelanggaran Kartu Kuning
+    static function jumlahPelanggaranKuningKiper()
+    {
+        $data = HasilSubKriteria::select('pemain_id', 'musim', DB::raw('SUM(jumlah*0.059) as jumlah_pelanggaran_kuning'))
+                                    ->where('sub_kriteria_id', 9)
+                                    ->groupBy('pemain_id', 'musim')->get();
+        return $data;
+    }
+    //Jumlah Provokasi Kartu Kuning
+    static function jumlahProvokasiKuningKiper()
+    {
+        $data = HasilSubKriteria::select('pemain_id', 'musim', DB::raw('SUM(jumlah*0.274) as jumlah_provokasi_kuning'))
+                                    ->where('sub_kriteria_id', 10)
+                                    ->groupBy('pemain_id', 'musim')->get();
+        return $data;
+    }
+
+    //Jumlah Memukul Kartu Kuning
+    static function jumlahMemukulKuningKiper()
+    {
+        $data = HasilSubKriteria::select('pemain_id', 'musim', DB::raw('SUM(jumlah*0.530) as jumlah_memukul_kuning'))
+                                    ->where('sub_kriteria_id',11)
+                                    ->groupBy('pemain_id', 'musim')->get();
+        return $data;
+    }
+
+    //Jumlah Selebrasi Kartu Kuning
+    static function jumlahSelebrasiKuningKiper()
+    {
+        $data = HasilSubKriteria::select('pemain_id', 'musim', DB::raw('SUM(jumlah*0.138) as jumlah_selebrasi_kuning'))
+                                    ->where('sub_kriteria_id', 12)
+                                    ->groupBy('pemain_id', 'musim')->get();
+        return $data;
+    }
+
+    //KARTU MERAH ----------------------------------------------------------------
+    //Jumlah Pelanggaran Kartu Merah
+    static function jumlahPelanggaranMerahKiper()
+    {
+        $data = HasilSubKriteria::select('pemain_id', 'musim', DB::raw('SUM(jumlah*0.059) as jumlah_pelanggaran_merah'))
+                                    ->where('sub_kriteria_id', 13)
+                                    ->groupBy('pemain_id', 'musim')->get();
+        return $data;
+    }
+    //Jumlah Provokasi Kartu Merah
+    static function jumlahProvokasiMerahKiper()
+    {
+        $data = HasilSubKriteria::select('pemain_id', 'musim', DB::raw('SUM(jumlah*0.274) as jumlah_provokasi_merah'))
+                                    ->where('sub_kriteria_id', 14)
+                                    ->groupBy('pemain_id', 'musim')->get();
+        return $data;
+    }
+
+    //Jumlah Memukul Kartu Merah
+    static function jumlahMemukulMerahKiper()
+    {
+        $data = HasilSubKriteria::select('pemain_id', 'musim', DB::raw('SUM(jumlah*0.530) as jumlah_memukul_merah'))
+                                    ->where('sub_kriteria_id', 15)
+                                    ->groupBy('pemain_id', 'musim')->get();
+        return $data;
+    }
+
+    //Jumlah Selebrasi Kartu Merah
+    static function jumlahSelebrasiMerahKiper()
+    {
+        $data = HasilSubKriteria::select('pemain_id', 'musim', DB::raw('SUM(jumlah*0.138) as jumlah_selebrasi_merah'))
+                                    ->where('sub_kriteria_id', 16)
+                                    ->groupBy('pemain_id', 'musim')->get();
+        return $data;
+    }
+
+
+    //ATTITUDE PEMAIN-------------------------------------------------------------
+    //WAKTU
+    static function jumlahWaktuPemainKiper()
+    {
+        $data = HasilSubKriteria::select('pemain_id', 'musim', DB::raw('SUM(jumlah*0.703) as jumlah_waktu_pemain'))
+                                    ->where('sub_kriteria_id', 20)
+                                    ->groupBy('pemain_id', 'musim')->get();
+        return $data;
+    }
+    static function jumlahRespectPemainKiper()
+    {
+        $data = HasilSubKriteria::select('pemain_id', 'musim', DB::raw('SUM(jumlah*0.115) as jumlah_respect_pemain'))
+                                    ->where('sub_kriteria_id', 21)
+                                    ->groupBy('pemain_id', 'musim')->get();
+        return $data;
+    }
+    static function jumlahMentalPemainKiper()
+    {
+        $data = HasilSubKriteria::select('pemain_id', 'musim', DB::raw('SUM(jumlah*0.182) as jumlah_mental_pemain'))
+                                    ->where('sub_kriteria_id', 22)
+                                    ->groupBy('pemain_id', 'musim')->get();
+        return $data;
+    }
+    
+
+    
 }

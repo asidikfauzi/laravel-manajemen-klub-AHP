@@ -35,12 +35,20 @@ class AdminController extends Controller
     public function showAdmin()
     {
         $data = User::select('*')->where('role_id', 'admin')->get()->toArray();
+        if(empty($data))
+        {
+            return redirect('/admin/registerAdmin');
+        }
         return view('dashboard.admin.admin', compact('data'));
     }
 
     public function showBerita()
     {
         $data = BeritaDanAktivitas::orderBy('created_at', 'desc')->get()->toArray();
+        if(empty($data))
+        {
+            return redirect('/admin/tambahBerita');
+        }
         return view('dashboard.admin.beritadanaktivitas', compact('data'));
     }
 
@@ -53,6 +61,10 @@ class AdminController extends Controller
     public function showKlub()
     {
         $data = Klub::join('users', 'username', '=', 'users_username')->get()->toArray();
+        if(empty($data))
+        {
+            return redirect('/admin/registerKlub');
+        }
         return view('dashboard.admin.klub', compact('data'));
     }
 
@@ -65,13 +77,15 @@ class AdminController extends Controller
     public function showPemain()
     {
         $data = Pemain::select('*')->orderBy('created_at', 'DESC')->get()->toArray();
+        if(empty($data))
+        {
+            return redirect('/admin/registerPemain');
+        }
         return view('dashboard.admin.pemain', compact('data'));
     }
 
     public function showMessage()
     {
-        
-
         $message = Pesan::where('kepada_username', Auth::user()->username)->orderBy('created_at', 'desc')->get()->toArray();
         
         $data = [];
@@ -134,6 +148,11 @@ class AdminController extends Controller
         $kontrak = Kontrak::join('pemain', 'pemain.id', '=', 'kontrak.pemain_id')
                         ->join('klub', 'klub.id', '=', 'kontrak.klub_id')
                         ->get()->toArray();
+        if(empty($kontrak))
+        {
+            return redirect('/admin/registerPemain');
+        }
+        
         $data = [];
        
         foreach($kontrak as $item)
@@ -174,7 +193,12 @@ class AdminController extends Controller
         $dataHasil = HasilSubKriteria::select('pemain_id', 'pemain.nama_pemain', 'pemain.nama_klub', 'musim')
                     ->join('pemain', 'pemain.id', '=', 'hasil_sub_kriteria.pemain_id')
                     ->groupBy('pemain_id','pemain.nama_pemain', 'pemain.nama_klub', 'musim')->get()->toArray();
-       
+        
+        // if(empty($dataHasil))
+        // {
+        //     return redirect('/admin/tambahpoin');
+        // }
+        
         //DataGoal
         $dataGoal = HasilSubKriteria::jumlahGoal()->toArray();
 
@@ -205,6 +229,7 @@ class AdminController extends Controller
         {
             array_push($hasilGoal, ['nama_pemain'=>$dataHasil[$i]['nama_pemain'],'nama_klub'=>$dataHasil[$i]['nama_klub'],'musim'=>$dataHasil[$i]['musim'],'jumlah'=> number_format((float)$dataGoal[$i]['jumlah_goal'], 3, '.', '')]);
         }
+        
 
         $hasilAssist = [];
         for($i = 0; $i < count($dataHasil); $i++)
@@ -258,9 +283,34 @@ class AdminController extends Controller
 
     public function showTambahPoin()
     {
-        $dataPemain = Pemain::select('pemain.id', 'pemain.nama_pemain', 'users.username')
+        $dataPemain = Pemain::select('pemain.id', 'pemain.nama_pemain', 'users.username', 'pemain.posisi')
                             ->join('users', 'users.username', '=', 'pemain.users_username')
                             ->where('pemain.posisi', 'pemain')
+                            ->get()->toArray();
+        
+        $dataSubKriteria = SubKriteria::select('sub_kriteria.id', 'sub_kriteria.nama_sub_kriteria', 'kriteria.nama_kriteria', 
+                                                'sub_kriteria.bobot', 'sub_kriteria.kriteria_id', 'sub_kriteria.min_max')
+                            ->join('kriteria', 'kriteria.id', '=', 'sub_kriteria.kriteria_id')
+                            ->where('kriteria.jenis', 'pemain') 
+                            ->orderBy('sub_kriteria.id', 'asc')
+                            ->get()->toArray();
+        $kartuKuning = SubKriteria::select('id','nama_sub_kriteria')
+                            ->where('kriteria_id', 4)
+                            ->get()->toArray();
+        $kartuMerah = SubKriteria::select('id','nama_sub_kriteria')
+                            ->where('kriteria_id', 3)
+                            ->get()->toArray();
+        $attitude = SubKriteria::select('id','nama_sub_kriteria')
+                            ->where('kriteria_id', 5)
+                            ->get()->toArray();
+
+        return view('dashboard.admin.tambahpoin', compact('dataPemain', 'dataSubKriteria', 'kartuKuning', 'kartuMerah', 'attitude'));
+    }
+    public function showTambahPoinKiper()
+    {
+        $dataPemain = Pemain::select('pemain.id', 'pemain.nama_pemain', 'users.username', 'pemain.posisi')
+                            ->join('users', 'users.username', '=', 'pemain.users_username')
+                            ->where('pemain.posisi', 'kiper')
                             ->get()->toArray();
         
         $dataSubKriteria = SubKriteria::select('sub_kriteria.id', 'sub_kriteria.nama_sub_kriteria', 'kriteria.nama_kriteria', 
@@ -287,67 +337,197 @@ class AdminController extends Controller
         $pemain_id = $request->input('pemain');
         $goal = $request->input('goal');
         $assist = $request->input('assist');
-        $kuning = $request->input('kuning');
-        $merah = $request->input('merah');
-        $attitude = $request->input('attitude');
+        $pelanggaran = $request->input('pelanggaran');
+        $provokasi = $request->input('provokasi');
+        $memukul = $request->input('memukul');
+        $selebrasi = $request->input('selebrasi');
+        $pelanggaranM = $request->input('pelanggaran_merah');
+        $provokasiM = $request->input('provokasi_merah');
+        $memukulM = $request->input('memukul_merah');
+        $selebrasiM = $request->input('selebrasi_merah');
+        $waktu = $request->input('waktu');
+        $respect = $request->input('respect');
+        $mental = $request->input('mental');
         $musim = $request->input('musim');
 
-        // dd($pemain_id);
+        if(empty($pemain_id))
+        {
+            return back()->with('failed', 'Pemain Harus Diisi!');
+        }
+        if(empty($musim))
+        {
+            return back()->with('failed', 'Musim Harus Diisi!');
+        }
 
-        DB::transaction(function() use ($pemain_id, $goal, $assist, $kuning, $merah, 
-                                            $attitude, $musim)
+        $jumlahPelanggaran = 1;
+        $jumlahProvokasi = 1;
+        $jumlahMemukul = 1;
+        $jumlahSelebrasi = 1;
+
+        $jumlahPelanggaranMerah = 1;
+        $jumlahProvokasiMerah = 1;
+        $jumlahMemukulMerah = 1;
+        $jumlahSelebrasiMerah = 1;
+
+        $jumlahWaktu =1;
+        $jumlahRespect =1;
+        $jumlahMental = 1;
+
+        if(empty($goal))
+        {
+            $goal = 0;
+        }
+        if(empty($assist))
+        {
+            $assist = 0;
+        }
+
+        if(!isset($pelanggaran))
+        {
+            $jumlahPelanggaran = 0;
+        }
+        if(!isset($provokasi))
+        {
+            $jumlahProvokasi = 0;
+        }
+        if(!isset($memukul))
+        {
+            $jumlahMemukul = 0;
+        }
+        if(!isset($selebrasi))
+        {
+            $jumlahSelebrasi = 0;
+        }
+        if(!isset($pelanggaranM))
+        {
+            $jumlahPelanggaranMerah = 0;
+        }
+        if(!isset($provokasiM))
+        {
+            $jumlahProvokasiMerah = 0;
+        }
+        if(!isset($memukulM))
+        {
+            $jumlahMemukulMerah = 0;
+        }
+        if(!isset($selebrasiM))
+        {
+            $jumlahSelebrasiMerah = 0;
+        }
+        if(!isset($waktu))
+        {
+            $jumlahWaktu = 0;
+        }
+        if(!isset($respect))
+        {
+            $jumlahRespect = 0;
+        }
+        if(!isset($mental))
+        {
+            $jumlahMental = 0;
+        }
+        DB::transaction(function() use ($pemain_id, $goal, $assist, $pelanggaran, $provokasi, 
+                                            $memukul, $selebrasi, $pelanggaranM, $provokasiM,
+                                            $memukulM, $selebrasiM ,$waktu, $respect, $mental, 
+                                            $musim, $jumlahPelanggaran, $jumlahProvokasi, $jumlahMemukul,
+                                            $jumlahSelebrasi, $jumlahPelanggaranMerah, $jumlahProvokasiMerah,
+                                            $jumlahMemukulMerah, $jumlahSelebrasiMerah, $jumlahWaktu,
+                                            $jumlahRespect, $jumlahMental)
         {
             try
             {
-                if(!empty($goal))
-                {
-                    $data = new HasilSubKriteria();
-                    $data->pemain_id = $pemain_id;
-                    $data->sub_kriteria_id = 25;
-                    $data->musim = $musim;
-                    $data->jumlah = $goal;
-                    $data->save();
-                }
                 
-                if(!empty($assist))
-                {
-                    $data1 = new HasilSubKriteria();
-                    $data1->pemain_id = $pemain_id;
-                    $data1->sub_kriteria_id = 26;
-                    $data1->musim = $musim;
-                    $data1->jumlah = $assist;
-                    $data1->save();
-                }
-
-                if(!empty($kuning))
-                {
-                    $data2 = new HasilSubKriteria();
-                    $data2->pemain_id = $pemain_id;
-                    $data2->sub_kriteria_id = $kuning;
-                    $data2->musim = $musim;
-                    $data2->jumlah = 1;
-                    $data2->save();
-                }
-
-                if(!empty($merah))
-                {
-                    $data3 = new HasilSubKriteria();
-                    $data3->pemain_id = $pemain_id;
-                    $data3->sub_kriteria_id = $merah;
-                    $data3->musim = $musim;
-                    $data3->jumlah = 1;
-                    $data3->save();
-                }
-
-                if(!empty($attitude))
-                {
-                    $data4 = new HasilSubKriteria();
-                    $data4->pemain_id = $pemain_id;
-                    $data4->sub_kriteria_id = $attitude;
-                    $data4->musim = $musim;
-                    $data4->jumlah = 1;
-                    $data4->save();
-                }
+                $data = new HasilSubKriteria();
+                $data->pemain_id = $pemain_id;
+                $data->sub_kriteria_id = 23;
+                $data->musim = $musim;
+                $data->jumlah = $goal;
+                $data->save();
+            
+                $data1 = new HasilSubKriteria();
+                $data1->pemain_id = $pemain_id;
+                $data1->sub_kriteria_id = 24;
+                $data1->musim = $musim;
+                $data1->jumlah = $assist;
+                $data1->save();
+                
+                $data2 = new HasilSubKriteria();
+                $data2->pemain_id = $pemain_id;
+                $data2->sub_kriteria_id = 1;
+                $data2->musim = $musim;
+                $data2->jumlah = $jumlahPelanggaran;
+                $data2->save();
+                
+                $data3 = new HasilSubKriteria();
+                $data3->pemain_id = $pemain_id;
+                $data3->sub_kriteria_id = 2;
+                $data3->musim = $musim;
+                $data3->jumlah = $jumlahProvokasi;
+                $data3->save();
+                
+                $data4 = new HasilSubKriteria();
+                $data4->pemain_id = $pemain_id;
+                $data4->sub_kriteria_id = 3;
+                $data4->musim = $musim;
+                $data4->jumlah = $jumlahMemukul;
+                $data4->save();
+                
+                $data5 = new HasilSubKriteria();
+                $data5->pemain_id = $pemain_id;
+                $data5->sub_kriteria_id = 4;
+                $data5->musim = $musim;
+                $data5->jumlah = $jumlahSelebrasi;
+                $data5->save();
+            
+                $data6 = new HasilSubKriteria();
+                $data6->pemain_id = $pemain_id;
+                $data6->sub_kriteria_id = 5;
+                $data6->musim = $musim;
+                $data6->jumlah = $jumlahPelanggaranMerah;
+                $data6->save();
+                
+                $data7 = new HasilSubKriteria();
+                $data7->pemain_id = $pemain_id;
+                $data7->sub_kriteria_id = 6;
+                $data7->musim = $musim;
+                $data7->jumlah = $jumlahProvokasiMerah;
+                $data7->save();
+                
+                $data8 = new HasilSubKriteria();
+                $data8->pemain_id = $pemain_id;
+                $data8->sub_kriteria_id = 7;
+                $data8->musim = $musim;
+                $data8->jumlah = $jumlahMemukulMerah;
+                $data8->save();
+            
+                $data9 = new HasilSubKriteria();
+                $data9->pemain_id = $pemain_id;
+                $data9->sub_kriteria_id = 8;
+                $data9->musim = $musim;
+                $data9->jumlah = $jumlahSelebrasiMerah;
+                $data9->save();
+            
+                $data10 = new HasilSubKriteria();
+                $data10->pemain_id = $pemain_id;
+                $data10->sub_kriteria_id = 17;
+                $data10->musim = $musim;
+                $data10->jumlah = $jumlahWaktu;
+                $data10->save();
+                
+                $data11 = new HasilSubKriteria();
+                $data11->pemain_id = $pemain_id;
+                $data11->sub_kriteria_id = 18;
+                $data11->musim = $musim;
+                $data11->jumlah = $jumlahRespect;
+                $data11->save();
+                
+                $data12 = new HasilSubKriteria();
+                $data12->pemain_id = $pemain_id;
+                $data12->sub_kriteria_id = 19;
+                $data12->musim = $musim;
+                $data12->jumlah = $jumlahMental;
+                $data12->save();
+            
             }
             catch (Exception $e)
             {

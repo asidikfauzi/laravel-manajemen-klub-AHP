@@ -27,7 +27,7 @@
                                 <select name="pemain" id="pemain" class="form-control @error('pemain') is-invalid @enderror">
                                     <option disabled selected value> -- select an option -- </option>
                                     @foreach ($dataPemain as $data)
-                                    <option value="{{$data['id']}}">{{$data['username']}} - {{$data['nama_pemain']}}</option>
+                                    <option value="{{$data['id']}}">{{$data['username']}} - {{$data['nama_pemain']}} &nbsp;&nbsp;&nbsp;({{$data['posisi']}}) </option>
                                     @endforeach
                                 </select>
                             </div>
@@ -46,35 +46,61 @@
                         </div>
                         <div class="form-group row mb-2">
                             <label for="kartu" class="col-md-4 col-form-label text-md-right">{{ __('Kartu Kuning') }}</label>
-                            <div class="col-md-6">
-                                <select name="kuning" id="kuning" class="form-control @error('kuning') is-invalid @enderror">
-                                    <option disabled selected value> -- select an option -- </option>
-                                    @foreach ($kartuKuning as $kuning)
-                                        <option value="{{$kuning['id']}}">{{$kuning['nama_sub_kriteria']}}</option>
-                                    @endforeach
-                                </select>
+                            <div class="col-md-2">
+                                <input type="checkbox" id="pelanggaran" name="pelanggaran" value="1">
+                                <label for="pelanggaran">Pelanggaran</label><br>
+                            </div>
+                            <div class="col-md-2">
+                                <input type="checkbox" id="provokasi" name="provokasi" value="2">
+                                <label for="provokasi">Provokasi</label><br>
                             </div>
                         </div>
                         <div class="form-group row mb-2">
+                            <label for="kartu" class="col-md-4 col-form-label text-md-right"></label>
+                            <div class="col-md-2">
+                                <input type="checkbox" id="memukul" name="memukul" value="3">
+                                <label for="memukul">Memukul</label><br>
+                            </div>
+                            <div class="col-md-2">
+                                <input type="checkbox" id="selebrasi" name="selebrasi" value="4">
+                                <label for="selebrasi">Selebrasi Berlebihan</label><br>
+                            </div>
+                        </div>
+                        <div class="form-group row mt-4">
                             <label for="kartu" class="col-md-4 col-form-label text-md-right">{{ __('Kartu Merah') }}</label>
-                            <div class="col-md-6">
-                                <select name="merah" id="merah" class="form-control @error('merah') is-invalid @enderror">
-                                    <option disabled selected value> -- select an option -- </option>
-                                    @foreach ($kartuMerah as $merah)
-                                        <option value="{{$merah['id']}}">{{$merah['nama_sub_kriteria']}}</option>
-                                    @endforeach
-                                </select>
+                            <div class="col-md-2">
+                                <input type="checkbox" id="pelanggaran_merah" name="pelanggaran_merah" value="5">
+                                <label for="pelanggaran_merah">Pelanggaran</label><br>
+                            </div>
+                            <div class="col-md-2">
+                                <input type="checkbox" id="provokasi_merah" name="provokasi_merah" value="6">
+                                <label for="provokasi_merah">Provokasi</label><br>
                             </div>
                         </div>
-                        <div class="form-group row mb-2">
+                        <div class="form-group row mb-2 ">
+                            <label for="kartu" class="col-md-4 col-form-label text-md-right"></label>
+                            <div class="col-md-2">
+                                <input type="checkbox" id="memukul_merah" name="memukul_merah" value="7">
+                                <label for="memukul_merah">Memukul</label><br>
+                            </div>
+                            <div class="col-md-2">
+                                <input type="checkbox" id="selebrasi_merah" name="selebrasi_merah" value="8">
+                                <label for="selebrasi_merah">Selebrasi Berlebihan</label><br>
+                            </div>
+                        </div>
+                        <div class="form-group row mb-2 mt-4">
                             <label for="attitude" class="col-md-4 col-form-label text-md-right">{{ __('Attitude') }}</label>
-                            <div class="col-md-6">
-                                <select name="attitude" id="attitude" class="form-control @error('attitude') is-invalid @enderror">
-                                    <option disabled selected value> -- select an option -- </option>
-                                    @foreach ($attitude as $at)
-                                        <option value="{{$at['id']}}">{{$at['nama_sub_kriteria']}}</option>
-                                    @endforeach
-                                </select>
+                            <div class="col-md-2">
+                                <input type="checkbox" id="waktu" name="waktu" value="17">
+                                <label for="waktu">Waktu</label><br>
+                            </div>
+                            <div class="col-md-2">
+                                <input type="checkbox" id="respect" name="respect" value="18">
+                                <label for="respect">Respect</label><br>
+                            </div>
+                            <div class="col-md-2">
+                                <input type="checkbox" id="mental" name="mental" value="19">
+                                <label for="mental">Mental</label><br>
                             </div>
                         </div>
                         <div class="form-group row mb-2">

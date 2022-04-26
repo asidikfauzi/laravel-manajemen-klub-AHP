@@ -43,7 +43,8 @@ tr:nth-child(even) {
     <tr>
         <th>Image</th>
         <th>Nama Pemain</th>
-        <th>Nama Klub</th>\
+        <th>Nama Klub</th>
+        <th>Posisi</th>
         <th>Reset Password</th>
         <th>Edit</th>
         <th>Delete</th>
@@ -53,6 +54,7 @@ tr:nth-child(even) {
         <td><img src="{{asset('assets/img/pemain/'.$pemain['img'])}}" class="rounded mx-auto d-block" alt="image klub" style="height: 50px;"></td>
         <td>{{$pemain['nama_pemain']}}</td>
         <td>{{$pemain['nama_klub']}}</td>
+        <td>{{$pemain['posisi']}}</td>
         <td><button type="submit" onclick="window.location.href='{{route('resetPasswordPemain', $pemain['id'])}}'" class="btn btn-primary"><i class="fa fa-sync"></i></button></td>
         <td><button type="submit" onclick="window.location.href='{{route('adminEditPemain', $pemain['id'])}}'" class="btn btn-primary"><i class="fa fa-cog"></i></button></td>
         <td><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModalSave"><i class="fa fa-trash"></button></td>
