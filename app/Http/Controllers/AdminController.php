@@ -306,6 +306,7 @@ class AdminController extends Controller
 
         return view('dashboard.admin.tambahpoin', compact('dataPemain', 'dataSubKriteria', 'kartuKuning', 'kartuMerah', 'attitude'));
     }
+
     public function showTambahPoinKiper()
     {
         $dataPemain = Pemain::select('pemain.id', 'pemain.nama_pemain', 'users.username', 'pemain.posisi')
@@ -329,7 +330,7 @@ class AdminController extends Controller
                             ->where('kriteria_id', 5)
                             ->get()->toArray();
 
-        return view('dashboard.admin.tambahpoin', compact('dataPemain', 'dataSubKriteria', 'kartuKuning', 'kartuMerah', 'attitude'));
+        return view('dashboard.admin.tambah-poin-kiper', compact('dataPemain', 'dataSubKriteria', 'kartuKuning', 'kartuMerah', 'attitude'));
     }
 
     public function tambahPoinPemain(Request $request)

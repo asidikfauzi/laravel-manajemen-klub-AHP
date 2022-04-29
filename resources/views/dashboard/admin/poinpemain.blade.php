@@ -38,7 +38,7 @@ tr:nth-child(even) {
 @endif
 <h2>DATA POIN PEMAIN AFKAB SUMENEP 2021-2024</h2>
 <button type="submit" onclick="window.location.href='{{route('tambahpoin')}}'" class="btn btn-primary">TAMBAH POIN PEMAIN</button>
-<button type="submit" onclick="window.location.href='{{route('tambahpoin')}}'" class="btn btn-primary">TAMBAH POIN KIPER</button>
+<button type="submit" onclick="window.location.href='{{route('tambahpoin-kiper')}}'" class="btn btn-primary">TAMBAH POIN KIPER</button>
 <br><br>
 <div class="row aos-init aos-animate" data-aos="fade-up">
     <div class="col-xl-6 stretch-card-center grid-margin">

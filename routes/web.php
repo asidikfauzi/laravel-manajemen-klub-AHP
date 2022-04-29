@@ -75,6 +75,9 @@ Route::group(['prefix'=>'admin', 'middleware'=>['isAdmin','auth']], function(){
     //pont pemain/kiper
     Route::get('tambahpoin', [AdminController::class, 'showTambahPoin'])->name('tambahpoin');
     Route::post('tambahpoin', [AdminController::class, 'tambahPoinPemain'])->name('tambahpoin');
+    Route::get('/kiper/tambahpoin', [AdminController::class, 'showTambahPoinKiper'])->name('tambahpoin-kiper');
+    Route::post('/kiper/tambahpoin', [AdminController::class, 'tambahPoinPemainKiper'])->name('tambahpoin-kiper');
+
     Route::get('poinpemain', [AdminController::class, 'showPoinPemain'])->name('poinpemain');
     
     //berita dan aktivitas
