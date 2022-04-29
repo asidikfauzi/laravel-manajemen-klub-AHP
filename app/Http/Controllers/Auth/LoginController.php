@@ -65,10 +65,9 @@ class LoginController extends Controller
     {
         $username = $request->input('username');
         $password = $request->input('password');
-        $role_id = $request->input('role_id');
 
 
-        if(auth()->attempt(array('username'=>$username, 'password'=>$password, 'role_id'=>$role_id)))
+        if(auth()->attempt(array('username'=>$username, 'password'=>$password)))
         {
             
             if(auth()->user()->role_id == "admin")

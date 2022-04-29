@@ -32,18 +32,8 @@
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="password">
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <div class="col-md-6 offset-md-4">
-                                <input type="radio" id="role_id" name="role_id" value="admin">
-                                <label for="admin">Admin</label> &nbsp; &nbsp; &nbsp; 
-                                <input type="radio" id="role_id" name="role_id" value="klub">
-                                <label for="klub">Klub</label>&nbsp; &nbsp; &nbsp;
-                                <input type="radio" id="role_id" name="role_id" value="pemain">
-                                <label for="pemain">Pemain</label>
-                            </div>
-                        </div>
 
-                        <div class="form-group row mb-0">
+                        <div class="form-group row mb-0 mt-4">
                             <div class="col-md-8 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Login') }}
