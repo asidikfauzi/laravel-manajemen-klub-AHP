@@ -235,6 +235,7 @@ class KlubController extends Controller
 
     public function showMessage()
     {
+        $users = User::get()->toArray();
         $message = Pesan::where('kepada_username', Auth::user()->username)->orderBy('created_at', 'desc')->get()->toArray();
         
         $data = [];
@@ -242,7 +243,7 @@ class KlubController extends Controller
         {
             array_push($data, ['id'=>$item['id'],'dari_username'=>$item['dari_username'], 'isi_pesan'=>substr($item['isi_pesan'],0,80), 'created_at'=>$item['created_at']]);
         }
-        return view('dashboard.klub.message', compact('data'));
+        return view('dashboard.klub.message', compact('data', 'users'));
     }
 
     public function showOpenMessage($id)

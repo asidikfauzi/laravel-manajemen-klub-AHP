@@ -86,6 +86,7 @@ class AdminController extends Controller
 
     public function showMessage()
     {
+        $users = User::get()->toArray();
         $message = Pesan::where('kepada_username', Auth::user()->username)->orderBy('created_at', 'desc')->get()->toArray();
         
         $data = [];
@@ -93,7 +94,7 @@ class AdminController extends Controller
         {
             array_push($data, ['id'=>$item['id'],'dari_username'=>$item['dari_username'], 'isi_pesan'=>substr($item['isi_pesan'],0,80), 'created_at'=>$item['created_at']]);
         }
-        return view('dashboard.admin.message', compact('data'));
+        return view('dashboard.admin.message', compact('data', 'users'));
     }
 
     public function showOpenMessage($id)
@@ -359,7 +360,7 @@ class AdminController extends Controller
         $hasilFinishKiper = [];
         for($i = 0; $i < count($dataHasilKiper); $i++)
         {
-            $jumlahFinalKiper = $hasilKebobolan[$i]['jumlah'] + $hasilPenyelamatan[$i]['jumlah'] - $hasilKuningKiper[$i]['jumlah'] - $hasilMerahKiper[$i]['jumlah'] + $hasilAttitudeKiper[$i]['jumlah'];
+            $jumlahFinalKiper =  $hasilPenyelamatan[$i]['jumlah'] - $hasilKebobolan[$i]['jumlah'] - $hasilKuningKiper[$i]['jumlah'] - $hasilMerahKiper[$i]['jumlah'] + $hasilAttitudeKiper[$i]['jumlah'];
             array_push($hasilFinalKiper, ['nama_pemain'=>$dataHasilKiper[$i]['nama_pemain'],'nama_klub'=>$dataHasilKiper[$i]['nama_klub'],'musim'=>$dataHasilKiper[$i]['musim'],'jumlah'=> number_format((float)$jumlahFinalKiper, 3, '.', '')]);
             $hasilFinishKiper = collect($hasilFinalKiper)->sortByDesc('jumlah');
         }

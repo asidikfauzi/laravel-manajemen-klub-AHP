@@ -78,7 +78,12 @@ td, th {
                    
                         <div class="mb-3">
                           <label for="recipient-name" class="col-form-label">To:</label>
-                          <input type="text" name="to" id="to" class="form-control">
+                          <select name="to" id="to" class="form-control @error('to') is-invalid @enderror">
+                            <option selected disabled>--Username--</option>
+                            @foreach ($users as $data)
+                            <option value="{{$data['username']}}">{{$data['username']}}</option>
+                            @endforeach
+                        </select>
                         </div>
                         <div class="mb-3">
                           <label for="message-text" class="col-form-label">Message:</label>
