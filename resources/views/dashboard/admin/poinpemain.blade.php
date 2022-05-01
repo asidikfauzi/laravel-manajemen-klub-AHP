@@ -69,15 +69,19 @@ tr:nth-child(even) {
             <tr>
                 <th>No.</th>
                 <th>Nama Pemain</th>
+                <th>Musim</th>
                 <th>Nama Klub</th>
                 <th>Jumlah Poin</th>
             </tr>
+            @foreach ($hasilFinishKiper as $dataKiper)
             <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>{{$loop->index +1}}</td>
+                <td>{{$dataKiper['nama_pemain']}}</td>
+                <td>{{$dataKiper['musim']}}</td>
+                <td>{{$dataKiper['nama_klub']}}</td>
+                <td>{{$dataKiper['jumlah']}}</td>
             </tr>
+            @endforeach
         </table>    
     </div>    
 </div>
