@@ -201,7 +201,7 @@ class AdminController extends Controller
                     ->where('pemain.posisi', 'kiper')
                     ->groupBy('pemain_id','pemain.nama_pemain', 'pemain.nama_klub', 'musim')->get()->toArray();
         
-        if(empty($dataHasil))
+        if(empty($dataHasil) && empty($dataHasilKiper))
         {
             return redirect('/admin/tambahpoin');
         }

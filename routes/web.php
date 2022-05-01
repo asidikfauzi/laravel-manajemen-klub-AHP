@@ -145,6 +145,7 @@ Route::get('struktur/klub/{id}', [HomeController::class, 'showStrukturKlub'])->n
 Route::get('pemain/{namaKlub}', [PemainController::class, 'dataPemain'])->name('pemain');
 Route::get('pemain/detailpemain/{id}', [PemainController::class, 'show'])->name('detailpemain');
 
+Route::get('pemain/rekomendasi/terbaik', [HomeController::class, 'showPoinPemain'])->name('pemain.rekomendasi.terbaik');
 
 Route::get('profile', function () {
     return view('dashboard.public.profile');

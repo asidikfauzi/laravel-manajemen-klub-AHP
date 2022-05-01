@@ -31,6 +31,18 @@
 </div>
 <br>
 <div class="row aos-init aos-animate" data-aos="fade-up">
+    <div class="col-lg-12 stretch-card grid-margin">
+        <div class="card">
+            <div class="card-body">
+                <center>
+                    <a href="{{route('pemain.rekomendasi.terbaik')}}" style="text-decoration: none"><b>Hasil Poin Pemain / Rekomendasi Pemain Terbaik</b></a>
+                </center>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+<div class="row aos-init aos-animate" data-aos="fade-up">
     <div class="col-lg-3 stretch-card grid-margin">
         <div class="card">
             <div class="card-body">
