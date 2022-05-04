@@ -13,6 +13,5 @@ class Pesan extends Model
     protected $guarded =[];
  
     protected $keyType = "string";
-    protected $primaryKey = null;
 
 }

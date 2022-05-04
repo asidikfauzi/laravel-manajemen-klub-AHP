@@ -55,9 +55,9 @@ tr:nth-child(even) {
         <td>{{$klub['nama_klub']}}</td>
         <td><button type="submit" onclick="window.location.href='{{route('resetPasswordKlub', $klub['id'])}}'" class="btn btn-primary"><i class="fas fa-sync"></i></button></td>
         <td><button type="submit" onclick="window.location.href='{{route('editKlub', $klub['id'])}}'" class="btn btn-primary"><i class="fas fa-cog"></i></button></td>
-        <td><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModalSave"><i class="fa fa-trash"></button></td>  
+        <td><a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#klub{{$klub['id']}}"><i class="fa fa-trash"></i><input type="text" name="id_klub" id="id_klub" value="{{$klub['id']}}" hidden></a></td>  
     </tr>
-    <div class="modal fade" id="exampleModalSave" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="klub{{$klub['id']}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
           <div class="modal-content">
           <div class="modal-header">
@@ -70,11 +70,7 @@ tr:nth-child(even) {
           </div>
           <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <form action="{{ route('deleteKlub', $klub['nama_klub']) }}" method="POST">
-                {{ method_field('DELETE') }}
-                {{ csrf_field() }}
-                <button type="submit" class="btn btn-danger">DELETE</i></button>
-              </form>
+              <a onclick="window.location.href='{{route('deleteKlub', $klub['id'])}}'" class="btn btn-danger">DELETE</i></a>
           </div>
           </div>
       </div>

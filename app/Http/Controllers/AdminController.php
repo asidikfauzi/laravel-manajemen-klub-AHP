@@ -1130,18 +1130,28 @@ class AdminController extends Controller
            
     }
 
-    public function deleteKlub($namaKlub)
+    public function deleteKlub($id)
     {
-        DB::transaction(function() use ($namaKlub){
-            $kontrak = Kontrak::join('klub', 'klub_id', '=', 'klub.id')->where('klub.nama_klub', $namaKlub)->delete();
-            $pemain = Pemain::join('users', 'users_username', 'username')->where('nama_klub', $namaKlub)->delete();
-            $klub = Klub::join('users', 'users_username', 'username')->where('nama_klub', $namaKlub)->delete();
-            $usersKlub = User::where('users.role_id', 'klub')->leftJoin('klub', function($join){
-                $join->on('username', '=', 'klub.users_username');
-            })->whereNull('klub.users_username')->delete();
-            $usersKlub = User::where('users.role_id', 'pemain')->leftJoin('pemain', function($join){
-                $join->on('username', '=', 'pemain.users_username');
-            })->whereNull('pemain.users_username')->delete();
+        $klubb = Klub::where('id', $id)->get();
+        $kontrak = Kontrak::join('klub', 'klub_id', '=', 'klub.id')->where('klub.id', $id);
+        $pemain = Pemain::join('users', 'users_username', 'username')->where('id', $id);
+        $klub = Klub::join('users', 'users_username', 'username')->where('id', $id);
+        $pesan = Pesan::where('dari_username', $klubb[0]->users_username)->orWhere('kepada_username', $klubb[0]->users_username);
+        $usersKlub = User::where('users.role_id', 'klub')->leftJoin('klub', function($join){
+            $join->on('username', '=', 'klub.users_username');
+        })->whereNull('klub.users_username');
+        $usersKlub = User::where('users.role_id', 'pemain')->leftJoin('pemain', function($join){
+            $join->on('username', '=', 'pemain.users_username');
+        })->whereNull('pemain.users_username');
+        
+        DB::transaction(function() use ($id, $kontrak, $pemain, $klub, $pesan, $usersKlub){
+            
+            $kontrak->delete();
+            $pesan->delete();
+            $pemain->delete();
+            $usersKlub->delete();
+            $usersKlub->delete();
+            $klub->delete();
             
         });
 
@@ -1166,7 +1176,6 @@ class AdminController extends Controller
             $pemain = Pemain::where('id', $id)->first();
             $users = User::where('username', $pemain->users_username)->first();
             $kontrak = Kontrak::where('pemain_id', $id)->first();
-            $pesan = Pesan::where('dari_username', $id)->orWhere('kepada_username', $id);
             $hasilPoin = HasilSubKriteria::where('pemain_id', $id);
             $pesan = Pesan::where('dari_username', $pemain->users_username)->orWhere('kepada_username', $pemain->users_username);
             $hasilPoin->delete();
