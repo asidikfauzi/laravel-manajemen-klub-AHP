@@ -98,11 +98,11 @@
             <div class="col-md-12">
                 <div id="grid" class="row">
                   @foreach ($data as $pemain)
-                  <div class="mix col-sm-4 margin30">
+                  <div class="mix col-sm-4 margin30 mb-4">
                     <div class="item-img-wrap">
                         <img src="{{asset('assets/img/pemain/'.$pemain['img'])}}" class="rounded mx-auto d-block" alt="image pemain" style="width: 300px; height: 300px;">
                         <div class="item-img-overlay">
-                            <a href="{{ route('detailpemain', $pemain['id'])}}" class="show-image">
+                            <a style="text-decoration: none" href="{{ route('detailpemain', $pemain['id'])}}" class="show-image">
                                 <center><h5><span>{{$pemain['nama_pemain']}}</span></h5></center>
                             </a>
                         </div>

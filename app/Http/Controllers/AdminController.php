@@ -1198,6 +1198,6 @@ class AdminController extends Controller
             $kontrak->delete();
         });
 
-        return back()->with('failed', 'Kontrak berhasil di delete');
+        return back()->with('success', 'Kontrak berhasil di delete');
     }
 }

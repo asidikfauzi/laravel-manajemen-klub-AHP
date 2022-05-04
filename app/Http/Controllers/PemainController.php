@@ -38,7 +38,9 @@ class PemainController extends Controller
     
     public function show($id)
     {
-        $data = Pemain::join('kontrak', 'pemain.id', '=', 'kontrak.pemain_id')->where('pemain.id', $id)->get()->toArray();
+        $data = Pemain::leftJoin('kontrak', function($join) {
+            $join->on('pemain.id', '=', 'kontrak.pemain_id');
+        })->where('pemain.id', $id)->get()->toArray();
         return view('dashboard.public.detailpemain', compact('data','id'));
     }
     public function editPemain(Request $request)
