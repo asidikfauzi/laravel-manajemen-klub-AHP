@@ -85,7 +85,7 @@ Route::group(['prefix'=>'admin', 'middleware'=>['isAdmin','auth']], function(){
     Route::post('tambahBerita', [AdminController::class, 'tambahBerita'])->name('tambahBerita');
     Route::get('editBerita/{id}', [AdminController::class, 'showEditBerita'])->name('editBerita');
     Route::post('editBerita/{id}', [AdminController::class, 'editBerita'])->name('editBerita'); 
-    Route::delete('berita/{id}', [AdminController::class, 'deleteBerita'])->name('deleteBerita');
+    Route::get('delete/berita/{id}', [AdminController::class, 'deleteBerita'])->name('deleteBerita');
 
 });
 

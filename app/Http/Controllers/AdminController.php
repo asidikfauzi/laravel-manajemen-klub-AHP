@@ -1166,7 +1166,7 @@ class AdminController extends Controller
     public function deleteBerita($id)
     {
         $berita = BeritaDanAktivitas::where('id', $id)->delete();
-        return back()->with('failed', 'Pemain berhasil di delete');
+        return back()->with('success', 'Pemain berhasil di delete');
     }
 
     public function deletePemain($id)
