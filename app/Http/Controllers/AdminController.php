@@ -1161,10 +1161,16 @@ class AdminController extends Controller
 
     public function deletePemain($id)
     {
+        
         DB::transaction(function() use ($id){
             $pemain = Pemain::where('id', $id)->first();
             $users = User::where('username', $pemain->users_username)->first();
-            $kontrak = Kontrak::where('pemain_id', $id)->first();           
+            $kontrak = Kontrak::where('pemain_id', $id)->first();
+            $pesan = Pesan::where('dari_username', $id)->orWhere('kepada_username', $id);
+            $hasilPoin = HasilSubKriteria::where('pemain_id', $id);
+            $pesan = Pesan::where('dari_username', $pemain->users_username)->orWhere('kepada_username', $pemain->users_username);
+            $hasilPoin->delete();
+            $pesan->delete();           
             $kontrak->delete();
             $pemain->delete();
             $users->delete();

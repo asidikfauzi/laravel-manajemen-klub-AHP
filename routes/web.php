@@ -66,7 +66,7 @@ Route::group(['prefix'=>'admin', 'middleware'=>['isAdmin','auth']], function(){
     Route::get('pemain/edit/{id}', [AdminController::class, 'showEditPemain'])->name('adminEditPemain');
     Route::post('pemain/edit/{id}', [AdminController::class, 'editPemain'])->name('adminEditPemain');
     Route::get('resetPasswordPemain/{id}', [AdminController::class, 'resetPasswordPemain'])->name('resetPasswordPemain');
-    Route::delete('pemain/{id}', [AdminController::class, 'deletePemain'])->name('deletePemain');
+    Route::get('delete/pemain/{id}', [AdminController::class, 'deletePemain'])->name('deletePemain');
 
     //kontrak
     Route::get('kontrak', [AdminController::class, 'showKontrak'])->name('showKontrak');
