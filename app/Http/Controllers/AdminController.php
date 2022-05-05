@@ -169,7 +169,7 @@ class AdminController extends Controller
         $data = StrukturKlub::where('klub_id', $id)->get()->toArray();
         if(empty($data))
         {
-            return back()->with('failed', 'Struktur data dari klub ini masih belum ada, silahkan tambahkan terlebih dahulu');
+            return redirect('/admin/struktur/klub/add/'.$id);
         }
         return view('dashboard.admin.strukturKlub', compact('data'));
     }
