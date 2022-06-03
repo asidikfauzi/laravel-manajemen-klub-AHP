@@ -27,7 +27,7 @@
                             <label for="oldPassword" class="col-md-4 col-form-label text-md-right">{{ __('Old Password') }}</label>
 
                             <div class="col-md-6">
-                                <input id="oldPassword" type="password" class="form-control @error('oldPassword') is-invalid @enderror" name="oldPassword" value="{{ old('oldPassword') }}" required autocomplete="oldPassword" autofocus>
+                                <input id="oldPassword" type="password" class="form-control @error('oldPassword') is-invalid @enderror" name="oldPassword" value="{{ old('oldPassword') }}"  autofocus>
 
                                
                             </div>
@@ -37,7 +37,7 @@
                             <label for="newPassword" class="col-md-4 col-form-label text-md-right">{{ __('New Password') }}</label>
 
                             <div class="col-md-6">
-                                <input id="newPassword" type="password" class="form-control @error('newPassword') is-invalid @enderror" name="newPassword" required autocomplete="newPassword">
+                                <input id="newPassword" type="password" class="form-control @error('newPassword') is-invalid @enderror" name="newPassword" >
 
                                
                             </div>
@@ -47,7 +47,7 @@
                             <label for="reNewPassword" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
 
                             <div class="col-md-6">
-                                <input id="reNewPassword" type="password" class="form-control" name="reNewPassword" required autocomplete="reNewPassword">
+                                <input id="reNewPassword" type="password" class="form-control" name="reNewPassword" >
                             </div>
                         </div><br>
 

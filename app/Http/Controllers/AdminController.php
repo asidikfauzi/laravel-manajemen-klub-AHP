@@ -938,7 +938,6 @@ class AdminController extends Controller
             }
             $kontrak->awal_kontrak = $awalKontrak;
             $kontrak->akhir_kontrak = $akhirKontrak;
-            $kontrak->klub_id = $dataKlub[0]['id'];
             $kontrak->pemain_id = $id;
             $kontrak->gaji = $gaji;
             if($request->hasFile('foto_kontrak'))   
@@ -1028,6 +1027,19 @@ class AdminController extends Controller
         $oldPassword = $request->input('oldPassword');
         $newPassword = $request->input('newPassword');
         $reNewPassword = $request->input('reNewPassword');
+
+        if(empty($oldPassword))
+        {
+            return back()->with('failed', 'Old Password Harus Di Isi');
+        }
+        if(empty($newPassword))
+        {
+            return back()->with('failed', 'New Password Harus Di Isi');
+        }
+        if(empty($reNewPassword))
+        {
+            return back()->with('failed', 'Confirm-Password Harus Di Isi');
+        }
 
         if($newPassword !== $reNewPassword)
         {
@@ -1166,7 +1178,7 @@ class AdminController extends Controller
     public function deleteBerita($id)
     {
         $berita = BeritaDanAktivitas::where('id', $id)->delete();
-        return back()->with('success', 'Pemain berhasil di delete');
+        return back()->with('success', 'Berita dan aktivitas berhasil di delete');
     }
 
     public function deletePemain($id)
@@ -1175,7 +1187,9 @@ class AdminController extends Controller
         DB::transaction(function() use ($id){
             $pemain = Pemain::where('id', $id)->first();
             $users = User::where('username', $pemain->users_username)->first();
-            $kontrak = Kontrak::where('pemain_id', $id)->first();
+            $kontrak = Kontrak::where('pemain_id', $id)->leftjoin('pemain', function($join){
+                $join->on('pemain.id','=','kontrak.pemain_id');
+            })->whereNull('pemain.id');
             $hasilPoin = HasilSubKriteria::where('pemain_id', $id);
             $pesan = Pesan::where('dari_username', $pemain->users_username)->orWhere('kepada_username', $pemain->users_username);
             $hasilPoin->delete();
