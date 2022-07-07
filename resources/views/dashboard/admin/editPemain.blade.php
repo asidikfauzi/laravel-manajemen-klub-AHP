@@ -21,6 +21,9 @@
     .about_lav{
         background: #FFF0F5;
     }
+    th,td {
+        border: 1px solid black;
+    }
     .about_yea{
         background: #FFF8DC;
     }
@@ -135,15 +138,6 @@
                             <input id="image" type="file" class="form-control mb-4" name="image" value="{{old('image')}}">
                         </div>
                     </div>
-                    <img src="{{asset('assets/img/kontrak/'.$pemain['foto_kontrak'])}}" alt="" style="width:100%;  float:left; height: 100%;  float:left; border: 5px solid black;object-fit: cover;"><br>
-                    <div class="form-group-row">
-                        <div class="col-md-12">
-                            <center>
-                                <h4>EDIT IMAGE KONTRAK</h4>
-                            </center>
-                            <input id="foto_kontrak" type="file" class="form-control" name="foto_kontrak" value="{{old('foto_kontrak')}}">
-                        </div>
-                    </div>
                 </div>
 
                 <div class="col-sm-8" >
@@ -179,20 +173,16 @@
                     </p>
                     <b>Status : </b>
                     <p>
-                        <select name="status" id="status" class="form-control @error('status') is-invalid @enderror">
-                            <option value="{{$pemain['status']}}">{{$pemain['status']}}</option>
-                            <option value="-">-</option>
-                            <option value="aktif">Aktif</option>
-                            <option value="nonaktif">Nonaktif</option>
-                        </select>
+                        <input type="status" name="status" class="form-control @error('berat') is-invalid @enderror" value="{{$pemain['status']}}" readonly>
                     </p>
                     <b>Klub : </b>
                     <p>
+                        
                         <select name="klub" id="klub" class="form-control @error('klub') is-invalid @enderror">
-                            <option value="{{$pemain['id']}}">{{$pemain['nama_klub']}}</option>
+                            <option value="{{$pemain['nama_klub']}}">{{$pemain['nama_klub']}}</option>
                             <option value=""></option>
                             @foreach ($dataKlub as $data)
-                            <option value="{{$data['id']}}">{{$data['nama_klub']}}</option>
+                            <option value="{{$data['nama_klub']}}">{{$data['nama_klub']}}</option>
                             @endforeach
                         </select>
                     </p>
@@ -203,14 +193,53 @@
                             <option value="kiper">Kiper</option>
                         </select>
                     </p>
-                    <b>Gaji : </b>
-                    <p>
-                        <input type="number" name="gaji" class="form-control @error('gaji') is-invalid @enderror" value="{{$pemain['gaji']}}">
-                    </p>
+                    
                     <b>Kontrak : </b>
                     <p>
-                        Awal Kontrak <input id="awal_kontrak" type="date" class="col-sm-6 form-control @error('awal_kontrak') is-invalid @enderror" name="awal_kontrak" value="{{ $pemain['awal_kontrak']}}" required autocomplete="awal_kontrak">
-                        Akhir Kontrak <input id="akhir_kontrak" type="date" class="col-sm-6 form-control @error('akhir_kontrak') is-invalid @enderror" name="akhir_kontrak" value="{{ $pemain['akhir_kontrak']}}" required autocomplete="akhir_kontrak">
+                        <table style="width: 100%; border:1px solid black; padding: 10px;">
+                            <tr>
+                                <th>Nama Klub</th>
+                                <th>Gaji</th>
+                                <th>Awal Kontrak</th>
+                                <th>Akhir Kontrak</th>
+                                <th>Link Foto Kontrak</th>
+                                <th>Status</th>
+                            </tr>
+                            @foreach ($nonaktif as $non)
+                            <tr>
+                                <td>{{$non['nama_klub']}}</td>
+                                <td>{{$non['gaji']}}</td>
+                                <td>{{$non['awal_kontrak']}}</td>
+                                <td>{{$non['akhir_kontrak']}}</td>
+                                <td><a href="{{asset('assets/img/kontrak/'. $non['foto_kontrak'])}}" target="blank">{{$non['foto_kontrak']}}</a> </td>
+                                <td>{{$non['status']}}</td>
+                            </tr>
+                            @endforeach
+                        
+                        </table>
+                    </p>
+                    <b>BUAT KONTRAK BARU</b>
+                    <p>
+                        Awal Kontrak <input id="awal_kontrak" type="date" class="col-sm-6 form-control @error('awal_kontrak') is-invalid @enderror" name="awal_kontrak"  >
+                        Akhir Kontrak <input id="akhir_kontrak" type="date" class="col-sm-6 form-control @error('akhir_kontrak') is-invalid @enderror" name="akhir_kontrak"  >
+                    </p>
+                    <b>Gaji : </b>
+                    <p>
+                        <input type="number" name="gaji" class="form-control @error('gaji') is-invalid @enderror" >
+                    </p>
+                    <b>Klub : </b>
+                    <p>
+                        
+                        <select name="klub_id" id="klub" class="form-control @error('klub') is-invalid @enderror">
+                            <option value=""></option>
+                            @foreach ($dataKlub as $data)
+                            <option value="{{$data['id']}}">{{$data['nama_klub']}}</option>
+                            @endforeach
+                        </select>
+                    </p>
+                    <b>Upload Kontrak :</b>
+                    <p>
+                        <input id="foto_kontrak" type="file" class="form-control" name="foto_kontrak">
                     </p>
                     
                     
