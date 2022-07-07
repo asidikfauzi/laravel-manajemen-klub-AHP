@@ -76,7 +76,7 @@ class AdminController extends Controller
 
     public function showPemain()
     {
-        $data = Pemain::select('*')->orderBy('created_at', 'DESC')->get()->toArray();
+        $data = Pemain::select('*')->where('status', 'aktif')->orderBy('created_at', 'DESC')->get()->toArray();
         if(empty($data))
         {
             return redirect('/admin/registerPemain');
