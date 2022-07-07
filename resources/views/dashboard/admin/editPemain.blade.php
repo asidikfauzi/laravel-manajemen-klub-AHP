@@ -189,10 +189,10 @@
                     <b>Klub : </b>
                     <p>
                         <select name="klub" id="klub" class="form-control @error('klub') is-invalid @enderror">
-                            <option value="{{$pemain['id']}}">{{$pemain['nama_klub']}}</option>
+                            <option value="{{$pemain['nama_klub']}}">{{$pemain['nama_klub']}}</option>
                             <option value=""></option>
                             @foreach ($dataKlub as $data)
-                            <option value="{{$data['id']}}">{{$data['nama_klub']}}</option>
+                            <option value="{{$data['nama_klub']}}">{{$data['nama_klub']}}</option>
                             @endforeach
                         </select>
                     </p>

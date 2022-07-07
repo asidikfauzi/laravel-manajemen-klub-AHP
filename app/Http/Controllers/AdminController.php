@@ -148,6 +148,7 @@ class AdminController extends Controller
     {
         $kontrak = Kontrak::join('pemain', 'pemain.id', '=', 'kontrak.pemain_id')
                         ->join('klub', 'klub.id', '=', 'kontrak.klub_id')
+                        ->where('kontrak.status', 'aktif')
                         ->get()->toArray();
         if(empty($kontrak))
         {
@@ -1186,17 +1187,11 @@ class AdminController extends Controller
         
         DB::transaction(function() use ($id){
             $pemain = Pemain::where('id', $id)->first();
-            $users = User::where('username', $pemain->users_username)->first();
-            $kontrak = Kontrak::where('pemain_id', $id)->leftjoin('pemain', function($join){
-                $join->on('pemain.id','=','kontrak.pemain_id');
-            })->whereNull('pemain.id');
-            $hasilPoin = HasilSubKriteria::where('pemain_id', $id);
-            $pesan = Pesan::where('dari_username', $pemain->users_username)->orWhere('kepada_username', $pemain->users_username);
-            $hasilPoin->delete();
-            $pesan->delete();           
-            $kontrak->delete();
-            $pemain->delete();
-            $users->delete();
+            $kontrak = Kontrak::where('pemain_id', $id)->where('status', 'aktif')->first();
+            $pemain->status = 'nonaktif';
+            $kontrak->status = 'nonaktif';
+            $kontrak->save();
+            $pemain->save();
         });
 
         return back()->with('failed', 'Pemain berhasil di delete');
