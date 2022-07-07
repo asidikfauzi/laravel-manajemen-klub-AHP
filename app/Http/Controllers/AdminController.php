@@ -60,7 +60,7 @@ class AdminController extends Controller
 
     public function showKlub()
     {
-        $data = Klub::join('users', 'username', '=', 'users_username')->get()->toArray();
+        $data = Klub::join('users', 'username', '=', 'users_username')->where('klub.status', 'aktif')->get()->toArray();
         if(empty($data))
         {
             return redirect('/admin/registerKlub');
