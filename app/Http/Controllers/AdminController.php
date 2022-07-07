@@ -76,7 +76,7 @@ class AdminController extends Controller
 
     public function showPemain()
     {
-        $data = Pemain::select('*')->where('status', 'aktif')->orderBy('created_at', 'DESC')->get()->toArray();
+        $data = Pemain::select('*')->orderBy('created_at', 'DESC')->get()->toArray();
         if(empty($data))
         {
             return redirect('/admin/registerPemain');
@@ -177,7 +177,7 @@ class AdminController extends Controller
 
     public function showEditPemain($id)
     {
-        $data = Pemain::join('kontrak', 'pemain.id', 'pemain_id')->where('pemain.id', $id)->get()->toArray();
+        $data = Pemain::join('kontrak', 'pemain.id', 'pemain_id')->where('kontrak.status', 'aktif')->where('pemain.id', $id)->get()->toArray();
         if(empty($data))
         {
             $data = Pemain::where('id', $id)->get()->toArray();
@@ -186,8 +186,22 @@ class AdminController extends Controller
             $data[0]['akhir_kontrak'] = '-';
             $data[0]['foto_kontrak'] = '-';
         }   
+        $nonaktif = Kontrak::select('klub.nama_klub', 'kontrak.gaji', 'kontrak.awal_kontrak', 'kontrak.akhir_kontrak', 'kontrak.foto_kontrak', 'kontrak.status')
+                            ->where('kontrak.pemain_id', $id)
+                            ->join('klub', 'kontrak.klub_id', '=', 'klub.id')
+                            ->get()->toArray();
+        
+        if(empty($nonaktif))
+        {
+            $nonaktif[0]['nama_klub'];
+            $nonaktif[0]['gaji'] = '-';
+            $nonaktif[0]['awal_kontrak'] = '-';
+            $nonaktif[0]['akhir_kontrak'] = '-';
+            $nonaktif[0]['foto_kontrak'] = '-';
+            $nonaktif[0]['status'];
+        } 
         $dataKlub = Klub::get()->toArray();
-        return view('dashboard.admin.editPemain', compact('data', 'dataKlub'));
+        return view('dashboard.admin.editPemain', compact('data', 'dataKlub', 'nonaktif'));
     }
 
     public function showPoinPemain()
@@ -896,6 +910,7 @@ class AdminController extends Controller
         $berat = $request->input('berat'); 
         $status = $request->input('status');
         $klub = $request->input('klub');
+        $klub_id = $request->input('klub_id');
         $posisi = $request->input('posisi');   
         $image = $request->file('image');
 
@@ -909,12 +924,12 @@ class AdminController extends Controller
         {
             return back()->with('failed', 'pemain tidak ditemukan');
         }
-        
-        $kontrak = Kontrak::where('pemain_id', $id)->first();
+
+        $kontrakUpdate = Kontrak::where('pemain_id', $id)->where('status', 'aktif')->first();
 
         $dataKlub = Klub::where('nama_klub', $klub)->get()->toArray();
 
-        DB::transaction(function() use ($dataKlub, $request, $data, $kontrak, $nama, $tempat, $tglLahir, $alamat, $notelp, $tinggi, $berat, $status, $klub, $posisi, $image, $id, $awalKontrak, $akhirKontrak, $gaji, $fotoKontrak){
+        DB::transaction(function() use ($klub_id, $kontrakUpdate, $dataKlub, $request, $data, $nama, $tempat, $tglLahir, $alamat, $notelp, $tinggi, $berat, $status, $klub, $posisi, $image, $id, $awalKontrak, $akhirKontrak, $gaji, $fotoKontrak){
             
             $data->nama_pemain = $nama;
             $data->tempat = $tempat;
@@ -933,20 +948,31 @@ class AdminController extends Controller
             }
             $data->save();
 
-            if(empty($kontrak))
+            if($kontrakUpdate)
             {
+                $kontrakUpdate->status = 'nonaktif';
+                $kontrakUpdate->save();
+            }
+            
+            if(!empty($gaji) && !empty($awalKontrak) && !empty($akhirKontrak) && !empty($fotoKontrak)){
                 $kontrak = new Kontrak();
+                $kontrak->awal_kontrak = $awalKontrak;
+                $kontrak->akhir_kontrak = $akhirKontrak;
+                $kontrak->pemain_id = $id;
+                $kontrak->klub_id = $klub_id;
+                $kontrak->gaji = $gaji;
+                $kontrak->status = 'aktif';
+                if($request->hasFile('foto_kontrak'))   
+                {
+                    $uploadImageKontrak = Storage::uploadImageKontrak($fotoKontrak);
+                    $kontrak->foto_kontrak = $uploadImageKontrak;
+                }
+                
+                $kontrak->save();
+                
             }
-            $kontrak->awal_kontrak = $awalKontrak;
-            $kontrak->akhir_kontrak = $akhirKontrak;
-            $kontrak->pemain_id = $id;
-            $kontrak->gaji = $gaji;
-            if($request->hasFile('foto_kontrak'))   
-            {
-                $uploadImageKontrak = Storage::uploadImageKontrak($fotoKontrak);
-                $kontrak->foto_kontrak = $uploadImageKontrak;
-            }
-            $kontrak->save();
+            
+            
         });
 
         return back()->with('success', 'Data succesfully update!');
