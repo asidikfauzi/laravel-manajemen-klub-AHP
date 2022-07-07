@@ -1208,8 +1208,9 @@ class AdminController extends Controller
             $pemain = Pemain::where('id', $id)->first();
             $kontrak = Kontrak::where('pemain_id', $id)->first();  
             $pemain->status = 'nonaktif';
+            $kontrak->status = 'nonaktif';
             $pemain->save();         
-            $kontrak->delete();
+            $kontrak->save();
         });
 
         return back()->with('success', 'Kontrak berhasil di delete');
