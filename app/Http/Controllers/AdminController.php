@@ -206,10 +206,11 @@ class AdminController extends Controller
 
     public function showPoinPemain()
     {
-        $dataHasil = HasilSubKriteria::select('pemain_id', 'pemain.nama_pemain', 'pemain.nama_klub', 'musim')
+        $dataHasil = HasilSubKriteria::select('hasil_sub_kriteria.pemain_id', 'pemain.nama_pemain', 'pemain.nama_klub', 'hasil_sub_kriteria.musim')
                     ->join('pemain', 'pemain.id', '=', 'hasil_sub_kriteria.pemain_id')
                     ->where('pemain.posisi', 'pemain')
-                    ->groupBy('pemain_id','pemain.nama_pemain', 'pemain.nama_klub', 'musim')->get()->toArray();
+                    ->where('pemain.status', 'aktif')
+                    ->groupBy('hasil_sub_kriteria.pemain_id','pemain.nama_pemain', 'pemain.nama_klub', 'hasil_sub_kriteria.musim')->get()->toArray();
 
         $dataHasilKiper = HasilSubKriteria::select('pemain_id', 'pemain.nama_pemain', 'pemain.nama_klub', 'musim')
                     ->join('pemain', 'pemain.id', '=', 'hasil_sub_kriteria.pemain_id')
@@ -248,9 +249,10 @@ class AdminController extends Controller
 
 
         $hasilGoal = [];
+        // dd($dataHasil);
         for($i = 0; $i < count($dataHasil); $i++)
         {
-            array_push($hasilGoal, ['nama_pemain'=>$dataHasil[$i]['nama_pemain'],'nama_klub'=>$dataHasil[$i]['nama_klub'],'musim'=>$dataHasil[$i]['musim'],'jumlah'=> number_format((float)$dataGoal[$i]['jumlah_goal'], 3, '.', '')]);
+            array_push($hasilGoal, ['nama_pemain'=>$dataHasil[$i]['nama_pemain'],'nama_klub'=>$dataHasil[$i]['nama_klub'],'musim'=>$dataHasil[$i]['musim'],'jumlah'=> $dataGoal[$i]['jumlah_goal']]);
         }
         
 
