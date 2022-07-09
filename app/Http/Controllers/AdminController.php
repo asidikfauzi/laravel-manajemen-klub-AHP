@@ -8,6 +8,7 @@ use App\Models\BeritaDanAktivitas;
 use App\Models\HasilSubKriteria;
 use App\Models\Klub;
 use App\Models\Kontrak;
+use App\Models\Kriteria;
 use App\Models\Pemain;
 use App\Models\Pesan;
 use App\Models\StrukturKlub;
@@ -249,7 +250,6 @@ class AdminController extends Controller
 
 
         $hasilGoal = [];
-        // dd($dataHasil);
         for($i = 0; $i < count($dataHasil); $i++)
         {
             array_push($hasilGoal, ['nama_pemain'=>$dataHasil[$i]['nama_pemain'],'nama_klub'=>$dataHasil[$i]['nama_klub'],'musim'=>$dataHasil[$i]['musim'],'jumlah'=> $dataGoal[$i]['jumlah_goal']]);
@@ -267,7 +267,8 @@ class AdminController extends Controller
         for($i = 0; $i < count($dataHasil); $i++)
         {
             $jumlahKuning = $dataPelanggaranKuning[$i]['jumlah_pelanggaran_kuning'] + $dataProvokasiKuning[$i]['jumlah_provokasi_kuning'] + $dataMemukulKuning[$i]['jumlah_memukul_kuning'] + $dataSelebrasiKuning[$i]['jumlah_selebrasi_kuning'];
-            $pv = 0.049;
+            $bobot = Kriteria::where('id', 3)->get()->toArray();
+            $pv = $bobot[0]['bobot'];
             $hasilKalipv = $jumlahKuning * $pv;
             array_push($hasilKuning, ['nama_pemain'=>$dataHasil[$i]['nama_pemain'],'nama_klub'=>$dataHasil[$i]['nama_klub'],'musim'=>$dataHasil[$i]['musim'],'jumlah'=> number_format((float)$hasilKalipv, 3, '.', '')]);
         }
@@ -277,7 +278,8 @@ class AdminController extends Controller
         for($i = 0; $i < count($dataHasil); $i++)
         {
             $jumlahMerah = $dataPelanggaranMerah[$i]['jumlah_pelanggaran_merah'] + $dataProvokasiMerah[$i]['jumlah_provokasi_merah'] + $dataMemukulMerah[$i]['jumlah_memukul_merah'] + $dataSelebrasiMerah[$i]['jumlah_selebrasi_merah'];
-            $pv = 0.076;
+            $bobot = Kriteria::where('id', 4)->get()->toArray();
+            $pv = $bobot[0]['bobot'];
             $hasilKalipv = $jumlahMerah * $pv;
             array_push($hasilMerah, ['nama_pemain'=>$dataHasil[$i]['nama_pemain'],'nama_klub'=>$dataHasil[$i]['nama_klub'],'musim'=>$dataHasil[$i]['musim'],'jumlah'=> number_format((float)$hasilKalipv, 3, '.', '')]);
         }
@@ -287,7 +289,8 @@ class AdminController extends Controller
         for($i = 0; $i < count($dataHasil); $i++)
         {
             $jumlahAttitude = $dataWaktuPemain[$i]['jumlah_waktu_pemain'] + $dataRespectPemain[$i]['jumlah_respect_pemain'] + $dataMentalPemain[$i]['jumlah_mental_pemain'];
-            $pv = 0.119;
+            $bobot = Kriteria::where('id', 3)->get()->toArray();
+            $pv = $bobot[0]['bobot'];
             $hasilKalipv = $jumlahAttitude * $pv;
             array_push($hasilAttitude, ['nama_pemain'=>$dataHasil[$i]['nama_pemain'],'nama_klub'=>$dataHasil[$i]['nama_klub'],'musim'=>$dataHasil[$i]['musim'],'jumlah'=> number_format((float)$hasilKalipv, 3, '.', '')]);
         }
@@ -346,7 +349,8 @@ class AdminController extends Controller
         for($i = 0; $i < count($dataHasilKiper); $i++)
         {
             $jumlahKuningKiper = $dataPelanggaranKuningKiper[$i]['jumlah_pelanggaran_kuning'] + $dataProvokasiKuningKiper[$i]['jumlah_provokasi_kuning'] + $dataMemukulKuningKiper[$i]['jumlah_memukul_kuning'] + $dataSelebrasiKuningKiper[$i]['jumlah_selebrasi_kuning'];
-            $pv = 0.049;
+            $bobot = Kriteria::where('id', 8)->get()->toArray();
+            $pv = $bobot[0]['bobot'];
             $hasilKalipv = $jumlahKuningKiper * $pv;
             array_push($hasilKuningKiper, ['nama_pemain'=>$dataHasilKiper[$i]['nama_pemain'],'nama_klub'=>$dataHasilKiper[$i]['nama_klub'],'musim'=>$dataHasilKiper[$i]['musim'],'jumlah'=> number_format((float)$hasilKalipv, 3, '.', '')]);
         }
@@ -356,7 +360,8 @@ class AdminController extends Controller
         for($i = 0; $i < count($dataHasilKiper); $i++)
         {
             $jumlahMerahKiper = $dataPelanggaranMerahKiper[$i]['jumlah_pelanggaran_merah'] + $dataProvokasiMerahKiper[$i]['jumlah_provokasi_merah'] + $dataMemukulMerahKiper[$i]['jumlah_memukul_merah'] + $dataSelebrasiMerahKiper[$i]['jumlah_selebrasi_merah'];
-            $pv = 0.076;
+            $bobot = Kriteria::where('id', 9)->get()->toArray();
+            $pv = $bobot[0]['bobot'];
             $hasilKalipv = $jumlahMerahKiper * $pv;
             array_push($hasilMerahKiper, ['nama_pemain'=>$dataHasilKiper[$i]['nama_pemain'],'nama_klub'=>$dataHasilKiper[$i]['nama_klub'],'musim'=>$dataHasilKiper[$i]['musim'],'jumlah'=> number_format((float)$hasilKalipv, 3, '.', '')]);
         }
@@ -366,7 +371,8 @@ class AdminController extends Controller
         for($i = 0; $i < count($dataHasilKiper); $i++)
         {
             $jumlahAttitudeKiper = $dataWaktuPemainKiper[$i]['jumlah_waktu_pemain'] + $dataRespectPemainKiper[$i]['jumlah_respect_pemain'] + $dataMentalPemainKiper[$i]['jumlah_mental_pemain'];
-            $pv = 0.119;
+            $bobot = Kriteria::where('id', 10)->get()->toArray();
+            $pv = $bobot[0]['bobot'];
             $hasilKalipv = $jumlahAttitudeKiper * $pv;
             array_push($hasilAttitudeKiper, ['nama_pemain'=>$dataHasilKiper[$i]['nama_pemain'],'nama_klub'=>$dataHasilKiper[$i]['nama_klub'],'musim'=>$dataHasilKiper[$i]['musim'],'jumlah'=> number_format((float)$hasilKalipv, 3, '.', '')]);
         }
