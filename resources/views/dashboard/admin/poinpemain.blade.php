@@ -42,11 +42,11 @@ tr:nth-child(even) {
 <br><br>
 <div class="row aos-init aos-animate" data-aos="fade-up">
     <div class="col-xl-6 stretch-card-center grid-margin">
-        <button type="submit" onclick="window.location.href='{{route('tambahpoin')}}'" class="btn btn-primary" style="width: 18%; height: 20%;">Goal</button>
-        <button type="submit" onclick="window.location.href='{{route('tambahpoin')}}'" class="btn btn-primary" style="width: 18%; height: 20%;" >Assist</button>
-        <button type="submit" onclick="window.location.href='{{route('tambahpoin')}}'" class="btn btn-primary" style="width: 18%; height: 20%;">Kartu Kuning</button>
-        <button type="submit" onclick="window.location.href='{{route('tambahpoin')}}'" class="btn btn-primary" style="width: 18%; height: 20%;">Kartu Merah</button>
-        <button type="submit" onclick="window.location.href='{{route('tambahpoin')}}'" class="btn btn-primary" style="width: 18%; height: 20%;">Attitude</button>
+        <button type="submit" onclick="window.location.href='{{route('goal')}}'" class="btn btn-primary" style="width: 18%; height: 20%;">Goal</button>
+        <button type="submit" onclick="window.location.href='{{route('assist')}}'" class="btn btn-primary" style="width: 18%; height: 20%;" >Assist</button>
+        <button type="submit" onclick="window.location.href='{{route('kuning')}}'" class="btn btn-primary" style="width: 18%; height: 20%;">Kartu Kuning</button>
+        <button type="submit" onclick="window.location.href='{{route('merah')}}'" class="btn btn-primary" style="width: 18%; height: 20%;">Kartu Merah</button>
+        <button type="submit" onclick="window.location.href='{{route('attitude')}}'" class="btn btn-primary" style="width: 18%; height: 20%;">Attitude</button>
         <h5 class="mt-3">PEMAIN</h5>
         <table>
             <tr>
@@ -69,11 +69,11 @@ tr:nth-child(even) {
         </table>
     </div>
     <div class="col-xl-6 stretch-card-center grid-margin">
-        <button type="submit" onclick="window.location.href='{{route('tambahpoin')}}'" class="btn btn-primary" style="width: 18%; height: 20%;">Kebobolan</button>
-        <button type="submit" onclick="window.location.href='{{route('tambahpoin')}}'" class="btn btn-primary" style="width: 20%; height: 20%;">Penyelamatan</button>
-        <button type="submit" onclick="window.location.href='{{route('tambahpoin')}}'" class="btn btn-primary" style="width: 18%; height: 20%;">Kartu Kuning</button>
-        <button type="submit" onclick="window.location.href='{{route('tambahpoin')}}'" class="btn btn-primary" style="width: 18%; height: 20%;">Kartu Merah</button>
-        <button type="submit" onclick="window.location.href='{{route('tambahpoin')}}'" class="btn btn-primary" style="width: 18%; height: 20%;">Attitude</button>
+        <button type="submit" onclick="window.location.href='{{route('kebobolan')}}'" class="btn btn-primary" style="width: 18%; height: 20%;">Kebobolan</button>
+        <button type="submit" onclick="window.location.href='{{route('penyelamatan')}}'" class="btn btn-primary" style="width: 20%; height: 20%;">Penyelamatan</button>
+        <button type="submit" onclick="window.location.href='{{route('kuningKiper')}}'" class="btn btn-primary" style="width: 18%; height: 20%;">Kartu Kuning</button>
+        <button type="submit" onclick="window.location.href='{{route('merahKiper')}}'" class="btn btn-primary" style="width: 18%; height: 20%;">Kartu Merah</button>
+        <button type="submit" onclick="window.location.href='{{route('attitudeKiper')}}'" class="btn btn-primary" style="width: 18%; height: 20%;">Attitude</button>
         <h5 class="mt-3" >KIPER</h5>
         <table>
             <tr>

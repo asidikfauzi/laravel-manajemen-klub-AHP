@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PemainController;
 use App\Http\Controllers\KlubController;
+use App\Http\Controllers\RekomendasiController;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
@@ -90,6 +91,21 @@ Route::group(['prefix'=>'admin', 'middleware'=>['isAdmin','auth']], function(){
     //kriteria dan sub kriteria
     Route::get('kriteria-dan-subkriteria', [AdminController::class, 'showKriteriaSubKriteria'])->name('kriteriasubkriteria');
     Route::post('kriteria-dan-subkriteria', [AdminController::class, 'editKriteriaSubKriteria'])->name('kriteriasubkriteria');
+
+
+    //REkomendasi
+    Route::get('goal', [RekomendasiController::class, 'goal'])->name('goal');
+    Route::get('assist', [RekomendasiController::class, 'assist'])->name('assist');
+    Route::get('kuning', [RekomendasiController::class, 'kuning'])->name('kuning');
+    Route::get('merah', [RekomendasiController::class, 'merah'])->name('merah');
+    Route::get('attitude', [RekomendasiController::class, 'attitude'])->name('attitude');
+
+    Route::get('kebobolan', [RekomendasiController::class, 'kebobolan'])->name('kebobolan');
+    Route::get('penyelamatan', [RekomendasiController::class, 'penyelamatan'])->name('penyelamatan');
+    Route::get('kuningKiper', [RekomendasiController::class, 'kuningKiper'])->name('kuningKiper');
+    Route::get('merahKiper', [RekomendasiController::class, 'merahKiper'])->name('merahKiper');
+    Route::get('attitudeKiper', [RekomendasiController::class, 'attitudeKiper'])->name('attitudeKiper');
+
 });
 
 Route::group(['prefix'=>'pemain', 'middleware'=>['isPemain','auth']], function(){
