@@ -87,6 +87,9 @@ Route::group(['prefix'=>'admin', 'middleware'=>['isAdmin','auth']], function(){
     Route::post('editBerita/{id}', [AdminController::class, 'editBerita'])->name('editBerita'); 
     Route::get('delete/berita/{id}', [AdminController::class, 'deleteBerita'])->name('deleteBerita');
 
+    //kriteria dan sub kriteria
+    Route::get('kriteria-dan-subkriteria', [AdminController::class, 'showKriteriaSubKriteria'])->name('kriteriasubkriteria');
+    Route::post('kriteria-dan-subkriteria', [AdminController::class, 'editKriteriaSubKriteria'])->name('kriteriasubkriteria');
 });
 
 Route::group(['prefix'=>'pemain', 'middleware'=>['isPemain','auth']], function(){

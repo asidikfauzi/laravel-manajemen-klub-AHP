@@ -1244,4 +1244,208 @@ class AdminController extends Controller
 
         return back()->with('success', 'Kontrak berhasil di delete');
     }
+
+
+    public function showKriteriaSubKriteria()
+    {
+        $goal = Kriteria::where('id', 1)->get()->toArray();
+        $assist = Kriteria::where('id', 2)->get()->toArray();
+        $kuning = Kriteria::where('id', 3)->get()->toArray();
+        $merah = Kriteria::where('id', 4)->get()->toArray();
+        $attitude = Kriteria::where('id', 5)->get()->toArray();
+        $kebobolan = Kriteria::where('id', 6)->get()->toArray();
+        $penyelamatan = Kriteria::where('id', 7)->get()->toArray();
+        $kuningKiper = Kriteria::where('id', 8)->get()->toArray();
+        $merahKiper = Kriteria::where('id', 9)->get()->toArray();
+        $attitudeKiper = Kriteria::where('id', 10)->get()->toArray();
+        
+        $pelanggaranKuning = SubKriteria::where('id', 1)->get()->toArray();
+        $provokasiKuning = SubKriteria::where('id', 2)->get()->toArray();
+        $memukulKuning = SubKriteria::where('id', 3)->get()->toArray();
+        $selebrasiKuning = SubKriteria::where('id', 4)->get()->toArray();
+        $pelanggaranMerah = SubKriteria::where('id', 5)->get()->toArray();
+        $provokasiMerah = SubKriteria::where('id', 6)->get()->toArray();
+        $memukulMerah = SubKriteria::where('id', 7)->get()->toArray();
+        $selebrasiMerah = SubKriteria::where('id', 8)->get()->toArray();
+        $waktu = SubKriteria::where('id', 17)->get()->toArray();
+        $respect = SubKriteria::where('id', 18)->get()->toArray();
+        $mental = SubKriteria::where('id', 19)->get()->toArray();
+        $pelanggaranKuningKiper = SubKriteria::where('id', 9)->get()->toArray();
+        $provokasiKuningKiper = SubKriteria::where('id', 10)->get()->toArray();
+        $memukulKuningKiper = SubKriteria::where('id', 11)->get()->toArray();
+        $selebrasiKuningKiper = SubKriteria::where('id', 12)->get()->toArray();
+        $pelanggaranMerahKiper = SubKriteria::where('id', 13)->get()->toArray();
+        $provokasiMerahKiper = SubKriteria::where('id', 14)->get()->toArray();
+        $memukulMerahKiper = SubKriteria::where('id', 15)->get()->toArray();
+        $selebrasiMerahKiper = SubKriteria::where('id', 16)->get()->toArray();
+        $waktuKiper = SubKriteria::where('id', 20)->get()->toArray();
+        $respectKiper = SubKriteria::where('id', 21)->get()->toArray();
+        $mentalKiper = SubKriteria::where('id', 22)->get()->toArray();
+
+        return view('dashboard.admin.kriteriasubkriteria', compact('goal','assist','kuning','merah','attitude','kebobolan','penyelamatan','kuningKiper',
+        'merahKiper','attitudeKiper','pelanggaranKuning','provokasiKuning','memukulKuning','selebrasiKuning','pelanggaranMerah','provokasiMerah','memukulMerah','selebrasiMerah','waktu','respect','mental','pelanggaranKuningKiper','provokasiKuningKiper','memukulKuningKiper','selebrasiKuningKiper',
+        'pelanggaranMerahKiper','provokasiMerahKiper','memukulMerahKiper','selebrasiMerahKiper','waktuKiper','respectKiper','mentalKiper'));
+    }
+
+    public function editKriteriaSubKriteria(Request $request)
+    {
+
+        $igoal = $request->input('goal');
+        $iassist = $request->input('assist');
+        $ikuning = $request->input('kuning');
+        $ipelanggaranKuning = $request->input('pelanggaranKuning');
+        $iprovokasiKuning = $request->input('provokasiKuning');
+        $imemukulKuning = $request->input('memukulKuning');
+        $iselebrasiKuning = $request->input('selebrasiKuning');
+        $imerah = $request->input('merah');
+        $ipelanggaranMerah = $request->input('pelanggaranMerah');
+        $iprovokasiMerah = $request->input('provokasiMerah');
+        $imemukulMerah = $request->input('memukulMerah');
+        $iselebrasiMerah = $request->input('selebrasiMerah');
+        $iattitude = $request->input('attitude');
+        $iwaktu = $request->input('waktu');
+        $irespect = $request->input('respect');
+        $imental = $request->input('mental');
+        $ikebobolan = $request->input('kebobolan');
+        $ipenyelamatan = $request->input('penyelamatan');
+        $ikuningKiper = $request->input('kuningKiper');
+        $ipelanggaranKuningKiper = $request->input('pelanggaranKuningKiper');
+        $iprovokasiKuningKiper = $request->input('provokasiKuningKiper');
+        $imemukulKuningKiper = $request->input('memukulKuningKiper');
+        $iselebrasiKuningKiper = $request->input('selebrasiKuningKiper');
+        $imerahKiper = $request->input('merahKiper');
+        $ipelanggaranMerahKiper = $request->input('pelanggaranMerahKiper');
+        $iprovokasiMerahKiper = $request->input('provokasiMerahKiper');
+        $imemukulMerahKiper = $request->input('memukulMerahKiper');
+        $iselebrasiMerahKiper = $request->input('selebrasiMerahKiper');
+        $iattitudeKiper = $request->input('attitudeKiper');
+        $iwaktuKiper = $request->input('waktuKiper');
+        $irespectKiper = $request->input('respectKiper');
+        $imentalKiper = $request->input('mentalKiper');
+
+        
+
+        $result = DB::transaction(function() use($igoal, $iassist, $ikuning, $imerah, $ipelanggaranKuning, $iprovokasiKuning,
+                                                    $imemukulKuning, $iselebrasiKuning, $ipelanggaranMerah, $iprovokasiMerah, 
+                                                    $imemukulMerah, $iselebrasiMerah, $iattitude, $iwaktu, $irespect, $imental,
+                                                    $ipelanggaranMerahKiper, $iprovokasiMerahKiper, $imemukulMerahKiper, $iselebrasiMerahKiper,
+                                                    $ipelanggaranKuningKiper, $iprovokasiKuningKiper, $imemukulKuningKiper, $iselebrasiKuningKiper,
+                                                    $iattitudeKiper, $iwaktuKiper, $irespectKiper, $imentalKiper, $ikebobolan, $ipenyelamatan, 
+                                                    $ikuningKiper, $imerahKiper) {
+            $goal = Kriteria::where('id', 1)->first();
+            
+            $goal->bobot = $igoal;
+            $goal->save();
+            $assist = Kriteria::where('id', 2)->first();
+            $assist->bobot = $iassist;
+            $assist->save();
+            $kuning = Kriteria::where('id', 3)->first();
+            $kuning->bobot = $ikuning;
+            $kuning->save();
+            $merah = Kriteria::where('id', 4)->first();
+            $merah->bobot = $imerah;
+            $merah->save();
+            $attitude = Kriteria::where('id', 5)->first();
+            $attitude->bobot = $iattitude;
+            $attitude->save();
+            $kebobolan = Kriteria::where('id', 6)->first();
+            $kebobolan->bobot = $ikebobolan;
+            $kebobolan->save();
+            $penyelamatan = Kriteria::where('id', 7)->first();
+            $penyelamatan->bobot = $ipenyelamatan;
+            $penyelamatan->save();
+            $kuningKiper = Kriteria::where('id', 8)->first();
+            $kuningKiper->bobot = $ikuningKiper;
+            $kuningKiper->save();
+            $merahKiper = Kriteria::where('id', 9)->first();
+            $merahKiper->bobot = $imerahKiper;
+            $merahKiper->save();
+            $attitudeKiper = Kriteria::where('id', 10)->first();
+            $attitudeKiper->bobot = $iattitudeKiper;
+            $attitudeKiper->save();
+            
+            $pelanggaranKuning = SubKriteria::where('id', 1)->first();
+            $pelanggaranKuning->bobot = $ipelanggaranKuning;
+            $pelanggaranKuning->save();
+            $provokasiKuning = SubKriteria::where('id', 2)->first();
+            $provokasiKuning->bobot = $iprovokasiKuning;
+            $provokasiKuning->save();
+            $memukulKuning = SubKriteria::where('id', 3)->first();
+            $memukulKuning->bobot = $imemukulKuning;
+            $memukulKuning->save();
+            $selebrasiKuning = SubKriteria::where('id', 4)->first();
+            $selebrasiKuning->bobot = $iselebrasiKuning;
+            $selebrasiKuning->save();
+            $pelanggaranMerah = SubKriteria::where('id', 5)->first();
+            $pelanggaranMerah->bobot = $ipelanggaranMerah;
+            $pelanggaranMerah->save();
+            $provokasiMerah = SubKriteria::where('id', 6)->first();
+            $provokasiMerah->bobot = $iprovokasiMerah;
+            $provokasiMerah->save();
+            $memukulMerah = SubKriteria::where('id', 7)->first();
+            $memukulMerah->bobot = $imemukulMerah;
+            $memukulMerah->save();
+            $selebrasiMerah = SubKriteria::where('id', 8)->first();
+            $selebrasiMerah->bobot = $iselebrasiMerah;
+            $selebrasiMerah->save();
+            $waktu = SubKriteria::where('id', 17)->first();
+            $waktu->bobot = $iwaktu;
+            $waktu->save();
+            $respect = SubKriteria::where('id', 18)->first();
+            $respect->bobot = $irespect;
+            $respect->save();
+            $mental = SubKriteria::where('id', 19)->first();
+            $mental->bobot = $imental;
+            $mental->save();
+            $pelanggaranKuningKiper = SubKriteria::where('id', 9)->first();
+            $pelanggaranKuningKiper->bobot = $ipelanggaranKuningKiper;
+            $pelanggaranKuningKiper->save();
+            $provokasiKuningKiper = SubKriteria::where('id', 10)->first();
+            $provokasiKuningKiper->bobot = $iprovokasiKuningKiper;
+            $provokasiKuningKiper->save();
+            $memukulKuningKiper = SubKriteria::where('id', 11)->first();
+            $memukulKuningKiper->bobot = $imemukulKuningKiper;
+            $memukulKuningKiper->save();
+            $selebrasiKuningKiper = SubKriteria::where('id', 12)->first();
+            $selebrasiKuningKiper->bobot = $iselebrasiKuningKiper;
+            $selebrasiKuningKiper->save();
+            $pelanggaranMerahKiper = SubKriteria::where('id', 13)->first();
+            $pelanggaranMerahKiper->bobot = $ipelanggaranMerahKiper;
+            $pelanggaranMerahKiper->save();
+            $provokasiMerahKiper = SubKriteria::where('id', 14)->first();
+            $provokasiMerahKiper->bobot = $iprovokasiMerahKiper;
+            $provokasiMerahKiper->save();
+            $memukulMerahKiper = SubKriteria::where('id', 15)->first();
+            $memukulMerahKiper->bobot = $imemukulMerahKiper;
+            $memukulMerahKiper->save();
+            $selebrasiMerahKiper = SubKriteria::where('id', 16)->first();
+            $selebrasiMerahKiper->bobot = $iselebrasiMerahKiper;
+            $selebrasiMerahKiper->save();
+            $waktuKiper = SubKriteria::where('id', 20)->first();
+            $waktuKiper->bobot = $iwaktuKiper;
+            $waktuKiper->save();
+            $respectKiper = SubKriteria::where('id', 21)->first();
+            $respectKiper->bobot = $irespectKiper;
+            $respectKiper->save();
+            $mentalKiper = SubKriteria::where('id', 22)->first();
+            $mentalKiper->bobot = $imentalKiper;
+            $mentalKiper->save();
+
+            return "ok";
+        });
+
+        if($result)
+        {
+            return back()->with('success', 'Nilai bobot berhasil diubah');
+        }
+        else
+        {
+            return back()->with('failed', 'Nilai bobot gagal diubah');
+        }
+
+
+
+
+        
+    }
 }

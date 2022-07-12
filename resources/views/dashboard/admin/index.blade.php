@@ -49,6 +49,10 @@
                                 {{ __('POINT PEMAIN / KIPER') }}
                             </button>
                             <hr>
+                            <button type="submit" onclick="window.location.href='{{route('kriteriasubkriteria')}}'" class="btn btn-primary col-sm-12">
+                                {{ __('NILAI KRITERIA DAN SUB KRITERIA') }}
+                            </button>
+                            <hr>
                             
                         </div>
                     </div>
