@@ -149,6 +149,14 @@ Route::group(['prefix'=>'klub', 'middleware'=>['isKlub','auth']], function(){
 
     Route::delete('struktur/{id}', [KlubController::class, 'deleteStruktur'])->name('klub.deleteStruktur');
     
+    Route::get('rekomendasi/global/rekomendasi', [KlubController::class, 'showRekom'])->name('klub.showRekom');
+
+    Route::get('rekomendasi/pemain', [KlubController::class, 'showRekomendasi'])->name('klub.showRekomendasi');
+    Route::post('rekomendasi/pemain', [KlubController::class, 'rekomendasi'])->name('klub.rekomendasi');
+
+    Route::get('rekomendasi/kiper', [KlubController::class, 'showRekomendasiKiper'])->name('klub.showRekomendasi.kiper');
+    Route::post('rekomendasi/kiper', [KlubController::class, 'rekomendasiKiper'])->name('klub.rekomendasi.kiper');
+
 });
 
 

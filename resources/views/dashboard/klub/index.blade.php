@@ -121,6 +121,7 @@
         <a class="active" href="#home">Welcome {{Auth::user()->username}}</a> 
         
         <div class="search-container">
+          <a class="active" href="{{ route('klub.showRekom') }}">REKOMENDASI PEMAIN</a> 
             <a class="active" href="{{ url('pemain', $data[0]['nama_klub']) }}">PEMAIN</a> 
             <a class="active" href="{{route('klub.showStrukturKlub', $data[0]['id'])}}">STRUKTUR KLUB</a>
         </div>
