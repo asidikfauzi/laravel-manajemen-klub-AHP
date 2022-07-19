@@ -191,8 +191,8 @@ class HasilSubKriteria extends Model
         $bobot = SubKriteria::where('id', 9)->get()->toArray();
         $jumlah = $bobot[0]['bobot'];
         $data = HasilSubKriteria::select('pemain_id', 'musim', DB::raw("SUM(jumlah*$jumlah) as jumlah_pelanggaran_kuning"))
-                                    ->where('sub_kriteria_id', 9)
-                                    ->groupBy('pemain_id', 'musim')->get();
+        ->where('sub_kriteria_id', 9)
+        ->groupBy('pemain_id', 'musim')->get();
         return $data;
     }
     //Jumlah Provokasi Kartu Kuning
